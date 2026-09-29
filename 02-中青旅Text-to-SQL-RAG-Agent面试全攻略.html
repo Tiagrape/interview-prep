@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02-中青旅Text-to-SQL-RAG-Agent面试全攻略</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background: #f7f8fa; color: #2f3437; line-height: 1.9; font-size: 16px; }
+    h1 { color: #1a3a6b; border-bottom: 3px solid #4477ce; padding-bottom: .4em; font-size: 1.9em; }
+    h2 { color: #1a3a6b; border-bottom: 2px solid #b8cbe8; padding-bottom: .3em; margin-top: 2.6em; }
+    h3 { color: #2c5f9e; border-left: 5px solid #6fa8dc; padding-left: 12px; margin-top: 2.2em; }
+    a { color: #2563a8; text-decoration: none; -webkit-tap-highlight-color: rgba(68,119,206,.15); } a:hover { text-decoration: underline; }
+    blockquote { background: #fff8e6; border-left: 5px solid #f0b429; color: #5a4a1f;
+      padding: 12px 18px; border-radius: 8px; margin: 1em 0; }
+    blockquote p { margin: .4em 0; }
+    blockquote ul { margin: .4em 0; padding-left: 1.3em; }
+    blockquote li { margin: .55em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1.2em 0; background: #fff; font-size: 15px; display: block; overflow-x: auto; white-space: nowrap; }
+    th { background: #e8effa; color: #1a3a6b; }
+    th, td { border: 1px solid #d5dce6; padding: 9px 13px; text-align: left; }
+    tr:nth-child(even) { background: #fafbfd; }
+    code { background: #e9edf2; padding: 2px 6px; border-radius: 4px; font-size: .9em; color: #b34700; word-break: break-all; }
+    pre { background: #2b303b; color: #e8eaf0; padding: 16px; border-radius: 10px; overflow-x: auto; line-height: 1.6; }
+    pre code { background: none; color: inherit; padding: 0; }
+    p { margin: .85em 0; }
+    ol, ul { padding-left: 1.6em; }
+    li { margin: .35em 0; }
+    hr { border: none; border-top: 1px solid #d8dee9; margin: 2.5em 0; }
+    p.q { background: #ffffff; border: 1px solid #ccd8ea; border-left: 5px solid #4477ce;
+      border-radius: 8px; padding: 12px 16px; margin: 1.6em 0 0.4em; box-shadow: 0 1px 3px rgba(30,60,110,.06); }
+    p.q > strong:first-child { color: #1a3a6b; }
+    .top-btn { position: fixed; right: 20px; bottom: 28px; background: #4477ce; color: #fff; border-radius: 50%;
+      width: 46px; height: 46px; line-height: 46px; text-align: center; font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25); text-decoration: none; z-index: 99; }
+    .top-btn:hover { background: #2c5f9e; text-decoration: none; }
+    header#title-block-header { border-bottom: none; }
+    @media (max-width: 640px) {
+      body { padding: 20px 14px 90px; font-size: 15px; line-height: 1.85; }
+      h1 { font-size: 1.5em; } h2 { font-size: 1.3em; } h3 { font-size: 1.1em; }
+      blockquote { padding: 10px 12px; }
+      p.q { padding: 10px 12px; }
+      .top-btn { width: 52px; height: 52px; line-height: 52px; }
+    }
+  </style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var top = document.createElement('a');
+    top.href = '#s0'; top.className = 'top-btn'; top.textContent = '↑'; top.title = '回到目录';
+    document.body.appendChild(top);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  });
+  </script>
+  <a href="00-央国企计算机开发岗面试-总文档.html" class="back-btn">← 返回总文档</a>
+  <style>
+  .back-btn { position: fixed; left: 24px; bottom: 32px; background: #1a3a6b; color: #fff;
+    padding: 10px 16px; border-radius: 24px; font-size: 14px; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 99; }
+  .back-btn:hover { background: #2c5f9e; text-decoration: none; }
+  @media (max-width: 640px) { .back-btn { left: 12px; bottom: 20px; padding: 8px 12px; font-size: 13px; } }
+  </style>
+
+<style>
+/* ---- 手机适配（自动注入） ---- */
+@media (max-width: 640px) {
+  body { padding: 14px 12px 64px !important; margin: 0 !important; font-size: 15px !important; line-height: 1.85 !important; }
+  h1 { font-size: 1.35em !important; }
+  h2 { font-size: 1.18em !important; }
+  h3 { font-size: 1.05em !important; }
+  pre { white-space: pre-wrap !important; word-break: break-word !important; font-size: 0.82em !important; padding: 10px 12px !important; }
+  code { font-size: 0.86em !important; word-break: break-all; }
+  table { display: block !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: normal !important; }
+  img { max-width: 100% !important; }
+  blockquote { padding: 8px 12px !important; margin: 0.8em 0 !important; font-size: 0.95em; }
+}
+</style>
+
+<style>
+/* ---- 代码配色修正（自动注入）：浅色底 + 深色字 ---- */
+pre { background: #f5f7fa !important; color: #1f2328 !important; border: 1px solid #d5dbdb !important; }
+pre code { color: inherit !important; background: none !important; }
+pre.numberSource { border-left: 1px solid #b0b0b0 !important; }
+code span.co, code span.an, code span.cv, code span.in, code span.wa { color: #5a6570 !important; }
+code span.op { color: #424242 !important; }
+code { color: #8c3d00 !important; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">02-中青旅Text-to-SQL-RAG-Agent面试全攻略</h1>
+</header>
+<h1 id="中青旅text-to-sql-rag-agent-面试全攻略">02 · 中青旅（Text-to-SQL
+/ RAG / Agent）—— 面试全攻略</h1>
+<blockquote>
+<p><strong>三遍读法</strong>：第一遍只读每节的【先用大白话理解】，建立直觉，不看术语；第二遍读【展开讲】，把直觉对应到技术细节；第三遍用第
+5 章问答库自测。央国企综合面（D 类题）见 01 号文档第 5.D
+节。中青旅这段的追问会比美团更狠——每个简历关键词（QueryPlan、AST、父子
+Chunk、Rerank……）都会被戳，第 3 章概念卡片务必逐张过关。</p>
+</blockquote>
+<hr />
+<h2 id="口语稿项目介绍的两个版本">1. 口语稿：项目介绍的两个版本</h2>
+<h3 id="秒版">30 秒版</h3>
+<blockquote>
+<p>我在中青旅科技创新部做后端 / AI
+应用研发实习，围绕集团两个场景做链路优化：<strong>经营分析问数
+Copilot</strong> 和<strong>智慧文旅问答</strong>。问数是 Text-to-SQL
+方向，我基于真实 Badcase
+把生成链路从一步生成拆成指标解析、QueryPlan、SQL
+构建三段，加上指标词典匹配和 AST 校验，在 218 条回归集上 SQL 可执行率从
+76.1% 提到 89.4%；同时参与集团指标语义治理，建了 126 个核心指标、247
+组别名到物理字段的映射。问答是 RAG 方向，用 Metadata Filter
+解决跨景区串召和过期政策误召回，用父子 Chunk 加 Rerank 优化召回，326
+条真实问题集上 Top-5 命中率从 80.4% 提到 90.2%。全程建了 Badcase
+回归评测体系，7 轮迭代把核心问题端到端正确率从 78.6% 提到 87.3%。</p>
+</blockquote>
+<h3 id="分钟版">2 分钟版</h3>
+<blockquote>
+<p>中青旅是央企文旅集团，旗下有景区、酒店、旅行社业务线。我实习的科技创新部做两个
+AI
+应用。我的工作重点是解决<strong>指标理解偏差、知识召回错误、生成结果可信度</strong>三类问题。</p>
+<p>第一个是<strong>经营分析问数
+Copilot</strong>，让分析师用自然语言查数。排查真实问数 Badcase
+后发现三类错误：指标误映射（问回款额查成了合同额）、组织和期间条件遗漏（漏了
+WHERE
+过滤，数字能跑出来但口径是错的）、字段幻觉（编造不存在的字段）。我把一步生成的链路拆成三段：指标解析先查指标词典锁定标准指标，QueryPlan
+强制把组织和期间写成过滤条件，SQL 构建按模板拼装，最后过 AST 校验——用
+sqlglot 把 SQL 解析成语法树，核对表和字段真实存在。218
+条回归集上可执行率从 76.1% 提到 89.4%。</p>
+<p>第二个是配套的<strong>指标语义治理</strong>：集团各业务系统同名指标口径不同、同义指标字段不一，我们梳理出业务别名→标准指标→物理字段的三层映射，126
+个核心指标、247
+组映射，多口径指标加了消歧和反问机制。这是指标解析的地基。</p>
+<p>第三个是<strong>智慧文旅 RAG</strong>。线上 Badcase
+集中在三类：跨景区串召（各景区政策文本太像，向量分不清）、过期政策误召回（旧版政策还在库里）、长文档条件丢失（限定句和条款被切分切开了）。解法是
+Metadata Filter——按景区 ID、生效时间先过滤再语义检索；父子
+Chunk——小块做检索、命中后取大块保上下文；再加 Rerank 精排。326
+条问题集上 Top-5 命中率从 80.4% 提到 90.2%。</p>
+<p>最后是贯穿全程的 <strong>Badcase
+回归评测</strong>：错误按无知识命中、过期政策、Tool
+参数错误、无依据生成分类，固化成固定回归集，任何检索、Prompt、工具配置的改动都要全量重跑、指标不许退化才能上线。7
+轮迭代，端到端正确率从 78.6% 提到 87.3%。</p>
+</blockquote>
+<hr />
+<h2 id="系统背景与两条链路">2. 系统背景与两条链路</h2>
+<h3 id="先用大白话理解">2.1 先用大白话理解</h3>
+<p>集团里两件烦事：</p>
+<p><strong>第一件：领导想看数字，得配个翻译。</strong>
+领导问”华东区上半年回款多少？“——数据都在电脑仓库里，但仓库只听得懂一种很专业的话（SQL），领导说的是人话。以前得靠懂数据库的人当中间翻译。我们要做的，就是让
+AI 来当这个翻译：领导说人话，AI 翻译成仓库的话，去查，报数。</p>
+<p><strong>第二件：游客问政策，得有人翻书。</strong>
+游客问”退役军人门票有优惠吗？“——答案在几百份政策文件里。AI
+大模型自己其实并不知道答案，硬答就会编。所以要让它<strong>开卷考试</strong>：先把相关政策那几页翻出来，摆在它面前，命令它”照着这段回答”。</p>
+<p>你的实习就是给这两个系统<strong>修毛病</strong>：翻译官经常翻错（第一块工作），各公司的”黑话”不统一害的（第二块），翻书经常翻错页（第三块），以及给整个系统建一套”改完必须复考”的规矩（第四块）。</p>
+<h3 id="展开讲业务背景与链路">2.2 展开讲：业务背景与链路</h3>
+<p><strong>业务背景</strong>：央企文旅集团（景区如乌镇/古北水镇、酒店、旅行社），科技创新部。两个场景：</p>
+<ul>
+<li><strong>场景 A · 经营分析问数
+Copilot</strong>：给高管/财务/分析师用，自然语言问数（“华东区 Q2
+回款额”），系统生成 SQL
+查数仓返回结果。技术方向：Text-to-SQL（自然语言转 SQL）。</li>
+<li><strong>场景 B ·
+智慧文旅问答</strong>：给游客/客服用，问政策（“退役军人门票优惠吗”），系统检索政策文档后由
+LLM 作答。技术方向：RAG（检索增强生成）。</li>
+</ul>
+<pre><code>【场景A：问数】
+用户问题 ──► 指标解析 ──► QueryPlan ──► SQL构建 ──► AST校验 ──► 数仓执行 ──► 答案
+              (查指标词典)   (列提纲)     (按模板拼)   (安检机)
+
+【场景B：问答】
+用户问题 ──► 向量化 ──► 检索(先Metadata过滤,再向量搜索) ──► Rerank精排 ──► 组装Prompt ──► LLM生成 ──► 带引用回答
+                                                                          ▲
+离线: 政策文档 → 清洗 → 父子Chunk切分 → 向量化 → 入库(每个子块带Metadata: 景区ID/生效时间/政策类型)</code></pre>
+<p><strong>四条 bullet 的关系（讲故事的正确顺序）</strong>：</p>
+<pre><code>指标语义治理(地基) ──► 指标解析(地基的消费者)
+        └──────────► Text-to-SQL链路(场景A) ──┐
+                                               ├──► Badcase回归评测(质量护栏,罩住两个场景)
+RAG优化(场景B: Filter+父子Chunk+Rerank) ────────┘</code></pre>
+<p>一句话叙事：“<strong>先用治理把语义地基打好，再分别优化问数和问答两条链路，全程用回归评测兜底，保证每次迭代只变好不变坏。</strong>”</p>
+<hr />
+<h2 id="地基概念卡片8-张第二遍读时逐张过关">3. 地基概念卡片（8
+张，第二遍读时逐张过关）</h2>
+<p><strong>① LLM 与 Prompt（大语言模型 与 提示词）</strong>：LLM
+是”接话机器”，给它一段文字（Prompt）它续写。它没有你们公司的数据、知识冻结在训练截止日——这个知识边界是所有工程的原因。</p>
+<p><strong>② 幻觉（Hallucination）</strong>：LLM
+不知道也照答、编得有鼻子有眼。无法从模型层面根除，只能工程压制——<strong>简历上所有工作的本质都是在压幻觉</strong>。</p>
+<p><strong>③ Embedding 与向量检索（向量化 与
+语义搜索）</strong>：把文字变成”语义坐标”（一串浮点数），意思近的坐标近。向量检索
+=
+拿问题坐标找最近的文档片段——认意思不认字面（“门票优惠”能搜到”票价减免”）。</p>
+<p><strong>④ RAG（检索增强生成）</strong>：开卷考试。先检索相关段落塞进
+Prompt，要求模型”只准根据材料回答”——从”凭记忆瞎编”变”照着材料念”。</p>
+<p><strong>⑤ Tool Calling / Agent（工具调用 /
+智能体）</strong>：让模型输出结构化的工具调用指令（<code>查库存(景区=X, 日期=Y)</code>），系统执行后把结果喂回。“Tool
+参数错误”= 模型填错参数（日期格式非法、景区 ID 错）。</p>
+<p><strong>⑥ Copilot（副驾驶）</strong>：嵌在工作流里的 AI
+助手——<strong>人做决策，AI 提效</strong>。Copilot ≠
+Autopilot（自动驾驶）：人在回路里，最终确认由人负责（企业场景的可追责性）。两个设计是它的体现：多口径时反问澄清、答案标注所用口径。</p>
+<p><strong>⑦
+Metadata（关于数据的数据）</strong>：内容之外的结构化小标签，类比图书馆编目卡片——找书先按分类号锁书架再翻内容。项目里两处：文档块的标签（景区
+ID/生效时间 →
+检索先过滤）、指标的词典（别名→标准指标→物理字段）。<strong>语义靠向量，精确靠
+Metadata</strong>——LLM 是模糊的概率系统，Metadata
+是钉进来的结构化锚点。</p>
+<p><strong>⑧ Badcase（坏例子）</strong>：线上答错的真实案例。Badcase
+分析是所有优化的起点：先收集归类，才知道该修哪。</p>
+<hr />
+<h2 id="四大工作块详解">4. 四大工作块详解</h2>
+<h3 id="经营分析-copilottext-to-sql">4.1 经营分析
+Copilot（Text-to-SQL）</h3>
+<h4 id="先用大白话理解-1">先用大白话理解</h4>
+<p>AI 翻译官把领导的人话翻译成数据库的话，犯的错就是翻译的三种事故：</p>
+<ol type="1">
+<li><strong>听岔了词</strong>：领导问”回款额”（实际收回来的钱），翻译官翻成了”合同额”（签了多少钱）——俩词长得像，意思完全不同；</li>
+<li><strong>漏听了限定词</strong>：领导问”<strong>华东区、上半年</strong>的回款额”，翻译官把”华东区”“上半年”漏了——翻出来的话语法完全正确，也能查出一个数字，<strong>但那个数字是全公司全年的</strong>。最阴险：数字看着挺正常，错进汇报材料都没人发现；</li>
+<li><strong>瞎编了一个词</strong>：翻译官写了个数据库里根本不存在的词——好在这种错当场穿帮（数据库直接报错），反而危害最小。</li>
+</ol>
+<p>治法是把”听题直接翻”改成专业流程：<strong>动笔前先查术语词典</strong>（“回款额”在词典里查到唯一对应）、<strong>先列提纲再写</strong>（把”华东区”“上半年”强制写成限定条件）、<strong>写完过一遍安检机</strong>（核对每个词库里真有）。</p>
+<h4 id="展开讲">展开讲</h4>
+<p><strong>是什么</strong>：翻译官——用户说人话，数仓只懂
+SQL。旧做法把问题直接丢 LLM 一步生成，错误无规律、不可归因。</p>
+<p><strong>三段流水线（把一步翻译变成专业翻译流程）</strong>：</p>
+<ol type="1">
+<li><strong>指标解析（查词典）</strong>：问题 + 指标 Metadata
+给模型，只输出结构化结果
+<code>{指标, 组织, 期间}</code>——误映射在词典被拦；</li>
+<li><strong>QueryPlan（查询计划，列提纲）</strong>：确定查哪些表、过滤条件、聚合方式、分组维度——组织和期间<strong>强制</strong>写成过滤条件，漏条件在这里堵住；</li>
+<li><strong>SQL 构建（按提纲动笔）</strong>：按 Plan +
+表元数据模板化拼装——字段都来自真实元数据，幻觉空间大幅压缩。</li>
+</ol>
+<p><strong>AST 校验（安检机）</strong>：AST（抽象语法树）= 把 SQL
+文本解析成的树状结构（“用了哪些表、哪些字段、什么条件”的结构化表示，用
+sqlglot
+实现）。核对：表名存在？字段属于这张表？时间/组织过滤带了吗？不合格打回重生成（有限次数），仍失败降级模板
+SQL。</p>
+<p><strong>数字口径</strong>：218 条回归集（真实 Badcase +
+高频问题沉淀）；可执行率
+76.1%→89.4%。<strong>必须会说</strong>：可执行率是<strong>下界</strong>——漏
+WHERE 的 SQL 照样能执行！字段幻觉的修复直接体现在可执行率，①②类靠词典和
+Plan
+堵、体现在人工抽检的口径正确率上。为什么报可执行率：它能自动化统计。</p>
+<h3 id="集团指标语义治理">4.2 集团指标语义治理</h3>
+<h4 id="先用大白话理解-2">先用大白话理解</h4>
+<p>集团旗下景区、酒店、旅行社各公司各系统建了多年，“黑话”严重不统一，两种病：</p>
+<ul>
+<li><strong>同一个东西 N 种叫法</strong>：“土豆 / 马铃薯 /
+洋芋”其实是一个东西——集团里”入园人数 / 客流量 /
+接待人次”就是一个指标的三种叫法；</li>
+<li><strong>同一个叫法 N
+种含义</strong>：“苹果”既可以是水果也可以是公司——“营收”在景区公司=门票+园内消费，在酒店公司=房费+餐饮，字面一模一样，含义完全两回事。</li>
+</ul>
+<p>AI
+翻译官被这两种病害惨（听岔词的一大根源）。治法：<strong>编一本全集团官方词典</strong>，三层结构：<strong>各种叫法（方言）→
+标准名+精确定义（普通话）→
+仓库里的货架号（身份证号）</strong>。遇到”营收”这种一词多义的，词典标出来，系统<strong>反问一句</strong>：“您要含税口径还是不含税口径？”——宁可多问，不可猜错。</p>
+<h4 id="展开讲-1">展开讲</h4>
+<p><strong>三层映射</strong>：</p>
+<pre><code>业务别名(用户叫法)      标准指标(唯一ID+定义+口径)      物理字段(数仓落点)
+回款额、已回款金额  →   指标#017: 已实际收到的合同款项 → dws_fin.received_amount
+入园人数、客流量    →   指标#042                      → dws_scenic.visitor_cnt</code></pre>
+<p><strong>口径</strong> =
+“这个数怎么算出来的”的官方说法（营收含不含税、退款扣不扣）。<strong>126
+个指标、247 组映射</strong>：247 &gt;
+126，一个指标平均约两个别名/字段——这个数量关系要能解释。</p>
+<p><strong>消歧与澄清</strong>：多口径指标（如”营收”）——解析置信度高 →
+自动选默认口径 + <strong>答案里标注所用口径</strong>；置信度低 →
+<strong>反问用户</strong>（“含税还是不含税？”）。</p>
+<p><strong>定位</strong>：第一块的地基。面试升华点：“<strong>AI
+应用的上限往往取决于数据治理，不取决于模型</strong>。”</p>
+<h3 id="智慧文旅-rag">4.3 智慧文旅 RAG</h3>
+<h4 id="先用大白话理解-3">先用大白话理解</h4>
+<p>AI 开卷考试翻书（政策文档库），翻错的方式就三种，各有各的药：</p>
+<ol type="1">
+<li><strong>拿错了书</strong>：游客问古北水镇，它翻到了乌镇的政策文件——因为各景区的政策写得太像了（都是”XX
+人群半价”，就差景区名），“按内容相似度找”这招分不出你我。<strong>药：翻书之前先把书架锁对</strong>——只在本景区、今年生效的文件里找；</li>
+<li><strong>翻到了旧书</strong>：书架上 2024 旧版和 2025
+新版票价并排放着，旧版写得反而更规整、更容易被”内容相似度”选中。<strong>药：还是锁书架——书架上只留当前生效的版本</strong>；</li>
+<li><strong>断章取义</strong>：一份政策开头写”<strong>仅限全日制学生</strong>享受以下优惠”，后面某条写”门票半价”。文件被切碎存档时，“仅限学生”和”半价”进了两个袋子——翻书只翻到”半价”那个袋子，谁来问都答半价。<strong>药：袋子做小卡片用（小卡片好定位），翻到之后展开成整页再读（整页上下文完整）</strong>。</li>
+</ol>
+<p>最后再加一道工序：先快速圈出 50
+份候选（快但粗），再一份份细看挑出最好的 5 份（慢但准）——<strong>海选 +
+复审</strong>。</p>
+<h4 id="展开讲-2">展开讲</h4>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Badcase</th>
+<th>类比</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>跨景区串召</td>
+<td>拿错了书</td>
+<td>各景区政策句式几乎一样，只差景区名，向量分不清</td>
+<td><strong>Metadata Filter</strong></td>
+</tr>
+<tr>
+<td>过期政策误召回</td>
+<td>旧书没下架</td>
+<td>新旧版本都在库里，旧版文本更”规整”相似度反而高</td>
+<td><strong>Metadata Filter</strong>（生效时间）</td>
+</tr>
+<tr>
+<td>长文档条件丢失</td>
+<td>断章取义</td>
+<td>“仅限全日制在校生”和”门票半价”被切进两个块</td>
+<td><strong>父子 Chunk</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Metadata Filter（元数据过滤）=
+先锁书架再搜内容</strong>：入库时给块打结构化标签（景区
+ID、生效/失效时间、政策类型），检索<strong>先过滤再语义搜索</strong>（pre-filter，先过滤避免召回后再滤导致数量不足）。为什么必须靠标签：①景区
+ID
+是精确字段，一个等号解决，语义分不清；②”当前生效”这种日期逻辑向量检索根本表达不了。</li>
+<li><strong>父子 Chunk（父子切块）=
+索引用小卡片，阅读展开整页</strong>：检索要小块（语义集中、向量不被稀释），生成要大块（上下文完整）——解耦两个需求。子块（约
+200 字）入向量库被检索；命中后<strong>替换成父块</strong>（约 1000-2000
+字或完整章节）送 Prompt。限定句和条款大概率同属一个父块。</li>
+<li><strong>Rerank（重排序/精排）= 海选 +
+复审</strong>：向量检索快但粗（只看语义坐标粗略距离）→ 海选
+top50；交叉编码器（如 bge-reranker，把问题和文档拼一起精细打分）慢但准 →
+复审取 top5。<strong>漏斗</strong>：全库几万块 → 海选 50 → 精排 5 进
+Prompt。Rerank
+每条几十毫秒，只能放漏斗末端——这就是不能全库精排的原因。</li>
+</ul>
+<p><strong>数字口径</strong>：326
+条真实咨询问题集（人工标注每个问题的标准出处）；<strong>Top-5
+命中率</strong> = 前 5 块中至少含 1 个正确出处的比例，80.4%→90.2%。剩余
+~9.8%
+是检索解决不了的：知识库本身缺内容、问题歧义、需跨文档多跳推理——<strong>边界感要讲得出</strong>。</p>
+<h3 id="badcase-回归评测错题本-模拟卷">4.4 Badcase 回归评测（错题本 +
+模拟卷）</h3>
+<h4 id="先用大白话理解-4">先用大白话理解</h4>
+<p>AI
+系统像学生：你改了它的”学习方法”（调整配置），可能治好了老毛病，<strong>也可能悄悄弄出新毛病</strong>——不考试你根本不知道。</p>
+<p>做法全是学校那套：<strong>把线上答错的题收进错题本</strong>，按病因分四堆——课本里没这知识（库里没这政策）/
+翻到了旧版教材（过期政策）/ 计算器按错了键（工具参数填错）/
+不会做还瞎编（没依据硬答）。<strong>每次改系统之前，把整本错题本加上本来就会的题，重新考一遍</strong>：分数没退步才准改，退步了就打回。改了
+7 轮，成绩从 78.6 分涨到 87.3 分。</p>
+<p>为什么这么死板？因为 AI
+系统<strong>改动的后果不可预测</strong>：你教它”没依据别乱答”，它可能变得过度保守，好多本来会的也不敢答了——错题本就是防这种”悄悄退步”的唯一手段。</p>
+<h4 id="展开讲-3">展开讲</h4>
+<p><strong>简历原文逐句翻译（先背这张表）</strong>：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>简历原文</th>
+<th>人话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>围绕线上问答错误建立 Badcase 分类</td>
+<td>把线上答错的问题按出错原因分类</td>
+</tr>
+<tr>
+<td>重点覆盖无知识命中、过期政策、Tool 参数错误及无依据生成</td>
+<td>盯四类错误</td>
+</tr>
+<tr>
+<td>构建固定回归集验证 Retrieval、Prompt 与 ToolCalling 改动</td>
+<td>建固定考卷；每次改系统先全量重考，不退步才上线</td>
+</tr>
+<tr>
+<td>累计分析 137 条典型 Badcase</td>
+<td>错题本收录 137 道典型错题</td>
+</tr>
+<tr>
+<td>完成 7 轮策略迭代</td>
+<td>系统改了 7 版，每版过考</td>
+</tr>
+<tr>
+<td>核心问题端到端正确率由 78.6% 提升至 87.3%</td>
+<td>考卷上全流程答对的比例 78.6%→87.3%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>四类错误的病因与药方</strong>：</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>错误类型</th>
+<th>病因</th>
+<th>例子</th>
+<th>药方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无知识命中</td>
+<td>课本没这知识（检索空手而归）</td>
+<td>问”能带宠物吗”，库里没这政策</td>
+<td>补知识库</td>
+</tr>
+<tr>
+<td>过期政策</td>
+<td>翻到旧版教材</td>
+<td>按 2023 旧票价回答</td>
+<td>旧文档下架 / 时间过滤</td>
+</tr>
+<tr>
+<td>Tool 参数错误</td>
+<td>计算器按错键</td>
+<td>调工具时日期格式非法、景区 ID 错</td>
+<td>工具描述写清参数示例</td>
+</tr>
+<tr>
+<td>无依据生成</td>
+<td>不会做还瞎编（幻觉）</td>
+<td>没检索到还编”需购宠物票”</td>
+<td>Prompt 强约束”无材料则说不知道”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三个可调旋钮</strong>：Retrieval（检索，换翻书方式：加
+Filter、调切块、调召回量）、Prompt（提示词，改答题规矩：只准依据材料、必须附出处）、ToolCalling（工具调用，修工具使用：说明更清楚、参数给示例）。</p>
+<p><strong>“回归”的含义</strong>：来自软件测试 regression
+test（回归测试）——改完代码重测旧功能，确认没<strong>退步</strong>。AI
+系统的顽疾是<strong>改动不可预测</strong>，固定回归集是防”悄悄退步”的唯一护栏。</p>
+<p><strong>为什么这块值钱</strong>：大部分人只会做 demo，没有质量护栏的
+AI 系统不敢碰生产。<strong>“改动必须过回归、指标不许退化”= 工程能力和调
+API 能力的分水岭。</strong></p>
+<hr />
+<h2 id="面试问答库">5. 面试问答库</h2>
+<h3 id="a.-项目总体类">A. 项目总体类</h3>
+<p><strong>A1. 介绍一下这段实习？</strong> → 第 1
+章口语稿。结构：背景（两个场景）→ 三类问题 →
+四块工作各带”问题→方案→数字”。</p>
+<p><strong>A2. 你具体负责什么？</strong> &gt;
+参考口径：团队负责两个系统的整体架构，我的 mentor
+把关方案。我负责的是链路优化里的具体工作：Badcase
+的收集分析和归类、三段式链路中指标解析和 AST
+校验的开发、治理表条目的梳理和映射关系整理、RAG 侧 Metadata
+入库改造和父子切分方案、回归集的构建和评测脚本。方案我出设计、mentor
+评审后动手，改动能过回归才上线。</p>
+<p><strong>A3. 两段实习（中青旅 vs 美团）有什么区别和联系？</strong>
+&gt;
+考察叙事能力，标准答案：“技术底座相同——都是事件/数据链路上的工程问题，方法论一致：Badcase
+驱动、先定位根因再改、改动要可验证。区别在问题域：中青旅是 AI
+应用的<strong>可信度</strong>问题（幻觉、口径、召回），美团是分布式系统的<strong>稳定性</strong>问题（误报、状态一致、幂等）。中青旅教我
+AI 工程化，美团教我后端工程素养，我想要的方向正是两者交叉——AI
+应用的后端化。”</p>
+<p><strong>A4. 这段实习最大的收获？</strong> &gt; “一句话：AI
+应用的上限取决于数据治理而不是模型。指标误映射的解法不是更强的模型，是一张治理表；串召的解法不是更好的
+Embedding，是结构化过滤。第二个收获是质量意识：没有回归评测的 AI
+系统每次改动都是赌博。”</p>
+<h3 id="b.-技术深挖类">B. 技术深挖类</h3>
+<h4 id="b1.-text-to-sql">B1. Text-to-SQL</h4>
+<p><strong>B1-1. 为什么把一步生成拆成三段？</strong> &gt;
+一步生成是黑盒：错误无规律、不可归因、不可拦截。拆段后每段职责单一，三类错误各有人拦——误映射在词典、漏条件在
+Plan
+强制、幻觉在模板+AST。而且每段可独立测试和优化，出了错能精确定位到段。</p>
+<p><strong>B1-2. AST 校验具体校验什么？失败了怎么办？</strong> &gt; 用
+sqlglot 把 SQL 解析成语法树，核对四件事：表名在 schema
+里存在、每个字段真的属于所查的表、必要过滤（时间/组织）存在、无异常嵌套。失败带错误信息重新生成（限
+2-3 次），仍失败降级用模板 SQL，保证一定返回可执行结果。</p>
+<p><strong>B1-3. 可执行率和正确率是一回事吗？</strong> &gt;
+不是，这是我最注意区分的口径。可执行 = 语法和对象合法、能跑通；正确 =
+口径也对。漏了组织过滤的 SQL
+照样能执行、返回一个看起来正常的数字——最危险。可执行率能自动化统计所以作为主指标，同时人工抽检语义正确率，两者一起看。</p>
+<p><strong>B1-4. 表结构（schema）怎么给模型？全给吗？</strong> &gt;
+不全给，表多字段多会超上下文且干扰生成。按问题先检索相关表（表名/描述/字段也做成
+Metadata 做检索），只把相关表的 schema 放进 Prompt。</p>
+<p><strong>B1-5. 为什么不微调一个模型，而用 Prompt + 链路工程？</strong>
+&gt; 三个原因：标注数据量不够（Badcase
+才百级，微调要千级以上）；微调迭代慢、成本高，业务口径还在变；链路工程可解释可干预，出问题能定位到环节，微调是黑盒。且基础模型在迭代，链路方案可平移换模型，微调绑定。</p>
+<p><strong>B1-6. 218 条回归集会不会”改到只对回归集生效”？</strong> &gt;
+有这个风险（过拟合回归集）。措施：回归集留一部分做
+held-out（改策略时不见）；新 Badcase
+持续补充进来；上线后看线上指标和回归指标是否同步变化，不同步就说明过拟合了。</p>
+<h4 id="b2.-指标治理">B2. 指标治理</h4>
+<p><strong>B2-1. 126 个指标怎么选出来的？</strong> &gt;
+三个来源取交集：问数日志里的高频词、财务核心指标（回款/预算/应收这些必问的）、三大业务线（景区/酒店/旅行服务）各自的主线指标。先覆盖最高频的
+126 个，长尾的按需扩。</p>
+<p><strong>B2-2. 别名从哪来的？</strong> &gt;
+问数日志挖掘（用户实际怎么叫）+ 业务方访谈确认 +
+同义词扩展，全部人工审核后入表。别名是会长出来的，治理表是活文档。</p>
+<p><strong>B2-3. 消歧具体怎么实现？</strong> &gt;
+指标解析段让模型输出”命中指标 + 置信度”。多口径指标：置信度高 →
+用默认口径，但<strong>答案里显式标注</strong>”按含税口径”；置信度低 →
+生成澄清问题反问用户，给选项不给开放题。原则：宁可多问一句，不可猜错口径。</p>
+<h4 id="b3.-rag">B3. RAG</h4>
+<p><strong>B3-1. Embedding 用的什么模型？为什么？</strong> &gt; bge
+系列（bge-large-zh-v1.5 / BGE-M3），1024
+维。理由：中文效果好于通用模型、开源可<strong>私有化部署</strong>——央企场景数据不出内网，这是硬约束；生态成熟，配套
+reranker 同系列。</p>
+<p><strong>B3-2. 父子块具体怎么配的？</strong> &gt; 子块约 200
+字、按语义段落切（标题/条款边界优先）；父块约 1000-2000
+字或完整章节。子块入向量库，块记录 parent_id；命中子块后按 parent_id
+取父块（同父的多个子块去重合并）进 Prompt。</p>
+<p><strong>B3-3. Rerank 用的什么？延迟代价？</strong> &gt; bge-reranker
+交叉编码器。海选 top50 → 精排取 top5。每条打分几十毫秒、50
+条总增量两三秒内可控（可批量并行）；换来精度提升明显，值得。</p>
+<p><strong>B3-4. 为什么不用 BM25 关键词检索？</strong> &gt;
+关键词认字面：用户问”优惠”，文档写”减免/打折”就召回不到。语义检索解决这个。但我们不是二选一——保留关键词通道做混合检索（RRF
+融合两者排名），政策编号、景区名这类精确词关键词更稳，语义和精确各取所长。</p>
+<p><strong>B3-5. Metadata Filter 是先过滤还是后过滤？</strong> &gt;
+先过滤（pre-filter）：先用结构化条件把候选集缩小到本景区、当前生效，再在缩小后的集合里做向量检索。反过来（先召回再滤）会出现召回
+50 条滤完只剩 3 条、数量不足的问题。</p>
+<p><strong>B3-6. 剩下 9.8% 没命中的是什么？怎么办？</strong> &gt;
+三类：知识库缺内容（检索再好也无米下锅——补知识库）、问题本身歧义（需澄清）、需要跨文档多跳推理（要
+Agent
+拆解）。我的边界认知：检索优化能解决”找得准”，解决不了”库里没有”。</p>
+<p><strong>B3-7. Top-5 命中率怎么定义的？</strong> &gt; 人工给 326
+个问题标注”标准出处”（正确答案来自哪个文档哪些段落），检索前 5
+块里至少含一个正确出处即算命中。标注有规范，双人标注抽检一致性。</p>
+<h4 id="b4.-回归评测">B4. 回归评测</h4>
+<p><strong>B4-1. 正确率谁来判？</strong> &gt; 人工标注为主。量大时用 LLM
+辅助初判（按评分标准给通过/不通过），但定期人工抽检校准 LLM
+判断的一致率——LLM 当裁判本身也会错，所以只能当初筛。</p>
+<p><strong>B4-2. 回归集多大才够？</strong> &gt;
+没有绝对数，标准是：覆盖的每类高频错误有足够样本（每类至少几十条）、加上等比例的”本来就能答对”的题（否则只防复发不防误伤）。回归集是滚雪球的，新
+Badcase 持续补进来。</p>
+<p><strong>B4-3. 一次迭代的完整流程？</strong> &gt; 线上发现/用户反馈
+Badcase → 归类、补进回归集 → 本地改动（检索/Prompt/工具）→ 全量重跑回归
+→ 出对比报告（每类指标变化）→ 评审通过才上线 → 线上监控正确率。7
+轮迭代就是 7 次这个循环。</p>
+<p><strong>B4-4. 线上怎么发现 Badcase？</strong> &gt;
+三个渠道：用户反馈（点踩）、客服上报（答错被游客投诉的）、定期抽检。回流有责任人和周期，不是等出大事才发现。</p>
+<h3 id="c.-难点与思考类">C. 难点与思考类</h3>
+<p><strong>C1. 这段实习最大的困难？</strong> &gt; “Badcase
+的归因。同一个错误答案，可能是检索没找到、找到了没排进前五、排进了但
+Prompt
+没放好、模型没遵守指令、工具参数错——五环都可能背锅。一开始只看最终答案对错去改，方向判断错过一次：以为是不瞎编的
+Prompt 问题，实际是那批题检索根本没召回，改 Prompt
+无效。后来养成的习惯是<strong>逐环节留痕</strong>：把每次的检索结果、组装后的
+Prompt、工具调用参数都打出来，先定位错在哪一环再动手。这个调试习惯是这段实习最硬的收获。”</p>
+<p><strong>C2. 你怎么定位”跨景区串召”这个问题的？</strong> &gt; 抽
+Badcase
+看系统自带的出处标注（每个回答附带引用的文档块），统计发现召回块的景区
+ID
+和问题景区不符的比例很高；再看根因：各景区优惠政策文本句式高度相似只差景区名，纯向量检索分不出来。结论是这不是”语义不够像”的问题，是”检索范围没锁对”——所以解法是结构化过滤而不是换
+Embedding。</p>
+<p><strong>C3. 做过什么取舍？</strong> &gt; 两个。①Rerank 的精度 vs
+延迟：加精排整体响应增加，但答案错误在客服场景的代价（投诉、口径事故）远高于几百毫秒，值得；②反问澄清
+vs
+直接答：反问多一轮交互、体验有损，但口径错误进了汇报材料是事故级代价——企业场景一律选准确性优先。</p>
+<p><strong>C4. 犯过的错？</strong> &gt; 同 C1 的例子：没做逐环节归因就改
+Prompt，一轮迭代白做。教训：AI
+链路里”最终答案错”≠“生成环节错”，必须先看中间结果。后来我把”打印中间态”固化成了调试规范。</p>
+<p><strong>C5. 如果重来会改进什么？</strong> &gt;
+①回归集从第一天就该建，而不是先改了几轮才补——前几轮改动其实没有护栏；②Badcase
+分类体系一开始定得太粗，中途重构过一次，应该先参考成熟分类（检索类/生成类/工具类）再细化；③治理表的维护流程该更早和业务方明确责任人，否则别名补充会滞后。</p>
+<h3 id="e.-开放延伸类">E. 开放延伸类</h3>
+<p><strong>E1. 知识库扩大 100 倍怎么办？</strong> &gt;
+①向量库层面：Milvus 分区（按景区/业务线 partition）、HNSW
+索引参数调优（efSearch
+权衡召回率与延迟）；②检索层面：分层检索——先用轻量分类器把问题路由到业务线，再在子库内检索，避免全库海选；③粗召回通道加关键词/混合检索兜底。</p>
+<p><strong>E2. 怎么评估一个 RAG 系统的好坏？</strong> &gt;
+分层：检索层（Top-K 命中率、MRR）→
+生成层（忠实度：答案是否忠于检索材料；相关性）→
+端到端（最终答案正确率）→
+线上（用户反馈率、人工接管率）。只看端到端无法归因，只看检索层会漏掉生成退化——四层都要有。</p>
+<p><strong>E3. 从零建一个问数系统你会怎么排？</strong> &gt;
+先治理后智能：①先和业务定核心指标口径、建治理表（没有这个，模型再好也映射不对）；②小范围
+MVP（十几个指标内）验证链路；③同步建回归集；④逐步扩指标面和问题复杂度。顺序错了（先上模型后治理）会一直在修口径问题。</p>
+<hr />
+<h2 id="数字口径速查表必须张口就来">6.
+数字口径速查表（必须张口就来）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>数字</th>
+<th>含义</th>
+<th>口径 / 构成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>218 条</td>
+<td>问数回归集</td>
+<td>真实问数 Badcase + 高频问题沉淀，固定不动</td>
+</tr>
+<tr>
+<td>76.1% → 89.4%（+13.3pp）</td>
+<td>SQL 可执行率</td>
+<td>能跑通不报错的比例；<strong>是下界</strong>，另有人工抽检口径正确率</td>
+</tr>
+<tr>
+<td>126 个 / 247 组</td>
+<td>核心指标 / 字段及别名映射</td>
+<td>247 &gt; 126：一个指标平均约 2 个别名/字段</td>
+</tr>
+<tr>
+<td>326 条</td>
+<td>咨询问题回归集</td>
+<td>真实线上问题，人工标注标准出处</td>
+</tr>
+<tr>
+<td>80.4% → 90.2%（+9.8pp）</td>
+<td>Top-5 知识命中率</td>
+<td>前 5 块含 ≥1 个正确出处即命中；剩余 ~10% 是缺知识/歧义/多跳</td>
+</tr>
+<tr>
+<td>137 条 / 7 轮</td>
+<td>典型 Badcase / 策略迭代轮次</td>
+<td>每轮改动全量过回归后才上线</td>
+</tr>
+<tr>
+<td>78.6% → 87.3%（+8.7pp）</td>
+<td>核心问题端到端正确率</td>
+<td>从提问到最终答案全链路算对；pp = 百分点</td>
+</tr>
+</tbody>
+</table>
+<h2 id="红线与自查清单中青旅特有">7. 红线与自查清单（中青旅特有）</h2>
+<ol type="1">
+<li><strong>可执行率 ≠
+正确率</strong>必须随时分清（B1-3），混着说等于邀请追问。</li>
+<li><strong>只说链路工程和 Prompt
+工程，别说”微调/训练了模型”</strong>——简历口径是链路优化，说微调会被追训练细节（数据构造、超参、Loss），接不住。</li>
+<li><strong>模型版本要报得出</strong>：Embedding = bge 系列 1024
+维、Rerank = bge-reranker。记不清细节时说”bge
+系列，具体小版本记不准”，别硬编。</li>
+<li><strong>央企数据保密意识</strong>：被问”回款额具体多少”“数仓什么规模”一律答”涉内部数据不方便透露，我讲方法和口径”。这本身还是央国企面试的加分表现。</li>
+<li><strong>私有化部署</strong>是选型理由（B3-1），主动讲——央企场景数据合规是真实约束，说得越自然越像真待过。</li>
+<li><strong>时间线</strong>：中青旅 2025.06-09 在前，美团 2026.06-09
+在后；成长叙事 = 中青旅学 AI 应用工程化 → 美团学后端稳定性（A3
+的答案）。</li>
+<li><strong>一致性检查</strong>：QueryPlan、AST、Metadata Filter、父子
+Chunk、Rerank、回归集、消歧、口径——每个词都要能按第 3、4
+章的深度讲。</li>
+</ol>
+<hr />
+<p><em>配套：01 · 美团充电宝项目（含 B5 中间件小抄 MQ/Redis、D
+央国企综合面题库）。待补充：03 · 神农大模型平台 / 04 · MSTGN-Wheat / 05
+· DSH-plugin。</em></p>
+</body>
+</html>

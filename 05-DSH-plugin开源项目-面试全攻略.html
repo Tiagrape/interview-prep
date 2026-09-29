@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>05-DSH-plugin开源项目-面试全攻略</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background: #f7f8fa; color: #2f3437; line-height: 1.9; font-size: 16px; }
+    h1 { color: #1a3a6b; border-bottom: 3px solid #4477ce; padding-bottom: .4em; font-size: 1.9em; }
+    h2 { color: #1a3a6b; border-bottom: 2px solid #b8cbe8; padding-bottom: .3em; margin-top: 2.6em; }
+    h3 { color: #2c5f9e; border-left: 5px solid #6fa8dc; padding-left: 12px; margin-top: 2.2em; }
+    a { color: #2563a8; text-decoration: none; -webkit-tap-highlight-color: rgba(68,119,206,.15); } a:hover { text-decoration: underline; }
+    blockquote { background: #fff8e6; border-left: 5px solid #f0b429; color: #5a4a1f;
+      padding: 12px 18px; border-radius: 8px; margin: 1em 0; }
+    blockquote p { margin: .4em 0; }
+    blockquote ul { margin: .4em 0; padding-left: 1.3em; }
+    blockquote li { margin: .55em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1.2em 0; background: #fff; font-size: 15px; display: block; overflow-x: auto; white-space: nowrap; }
+    th { background: #e8effa; color: #1a3a6b; }
+    th, td { border: 1px solid #d5dce6; padding: 9px 13px; text-align: left; }
+    tr:nth-child(even) { background: #fafbfd; }
+    code { background: #e9edf2; padding: 2px 6px; border-radius: 4px; font-size: .9em; color: #b34700; word-break: break-all; }
+    pre { background: #2b303b; color: #e8eaf0; padding: 16px; border-radius: 10px; overflow-x: auto; line-height: 1.6; }
+    pre code { background: none; color: inherit; padding: 0; }
+    p { margin: .85em 0; }
+    ol, ul { padding-left: 1.6em; }
+    li { margin: .35em 0; }
+    hr { border: none; border-top: 1px solid #d8dee9; margin: 2.5em 0; }
+    p.q { background: #ffffff; border: 1px solid #ccd8ea; border-left: 5px solid #4477ce;
+      border-radius: 8px; padding: 12px 16px; margin: 1.6em 0 0.4em; box-shadow: 0 1px 3px rgba(30,60,110,.06); }
+    p.q > strong:first-child { color: #1a3a6b; }
+    .top-btn { position: fixed; right: 20px; bottom: 28px; background: #4477ce; color: #fff; border-radius: 50%;
+      width: 46px; height: 46px; line-height: 46px; text-align: center; font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25); text-decoration: none; z-index: 99; }
+    .top-btn:hover { background: #2c5f9e; text-decoration: none; }
+    header#title-block-header { border-bottom: none; }
+    @media (max-width: 640px) {
+      body { padding: 20px 14px 90px; font-size: 15px; line-height: 1.85; }
+      h1 { font-size: 1.5em; } h2 { font-size: 1.3em; } h3 { font-size: 1.1em; }
+      blockquote { padding: 10px 12px; }
+      p.q { padding: 10px 12px; }
+      .top-btn { width: 52px; height: 52px; line-height: 52px; }
+    }
+  </style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var top = document.createElement('a');
+    top.href = '#s0'; top.className = 'top-btn'; top.textContent = '↑'; top.title = '回到目录';
+    document.body.appendChild(top);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  });
+  </script>
+  <a href="00-央国企计算机开发岗面试-总文档.html" class="back-btn">← 返回总文档</a>
+  <style>
+  .back-btn { position: fixed; left: 24px; bottom: 32px; background: #1a3a6b; color: #fff;
+    padding: 10px 16px; border-radius: 24px; font-size: 14px; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 99; }
+  .back-btn:hover { background: #2c5f9e; text-decoration: none; }
+  @media (max-width: 640px) { .back-btn { left: 12px; bottom: 20px; padding: 8px 12px; font-size: 13px; } }
+  </style>
+
+<style>
+/* ---- 手机适配（自动注入） ---- */
+@media (max-width: 640px) {
+  body { padding: 14px 12px 64px !important; margin: 0 !important; font-size: 15px !important; line-height: 1.85 !important; }
+  h1 { font-size: 1.35em !important; }
+  h2 { font-size: 1.18em !important; }
+  h3 { font-size: 1.05em !important; }
+  pre { white-space: pre-wrap !important; word-break: break-word !important; font-size: 0.82em !important; padding: 10px 12px !important; }
+  code { font-size: 0.86em !important; word-break: break-all; }
+  table { display: block !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: normal !important; }
+  img { max-width: 100% !important; }
+  blockquote { padding: 8px 12px !important; margin: 0.8em 0 !important; font-size: 0.95em; }
+}
+</style>
+
+<style>
+/* ---- 代码配色修正（自动注入）：浅色底 + 深色字 ---- */
+pre { background: #f5f7fa !important; color: #1f2328 !important; border: 1px solid #d5dbdb !important; }
+pre code { color: inherit !important; background: none !important; }
+pre.numberSource { border-left: 1px solid #b0b0b0 !important; }
+code span.co, code span.an, code span.cv, code span.in, code span.wa { color: #5a6570 !important; }
+code span.op { color: #424242 !important; }
+code { color: #8c3d00 !important; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">05-DSH-plugin开源项目-面试全攻略</h1>
+</header>
+<h1 id="dsh-plugin-开源项目-面试全攻略">05 · DSH-plugin 开源项目 ——
+面试全攻略</h1>
+<blockquote>
+<p><strong>三遍读法</strong>：第一遍读各节【先用大白话理解】；第二遍读【展开讲】；第三遍自测第
+4
+章问答库。<strong>这个项目是简历上唯一有真实代码可看的资产</strong>——面试官可能当场点开
+GitHub，所以每个细节都要能讲到本文档的深度。代码已 clone 到
+<code>/tmp/DSH-plugin/</code> 可随时查证。</p>
+</blockquote>
+<hr />
+<h2 id="口语稿">1. 口语稿</h2>
+<h3 id="秒版">30 秒版</h3>
+<blockquote>
+<p>我给 DeepSeek Harness——DeepSeek 官方开源的命令行 AI
+工具——写了两个插件，都在我的 GitHub
+上。一个是<strong>计费统计插件</strong>：拦截每一次模型调用，按官方定价自动算花了多少钱，支持峰谷分时电价，还能看缓存命中率和当前对话的上下文占用；另一个是<strong>自升级插件</strong>：一键检查官方更新、合并、构建，失败可以回滚。两个插件都是零依赖纯
+JavaScript，装的时候不用跑安装、没有供应链风险。起因是我自己重度使用这个工具，计费不透明和手动升级是自己的痛点，就自己动手解决了。</p>
+</blockquote>
+<h3 id="分钟版面试官说详细讲讲时">2 分钟版（面试官说”详细讲讲”时）</h3>
+<blockquote>
+<p>先说背景：DeepSeek Harness 是 DeepSeek 官方开源的终端 AI
+助手，支持插件机制。我用它的过程中有两个痛点：一是 API 按 token
+计费，但工具不告诉你花了多少钱、缓存帮你省了多少；二是工具本体是源码方式安装的，官方更新后要手动
+pull、装依赖、构建。</p>
+<p>计费插件的核心是一次”无感拦截”：模型的回答是流式一块块返回的，我在数据流上包了一层——每一块原样透传给宿主（用户完全无感知），流的最末尾有一块”账单”数据（本次输入输出各多少
+token），截下来记账。记账放在 finally 里保证不漏，再包一层 try/catch
+保证统计挂了也不影响对话。计费支持峰谷电价——官方高峰时段全价、空闲半价，和居民用电分时电价同构；缓存命中的输入价格约为未命中的
+1/120，所以专门算了缓存命中率给用户看。存储用两份文件：jsonl
+明细账本（只追加不改，写崩最多坏一行）加 summary
+汇总报表，就是事实表加汇总表的结构。</p>
+<p>升级插件最有意思的设计是”是否最新”的判定：一开始想比较本地和官方的版本号是否相同，但本地永远领先官方几个自己的定制提交，这么比会天天误报。改成”落后计数”——本地落后官方的提交数为
+0 就是最新，同时如实显示”本地领先 N
+条”。另外做了回滚锚点、脏工作区拒绝升级、端点只监听本机这些安全闸门。</p>
+<p>这两个插件让我完整走了一遍”自己是用户→发现痛点→设计→发布维护”的闭环，也算把异步流处理和
+Git 工程化用在了真实场景里。</p>
+</blockquote>
+<hr />
+<h2 id="先用大白话理解这两个插件各干了什么">2.
+先用大白话理解：这两个插件各干了什么</h2>
+<h3 id="计费插件-dsh-usage-meter-给水管装水表">计费插件 dsh-usage-meter
+= 给水管装水表</h3>
+<p>你天天用 DeepSeek 的 AI
+干活，就像天天用水——但水厂（API）按吨收费，你家却<strong>没有水表</strong>：一个月下来不知道用了多少、花了多少、哪些是浪费。</p>
+<p>这个插件就是在水管上装了一块<strong>智能水表</strong>：</p>
+<ul>
+<li><strong>用水量（token
+统计）</strong>：每次用水自动记录——多少是冷水（新输入）、多少是循环水（缓存命中，超便宜）、多少是排出去的（输出）；</li>
+<li><strong>电费单（费用计算）</strong>：按自来水厂的<strong>峰谷水价</strong>自动算钱——白天高峰全价、深夜半价，账单分时段给你列清楚；</li>
+<li><strong>省钱报告（缓存命中率）</strong>：告诉你循环水占多少比例——命中率越高越省钱；</li>
+<li><strong>油表（上下文占用）</strong>：对话有容量上限（就像油箱），它告诉你油箱还剩多少、大约还能聊几条消息。</li>
+</ul>
+<h3 id="升级插件-dsh-updater-给房子做一键装修更新">升级插件 dsh-updater
+= 给房子做”一键装修更新”</h3>
+<p>你的房子（DSH
+工具本体）是源码盖的，开发商（官方仓库）经常出新版本，但你<strong>自己还改过几处装修</strong>（定制提交）。以前每次更新要手动：看有没有新版
+→ 拉代码 → 合并（还不能弄丢自己的装修）→ 装材料 → 施工。</p>
+<p>这个插件把这些做成<strong>一键 + 可反悔</strong>：</p>
+<ul>
+<li><strong>检查更新</strong>：自动对比”开发商比我新了几版”——注意不是比”版本号一不一样”，因为你自己改过装修，版本号永远对不上，比错了会天天谎报”有新版”；</li>
+<li><strong>一键升级</strong>：合并新代码 → 装依赖 → 构建，全自动；</li>
+<li><strong>绝不弄丢你的装修</strong>：只合并、绝不强推覆盖；万一合并打架，自动撤回现场再报错；</li>
+<li><strong>可以反悔</strong>：升级前先拍张照（记下升级前的位置），盖砸了一键回到拍照那一刻。</li>
+</ul>
+<hr />
+<h2 id="展开讲会被问到的技术点">3. 展开讲：会被问到的技术点</h2>
+<h3 id="插件机制怎么挂到宿主上的">3.1 插件机制：怎么”挂”到宿主上的</h3>
+<p><strong>大白话</strong>：像手机装 App——商店（宿主
+DSH）提供安装位和系统服务，App 声明要什么权限，装上后开始干活。</p>
+<p><strong>展开</strong>：插件入口只有一行导出
+<code>module.exports = { name, inject: ['commands'], apply }</code>。<code>inject</code>
+声明需要的宿主服务（这里是斜杠命令注册表）；宿主装载插件时调用
+<code>apply(ctx)</code>，把上下文递进来，插件在里面挂事件监听、注册命令。这是典型的<strong>控制反转</strong>（和
+FastAPI 装饰器同一个思想：你提供零件，框架负责调用你）。</p>
+<h3 id="流拦截核心中的核心必考">3.2 流拦截：核心中的核心（必考）</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ctx<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;llm/stream&#39;</span><span class="op">,</span> (options<span class="op">,</span> next) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> stream <span class="op">=</span> <span class="fu">next</span>()              <span class="co">// 拿到原始数据流</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (<span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> () {       <span class="co">// 返回包装过的流</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> usage <span class="op">=</span> <span class="kw">null</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> <span class="cf">await</span> (<span class="kw">const</span> chunk <span class="kw">of</span> stream) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (chunk<span class="op">.</span><span class="at">type</span> <span class="op">===</span> <span class="st">&#39;usage&#39;</span>) usage <span class="op">=</span> chunk<span class="op">.</span><span class="at">usage</span>  <span class="co">// 流末尾的账单</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">yield</span> chunk                  <span class="co">// 原样透传, 一个字节不少</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">finally</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (usage) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> { <span class="fu">recordCall</span>(options<span class="op">,</span> usage) } <span class="cf">catch</span> (e) { <span class="co">/* 只打日志 */</span> }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  })()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>大白话</strong>：大模型的回答像水管的<strong>水流</strong>，一块一块流过来。插件在水管上装水表：<strong>水照常流</strong>（yield
+透传，宿主完全无感），表只管计数——流的最末尾有一块”账单”（type=usage
+的数据块，带本次 token 明细），顺手截下来。</p>
+<p><strong>三个技术点</strong>（每个都是追问弹药）： 1.
+<strong>流式响应（Streaming）</strong>：模型回答不是一次性返回的，是分块流式吐出，降低首字等待；<code>async generator</code>（异步生成器）是
+JS 里处理流的标准姿势——<code>for await</code>
+逐块消费、<code>yield</code> 逐块产出； 2. <strong>finally
+记账</strong>：不管流正常结束还是中途抛错，finally
+必然执行——保证”调用发生了就一定被统计”； 3.
+<strong>统计失败不影响主流程</strong>：recordCall 包
+try/catch，磁盘坏了也只是日志一句错。<strong>监控类代码第一原则：自己死不能拉着业务死</strong>——与美团巡检”失败登记不谎报”同一价值观，面试可互相呼应。</p>
+<h3 id="峰谷计价和生活经验完全同构">3.3
+峰谷计价：和生活经验完全同构</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">bandOf</span>(tsMs) {                       <span class="co">// 每次调用按时间戳判断计价带</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (tsMs <span class="op">&lt;</span> PEAK_START_UTC) <span class="cf">return</span> <span class="st">&#39;legacy&#39;</span>  <span class="co">// 调价日前 = 旧价</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> h <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(tsMs)<span class="op">.</span><span class="fu">getUTCHours</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ((h <span class="op">&gt;=</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> h <span class="op">&lt;</span> <span class="dv">4</span>) <span class="op">||</span> (h <span class="op">&gt;=</span> <span class="dv">6</span> <span class="op">&amp;&amp;</span> h <span class="op">&lt;</span> <span class="dv">10</span>)) <span class="cf">return</span> <span class="st">&#39;peak&#39;</span>  <span class="co">// 北京时间 9-12、14-18 = 峰</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">&#39;offpeak&#39;</span>                            <span class="co">// 其余 = 谷(半价)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>大白话</strong>：和居民<strong>峰谷电价</strong>一模一样——白天用电高峰贵、深夜便宜，引导错峰。DeepSeek
+官方同理：高峰时段全价、空闲时段半价，引导把不急的任务挪到夜里。</p>
+<p><strong>展开</strong>：费用 = tokens ÷ 1,000,000 ×
+单价（官方按”每百万 token
+多少元”定价），三个桶分别算再相加：<strong>未命中输入</strong>（全价）、<strong>缓存命中输入</strong>（超便宜，约为未命中的
+<strong>1/120</strong>）、<strong>输出</strong>。缓存命中 = cacheRead +
+cacheWrite
+tokens；多轮对话把历史上下文重发，服务端认出”这段缓存过”就按超低价计——<strong>这就是”长对话为什么越到后面越贵”以及”缓存为什么省钱”的量化答案</strong>。</p>
+<h3 id="存储明细账本-汇总报表">3.4 存储：明细账本 + 汇总报表</h3>
+<p><strong>大白话</strong>：两本账——<strong>流水账</strong>（每笔一行的明细，只添不改）和<strong>总账</strong>（随时可看的汇总报表）。</p>
+<p><strong>展开</strong>： - <code>records.jsonl</code>（明细）：JSON
+Lines 格式，一行一条
+JSON，<strong>append-only</strong>。为什么不用数据库：追加写天然安全（写崩最多坏最后一行）、纯文本肉眼可查、按行读天然可流式——单机个人工具的最优解，上
+SQLite 是杀鸡用牛刀； -
+<code>summary.json</code>（汇总）：每次记账后重算的总账——累计、按模型分组、按会话分组、按计价带分组、最近一次上下文快照。<strong>读报表不用重放全部明细</strong>——和数仓”事实表
++ 汇总表”同一个思想（可与中青旅 Text-to-SQL 的数仓知识呼应）。</p>
+<h3 id="命令与上下文油表">3.5 命令与上下文油表</h3>
+<ul>
+<li><code>/usage</code>：Markdown 报表（费用分旧价/峰/谷三段、token
+三桶、缓存命中率、按模型表格）；</li>
+<li><code>/usage context</code>：上下文占用——已用 /
+1,000,000（模型上下文窗口）= 百分比，剩余多少、约还能聊几条消息（剩余 ÷
+1500）。<strong>把”上下文窗口”这个抽象概念变成用户可感知的油表</strong>。</li>
+</ul>
+<h3 id="updater-的是否最新判定最值得讲的设计决策">3.6 updater
+的”是否最新”判定：最值得讲的设计决策</h3>
+<p><strong>大白话</strong>：判断”要不要更新”，最直觉的做法是比”我家版本号和开发商的一不一样”——但你家<strong>自己改过装修</strong>，版本号永远对不上，天天谎报”有新版”（和”狼来了”误报一个性质）。正确做法：数”<strong>开发商比我新了几版</strong>”——落后数为
+0 就是最新，同时如实显示”我领先 N 条自己的定制”。</p>
+<p><strong>展开</strong>：<code>git rev-list HEAD..origin/branch</code>
+的计数为 0 即最新（behind 计数），不比较 HEAD
+指针本身。<strong>这是”判定指标选错，报警永远不准”的真实案例</strong>，与美团误报治理（指标和丢包分布错配）同一方法论，面试串起来讲非常加分。</p>
+<h3 id="updater-的安全设计必考考虑过什么安全">3.7 updater
+的安全设计（必考”考虑过什么安全”）</h3>
+<ol type="1">
+<li><strong>回滚锚点</strong>：升级前把 merge 前的 HEAD 记入
+<code>~/.dsh/dsh-updater.state.json</code>，构建失败或反悔时 reset
+回锚点重构建——<strong>破坏性操作必须可撤销</strong>；</li>
+<li><strong>只 merge、永不 reset –hard
+远端</strong>：保护本地定制提交；merge 冲突自动
+<code>git merge --abort</code> 恢复现场再报错；</li>
+<li><strong>升级前安全检查</strong>：工作区有未提交修改→拒绝；detached
+HEAD→拒绝；同时只允许一个升级在跑（并发互斥）；</li>
+<li><strong>端点只监听本机（loopback）</strong>：这些端点会执行 git/pnpm
+命令，暴露到局域网等于把家门钥匙发给邻居。信任判定看 socket 地址 + Host
+头，<strong>永不信任 X-Forwarded-For</strong>（可伪造的转发头）。</li>
+</ol>
+<h3 id="工程决策零依赖">3.8 工程决策：零依赖</h3>
+<p>两个插件 <code>package.json</code> 无任何
+dependencies、无构建步骤。理由：插件安装者不用跑 npm
+install（<strong>避免供应链攻击面</strong>）、加载快、维护简单。面试一句话：“插件越小，可信面越大”。</p>
+<hr />
+<h2 id="问答库">4. 问答库</h2>
+<p><strong>Q1. 为什么做这个项目？</strong> &gt; 自己是 DeepSeek Harness
+的重度用户，两个痛点：计费不透明（不知道花了多少、缓存省了多少）、源码安装升级麻烦。自己写插件解决——“自己是用户”是开源项目最真实的动机，也让我完整走了一遍发现问题→设计→发布→维护的闭环。</p>
+<p><strong>Q2. 怎么拦截每次模型调用的？（核心题）</strong> &gt; 在
+llm/stream
+事件上包一层：拿到原始流后返回包装的异步生成器，逐块透传（宿主无感），流末尾
+type=usage 的账单块截下来，在 finally
+里记账（保证异常结束也统计到），记账再包
+try/catch（统计失败绝不影响对话）。本质是在数据流上装了一块”水表”：水照常流，表只管计数。</p>
+<p><strong>Q3. 峰谷计价怎么实现的？</strong> &gt;
+和居民峰谷电价同构：按每次调用的时间戳判断计价带——调价日前旧价、北京时间
+9-12/14-18
+峰时全价、其余谷时半价。费用按三个桶算：未命中输入全价、缓存命中输入约为其
+1/120、输出按输出价，tokens÷1M×单价再相加。</p>
+<p><strong>Q4. 缓存命中率为什么重要？</strong> &gt;
+缓存命中的输入价格是未命中的约
+1/120，长对话省钱全靠它——多轮对话把历史上下文重发，服务端认出缓存过的部分就按超低价计。所以插件专门算命中率展示，用户能直观看到”缓存帮我省了多少”。</p>
+<p><strong>Q5. 为什么用 jsonl 不用数据库？</strong> &gt; 明细是
+append-only：追加写天然安全（写崩最多坏最后一行）、纯文本肉眼可查、按行读可流式处理。单机个人工具不需要并发和事务，引入
+SQLite 反而增加复杂度。汇总单独存
+summary.json，读报表不重放明细——事实表加汇总表的两层结构。</p>
+<p><strong>Q6. updater 里最得意的决策？</strong> &gt;
+“是否最新”的判定算法。直觉做法是比较本地和官方版本是否相同，但本地永远领先官方几个定制提交，会天天误报。改成
+behind 计数——本地落后官方提交数为 0 即最新，同时如实显示”本地领先
+N”。教训：判定指标选错，准确性无从谈起——和做监控报警是同一个道理。</p>
+<p><strong>Q7. 安全上做了什么？</strong> &gt; updater 端点能执行
+git/pnpm 命令，所以只监听 loopback，信任判定看 socket 地址和 Host
+头、永不信任可伪造的 X-Forwarded-For；升级前检查（脏工作区拒绝、detached
+HEAD 拒绝、并发互斥）；升级前记回滚锚点，失败一键回滚；merge 冲突自动
+abort 恢复现场。原则：破坏性操作必须可撤销。</p>
+<p><strong>Q8. 什么是流式响应？为什么要透传？</strong> &gt;
+模型回答不是一次返回的，是分块流式吐出，降低用户看到首字的等待时间。透传是因为插件的角色是”观测”不是”修改”——水表不该改变水流。改动流会造成宿主行为异常，也违背插件最小侵入原则。</p>
+<p><strong>Q9. 上下文占用是怎么算的？</strong> &gt; 每次请求的 prompt
+规模（未命中+缓存命中
+tokens）就是当前上下文占用快照，取最近一次记录除以模型上下文窗口（1M
+tokens）得百分比，再按”一条中等消息约 1500
+tokens”估算还能聊几条——把抽象的上下文窗口变成用户看得懂的油表。</p>
+<hr />
+<h2 id="红线与自查">5. 红线与自查</h2>
+<ol type="1">
+<li><strong>这是唯一有真实代码的简历项</strong>——面试官可能当场打开
+GitHub 逐行问，本文档第 3 章每个代码点都要能对着仓库讲；</li>
+<li><strong>模型名和定价数字</strong>：PRICING 表里是
+deepseek-v4-pro/flash
+的虚构延续定价（实际以仓库代码为准），面试报数字前先看一眼代码，别背错；</li>
+<li><strong>零依赖、无构建</strong>是主动设计决策（供应链安全），不是”没能力用框架”——叙事方向要讲对；</li>
+<li><strong>和实习经历串线</strong>：流拦截的”透传+finally+不影响主流程”
+↔︎ 美团”监控不谎报/幂等”；behind 计数 ↔︎
+美团误报治理（指标选错天天误报）；jsonl+summary ↔︎
+数仓事实表汇总表。<strong>三处呼应主动讲，是”技术价值观一致”的最强证明</strong>；</li>
+<li>仓库地址与简历一致：https://github.com/kbtime/DSH-plugin.git</li>
+</ol>
+<hr />
+<p><em>配套：00 总文档 / 01 美团 / 02 中青旅 / 03 神农（待写）/ 04
+MSTGN。</em></p>
+</body>
+</html>

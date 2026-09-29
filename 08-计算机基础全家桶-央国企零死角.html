@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>08-计算机基础全家桶-央国企零死角</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background: #f7f8fa; color: #2f3437; line-height: 1.9; font-size: 16px; }
+    h1 { color: #1a3a6b; border-bottom: 3px solid #4477ce; padding-bottom: .4em; font-size: 1.9em; }
+    h2 { color: #1a3a6b; border-bottom: 2px solid #b8cbe8; padding-bottom: .3em; margin-top: 2.6em; }
+    h3 { color: #2c5f9e; border-left: 5px solid #6fa8dc; padding-left: 12px; margin-top: 2.2em; }
+    a { color: #2563a8; text-decoration: none; -webkit-tap-highlight-color: rgba(68,119,206,.15); } a:hover { text-decoration: underline; }
+    blockquote { background: #fff8e6; border-left: 5px solid #f0b429; color: #5a4a1f;
+      padding: 12px 18px; border-radius: 8px; margin: 1em 0; }
+    blockquote p { margin: .4em 0; }
+    blockquote ul { margin: .4em 0; padding-left: 1.3em; }
+    blockquote li { margin: .55em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1.2em 0; background: #fff; font-size: 15px; display: block; overflow-x: auto; white-space: nowrap; }
+    th { background: #e8effa; color: #1a3a6b; }
+    th, td { border: 1px solid #d5dce6; padding: 9px 13px; text-align: left; }
+    tr:nth-child(even) { background: #fafbfd; }
+    code { background: #e9edf2; padding: 2px 6px; border-radius: 4px; font-size: .9em; color: #b34700; word-break: break-all; }
+    pre { background: #2b303b; color: #e8eaf0; padding: 16px; border-radius: 10px; overflow-x: auto; line-height: 1.6; }
+    pre code { background: none; color: inherit; padding: 0; }
+    p { margin: .85em 0; }
+    ol, ul { padding-left: 1.6em; }
+    li { margin: .35em 0; }
+    hr { border: none; border-top: 1px solid #d8dee9; margin: 2.5em 0; }
+    p.q { background: #ffffff; border: 1px solid #ccd8ea; border-left: 5px solid #4477ce;
+      border-radius: 8px; padding: 12px 16px; margin: 1.6em 0 0.4em; box-shadow: 0 1px 3px rgba(30,60,110,.06); }
+    p.q > strong:first-child { color: #1a3a6b; }
+    .top-btn { position: fixed; right: 20px; bottom: 28px; background: #4477ce; color: #fff; border-radius: 50%;
+      width: 46px; height: 46px; line-height: 46px; text-align: center; font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25); text-decoration: none; z-index: 99; }
+    .top-btn:hover { background: #2c5f9e; text-decoration: none; }
+    header#title-block-header { border-bottom: none; }
+    @media (max-width: 640px) {
+      body { padding: 20px 14px 90px; font-size: 15px; line-height: 1.85; }
+      h1 { font-size: 1.5em; } h2 { font-size: 1.3em; } h3 { font-size: 1.1em; }
+      blockquote { padding: 10px 12px; }
+      p.q { padding: 10px 12px; }
+      .top-btn { width: 52px; height: 52px; line-height: 52px; }
+    }
+  </style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var top = document.createElement('a');
+    top.href = '#s0'; top.className = 'top-btn'; top.textContent = '↑'; top.title = '回到目录';
+    document.body.appendChild(top);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  });
+  </script>
+  <a href="00-央国企计算机开发岗面试-总文档.html" class="back-btn">← 返回总文档</a>
+  <style>
+  .back-btn { position: fixed; left: 24px; bottom: 32px; background: #1a3a6b; color: #fff;
+    padding: 10px 16px; border-radius: 24px; font-size: 14px; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 99; }
+  .back-btn:hover { background: #2c5f9e; text-decoration: none; }
+  @media (max-width: 640px) { .back-btn { left: 12px; bottom: 20px; padding: 8px 12px; font-size: 13px; } }
+  </style>
+
+<style>
+/* ---- 手机适配（自动注入） ---- */
+@media (max-width: 640px) {
+  body { padding: 14px 12px 64px !important; margin: 0 !important; font-size: 15px !important; line-height: 1.85 !important; }
+  h1 { font-size: 1.35em !important; }
+  h2 { font-size: 1.18em !important; }
+  h3 { font-size: 1.05em !important; }
+  pre { white-space: pre-wrap !important; word-break: break-word !important; font-size: 0.82em !important; padding: 10px 12px !important; }
+  code { font-size: 0.86em !important; word-break: break-all; }
+  table { display: block !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: normal !important; }
+  img { max-width: 100% !important; }
+  blockquote { padding: 8px 12px !important; margin: 0.8em 0 !important; font-size: 0.95em; }
+}
+</style>
+
+<style>
+/* ---- 代码配色修正（自动注入）：浅色底 + 深色字 ---- */
+pre { background: #f5f7fa !important; color: #1f2328 !important; border: 1px solid #d5dbdb !important; }
+pre code { color: inherit !important; background: none !important; }
+pre.numberSource { border-left: 1px solid #b0b0b0 !important; }
+code span.co, code span.an, code span.cv, code span.in, code span.wa { color: #5a6570 !important; }
+code span.op { color: #424242 !important; }
+code { color: #8c3d00 !important; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">08-计算机基础全家桶-央国企零死角</h1>
+</header>
+<h1 id="计算机基础全家桶-央国企面试零死角版通俗教学">08 ·
+计算机基础全家桶 —— 央国企面试零死角版（通俗教学）</h1>
+<blockquote>
+<p><strong>定位</strong>：对照 GitHub 星王题库（JavaGuide 14 万★ /
+doocs-advanced-java 7
+万★）的目录体系，把央国企面试会考的<strong>全部计算机基础</strong>补齐——MySQL、Redis、网络、操作系统、数据结构算法、MQ、分布式概念、设计模式。已有的
+07 管 Java、00 管简历题，本文管”考纲上其他一切”。</p>
+<p><strong>读法</strong>：每题【类比 → 30 秒答案 → 追问下限】；带 ★
+的是高频必背；考前刷文末速答表。语言全部人话，背了就能说。</p>
+</blockquote>
+<hr />
+<h2 id="目录">📑 目录</h2>
+<ul>
+<li><a href="#k1">一、MySQL 深入</a>（索引原理、索引失效、事务与
+MVCC、三大日志、慢查询优化）</li>
+<li><a href="#k2">二、Redis
+深入</a>（缓存三兄弟：穿透/击穿/雪崩、双写一致性、分布式锁、主从哨兵集群）</li>
+<li><a href="#k3">三、计算机网络</a>（分层、TCP 握手挥手、HTTP
+版本、HTTPS、DNS、Cookie/Session/Token）</li>
+<li><a href="#k4">四、操作系统</a>（内存管理与虚拟内存、I/O
+多路复用、零拷贝、用户态内核态、IPC）</li>
+<li><a
+href="#k5">五、数据结构与算法</a>（排序、链表二叉树高频题思路、TopK、布隆过滤器）</li>
+<li><a
+href="#k6">六、消息队列深入</a>（消息丢失三段保障、幂等、积压、选型对比）</li>
+<li><a
+href="#k7">七、分布式与高可用概念</a>（CAP、负载均衡、限流熔断降级、分布式事务入门）</li>
+<li><a href="#k8">八、设计模式（常考五个）</a></li>
+<li><a href="#k9">九、考前速答表</a></li>
+</ul>
+<hr />
+<p><a id="k1"></a></p>
+<h2 id="一mysql-深入">一、MySQL 深入</h2>
+<h3 id="索引是什么为什么快b-树">1.1 ★ 索引是什么、为什么快（B+ 树）</h3>
+<p><strong>类比</strong>：<strong>书的目录</strong>。没有目录找一段内容要一页页翻（全表扫描）；有目录先定位页码直接翻到。
+<strong>为什么用 B+ 树这种结构</strong>（追问必到）：B+
+树是”<strong>矮胖的多叉树</strong>”——每个节点不是二叉的俩孩子，而是一页装很多键（像目录的一级章/二级节），<strong>树矮意味着从根到叶只跳
+3-4 次</strong>（每次跳 = 一次磁盘读，磁盘读是大头，跳的次数少 =
+快）；且<strong>叶子节点之间有链子串起来</strong>——范围查询（查 3 月到 5
+月的所有订单）顺着链子扫一遍就行。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：索引是把某几列预先排好序的查找结构，MySQL
+InnoDB 用 B+
+树——矮胖多叉减少磁盘访问次数，叶子节点成链方便范围查询。没有索引 O(n)
+全表扫，有索引近似 O(log n)。
+<strong>追问下限</strong>：主键索引（叶子存整行数据，聚簇索引）vs
+普通索引（叶子存主键，还要回表再查一次——“回表”这个词说出来就是加分）；为什么推荐自增主键——插入总是追加到最右边，不会引起页分裂。</p>
+</blockquote>
+<h3 id="索引什么时候失效高频坑题">1.2 ★ 索引什么时候失效（高频坑题)</h3>
+<p><strong>类比</strong>：你按拼音排好了通讯录，结果<strong>有人问你”名字里带’明’的都有谁”</strong>——拼音序根本帮不上忙，只能全翻。以下操作等于”让有序白排”：</p>
+<blockquote>
+<p><strong>30
+秒答案</strong>：六种典型失效——①对索引列<strong>用函数或运算</strong>（<code>WHERE YEAR(date)=2026</code>，排好的是日期不是年份）；②<strong>左模糊</strong>
+<code>LIKE '%xx'</code>（开头是通配符，等于问”带某字的都有谁”；<code>'xx%'</code>
+右模糊不失效）；③<strong>隐式类型转换</strong>（列是字符串却拿数字查，MySQL
+悄悄给列套了函数）；④<strong>联合索引不满足最左前缀</strong>（建了
+(a,b,c) 却只按 b 查——目录按 a→b→c 排，跳过 a 没法定位）；⑤ OR
+连接了无索引的列；⑥ 优化器评估回表太多不如全扫（数据占比太大）。
+<strong>最左前缀追问</strong>：联合索引像”省→市→区”的地址目录，必须从省开始查才能用上目录。</p>
+</blockquote>
+<h3 id="事务隔离级别与-mvcc上次背了名字这次讲原理">1.3 ★ 事务隔离级别与
+MVCC（上次背了名字，这次讲原理）</h3>
+<p>先复习并发三毛病：<strong>脏读</strong>（读到别人没提交、可能反悔的数据）、<strong>不可重复读</strong>（同一事务内两次读同一行结果不同——别人改了并提交）、<strong>幻读</strong>（两次读同一范围，行数变了——别人插入了新行）。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：四个级别逐级解决——读未提交（三病全有）→
+读已提交（解决脏读）→ <strong>可重复读（MySQL
+默认</strong>，再解决不可重复读）→ 串行化（全解决但性能差）。
+<strong>MVCC（多版本并发控制）原理——类比</strong>：每个事务开工时<strong>拍一张数据的”版本快照”</strong>，之后
+reads
+都看自己的照片，别人改了也不影响我——读写互不阻塞，靠”多个版本并存”实现。实现靠隐藏的两个版本列
++ undo log 版本链，按隔离级别决定”照片拍多严”。</p>
+</blockquote>
+<h3 id="三大日志redo-undo-binlog">1.4 ★ 三大日志（redo / undo /
+binlog）</h3>
+<p><strong>类比</strong>：一家店的三本账： - <strong>redo
+log（重做日志）=
+存档点</strong>：先顺序记下”我改了什么”再慢慢刷盘——<strong>断电后照着存档重放，已提交的数据不丢</strong>（持久性）；
+- <strong>undo log（回滚日志）=
+Ctrl+Z</strong>：记录”改之前是什么”——事务失败或 ROLLBACK
+时逆向恢复（原子性）；MVCC 的版本链也是它； -
+<strong>binlog（归档日志）= 流水总账</strong>：Server
+层记录所有变更，<strong>给主从复制和数据恢复用</strong>——从库照着总账重放一遍就和主库一致了。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：redo
+保证持久性（先写日志再刷盘，崩溃恢复），undo 保证原子性（回滚）并支撑
+MVCC，binlog 用于主从复制和恢复。redo 是 InnoDB 引擎层的物理日志，binlog
+是 Server 层的逻辑日志。</p>
+</blockquote>
+<h3 id="慢查询怎么排查优化实操题勾连简历">1.5
+慢查询怎么排查优化（实操题，勾连简历）</h3>
+<blockquote>
+<p><strong>30 秒答案</strong>：①开启慢查询日志找到慢
+SQL；②<code>EXPLAIN</code> 看执行计划——重点看 type（出现 ALL
+就是全表扫）、key（用没用上索引）、rows（扫了多少行）；③对症下药：加/改索引、改写
+SQL（消除失效写法）、避免 SELECT
+*、大分页用”游标式”（<code>WHERE id &gt; 上次末尾</code> 代替
+<code>LIMIT 100000, 10</code>——跳过 10 万行是白跳的）。
+<strong>勾连</strong>：“我在中青旅做 Text-to-SQL，生成的 SQL 都要过 AST
+校验+执行计划检查，理念一样。”</p>
+</blockquote>
+<hr />
+<p><a id="k2"></a></p>
+<h2 id="二redis-深入">二、Redis 深入</h2>
+<h3 id="缓存三兄弟穿透-击穿-雪崩必考一个类比记住">2.1 ★★
+缓存三兄弟：穿透 / 击穿 / 雪崩（必考，一个类比记住）</h3>
+<p>背景：缓存的标准姿势是”查缓存→没有→查数据库→写回缓存”。三兄弟都是<strong>请求绕过缓存砸到数据库</strong>的三种方式：</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>名字</th>
+<th>是什么</th>
+<th>类比</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>穿透</strong></td>
+<td>查<strong>根本不存在</strong>的数据（缓存永远不会有）</td>
+<td>有人反复拨一个<strong>空号</strong>，前台每次都去查号簿</td>
+<td>①空值也缓存（短
+TTL）②<strong>布隆过滤器</strong>提前拦”肯定不存在”</td>
+</tr>
+<tr>
+<td><strong>击穿</strong></td>
+<td><strong>某个热点 key</strong> 恰好过期，瞬间全部请求砸库</td>
+<td>商场<strong>最火的店</strong>恰好盘点歇业，人群冲进仓库</td>
+<td>①互斥锁：只放一个请求去重建缓存，其他等 ②热点 key 不设过期</td>
+</tr>
+<tr>
+<td><strong>雪崩</strong></td>
+<td><strong>大批 key 同时过期</strong>（或 Redis 整个挂了）</td>
+<td>整层楼同时关门，全部人涌向仓库</td>
+<td>①过期时间<strong>加随机值</strong>错峰 ②集群高可用
+③限流降级兜底</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>30
+秒答案</strong>：穿透是查不存在的数据打穿缓存——空值缓存加布隆过滤器；击穿是单个热点
+key 过期——互斥重建或热点不过期；雪崩是大批 key
+同时失效——过期时间加随机、集群部署。共同思路：<strong>别让请求同时落到数据库</strong>。</p>
+</blockquote>
+<h3 id="缓存和数据库的一致性高频">2.2 ★
+缓存和数据库的一致性（高频）</h3>
+<p><strong>类比</strong>：公告栏（缓存）和档案室（数据库）要保持一致——<strong>正确姿势：先改档案室，再把公告栏的旧公告撕掉（删除缓存），下次有人看时再贴新的（懒加载）</strong>。</p>
+<blockquote>
+<p><strong>30
+秒答案</strong>：常用”<strong>先更新数据库，再删除缓存</strong>”（Cache
+Aside）。为什么是删缓存不是更新缓存——并发写时两次更新的先后可能乱，删除让下次读时自然重建，简单且不易错。为什么先库后缓存——反过来（先删缓存）在删完到更新库之间有请求会把<strong>旧值</strong>重新载入缓存。极端不一致再用延迟双删或订阅
+binlog（canal）异步删。
+<strong>勾连</strong>：和你美团项目”二次校验以数据库当前状态为准”是同一个原则——<strong>数据库是唯一真相源</strong>。</p>
+</blockquote>
+<h3 id="分布式锁setnx-那道的完整体">2.3 ★ 分布式锁（SETNX
+那道的完整体）</h3>
+<p><strong>类比</strong>：<strong>公司唯一的会议室预订系统</strong>——谁先在系统里订到（SETNX
+成功）谁用，用完释放（DEL）；订不到的等或放弃。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：Redis 分布式锁的三个关键点——①加锁用
+<code>SET key 唯一值 NX EX 过期时间</code>（一条原子命令同时完成”占位+设过期”）；②<strong>必须设过期时间</strong>：持锁的进程崩了没人释放，过期是唯一的自动解锁出路；③<strong>值必须唯一</strong>（请求
+ID）：删锁前先比对是不是自己的锁——防止 A 的业务超时、锁已过期被 B
+拿走后，A 回来误删了 B 的锁。释放锁的理想姿势是 Lua
+脚本把”比对+删除”做成原子。Redisson 是成熟封装（带看门狗自动续期）。</p>
+</blockquote>
+<h3 id="主从复制-哨兵-集群一句话梯队">2.4 主从复制 / 哨兵 /
+集群（一句话梯队）</h3>
+<blockquote>
+<p><strong>30
+秒答案</strong>：<strong>主从复制</strong>=一主多从，写主读从、主把变更同步给从（读写分离扩读能力）；<strong>哨兵</strong>=加一个监工盯着主，主挂了自动推选从升主（自动故障转移）；<strong>集群</strong>=数据分片到多个主（每主再带从），容量和写能力水平扩展。记忆：主从管”读得多”，哨兵管”怕挂”，集群管”装不下”。</p>
+</blockquote>
+<h3 id="大-key-热-key中频">2.5 大 key / 热 key（中频）</h3>
+<blockquote>
+<p><strong>大 key</strong>（一个 key 装了几百
+MB）：删它会卡单线程（异步删 UNLINK）、拆分结构；<strong>热
+key</strong>（一个 key 被打爆）：本地缓存兜一层、key
+加后缀分散到多节点。</p>
+</blockquote>
+<hr />
+<p><a id="k3"></a></p>
+<h2 id="三计算机网络">三、计算机网络</h2>
+<h3 id="osi-七层-tcp-ip-四层背四层版">3.1 ★ OSI 七层 / TCP-IP
+四层（背四层版）</h3>
+<p><strong>类比</strong>：<strong>寄快递</strong>——你写信（应用层：内容）→
+快递单填收发件人（传输层：端口， TCP/UDP）→
+分拣中心看城市路由（网络层：IP 地址选路）→ 每段路的司机（链路层：MAC
+逐跳传递）。七层版只是把其中几步再细分（表示层=统一格式加密，会话层=建立会话）。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：TCP/IP
+四层从上到下：应用（HTTP/DNS）、传输（TCP/UDP，端口到端口）、网络（IP，主机到主机选路）、链路（相邻设备传输）。HTTP
+跑在 TCP 上、DNS 是应用层的”电话簿”。</p>
+</blockquote>
+<h3 id="三次握手必考要会画">3.2 ★★ 三次握手（必考，要会画）</h3>
+<p><strong>类比</strong>：<strong>第一次见面对暗号</strong>： 1.
+客户端：<em>“能听到吗？”</em>（SYN） 2.
+服务端：<em>“能听到！你能听到我吗？”</em>（SYN+ACK） 3.
+客户端：<em>“能！开始聊。”</em>（ACK）</p>
+<p><strong>为什么是三次不是两次</strong>：两次的话，服务端无法确认”我能发、你能收”这条链路；且客户端一个<strong>迟到的旧连接请求</strong>（网络里迷路了半天才到）会让服务端白白建立没人用的连接——第三次握手给了客户端否决权。</p>
+<h3 id="四次挥手-time_wait">3.3 ★ 四次挥手 + TIME_WAIT</h3>
+<p><strong>类比</strong>：<strong>挂电话的礼貌告别</strong>—— 1.
+客户端：“我说完了”（FIN）； 2.
+服务端：“好，我知道了”（ACK）——<strong>但服务端可能还有话没说完</strong>；
+3. 服务端：“我也说完了”（FIN）； 4.
+客户端：“好，再见”（ACK），<strong>再等一会儿（TIME_WAIT，2
+个最大生存期）才真正收线</strong>。</p>
+<p><strong>为什么四次</strong>：TCP
+全双工（两边都能发），一方说完另一方可
+能还有数据——“知道了”和”我说完了”不能合并，所以各两次。 <strong>为什么
+TIME_WAIT</strong>：保证最后一个 ACK
+丢了还能重发；让旧连接的残包在网络中自然死亡，不污染新连接。</p>
+<h3 id="http-各版本-https">3.4 ★ HTTP 各版本 / HTTPS</h3>
+<blockquote>
+<p><strong>30 秒答案</strong>：HTTP1.0 一次连接一个请求；<strong>1.1
+长连接</strong>（Keep-Alive，建一次连发多个请求）但<strong>队头堵塞</strong>（一条队前面慢了后面全等）；<strong>HTTP2
+多路复用</strong>（一个连接并行跑多个请求）+ 头部压缩；HTTP3 换 UDP
+底座（QUIC）解决 TCP 层队头堵塞。 <strong>HTTPS = HTTP +
+TLS</strong>：握手时服务器出示<strong>证书</strong>（公钥，防冒充——像注册过的官方邮箱）；之后协商对称密钥加密通信。一句话：“<strong>证书验身份，对称加密传内容</strong>”。默认端口
+443（HTTP 80）。</p>
+</blockquote>
+<h3 id="从输入网址到看到页面综合题串场用">3.5
+从输入网址到看到页面（综合题，串场用）</h3>
+<blockquote>
+<p><strong>30 秒答案</strong>：输 URL → <strong>DNS 解析</strong>域名成
+IP（先查本机缓存→运营商→递归查询）→ TCP 三次握手建立连接 →（HTTPS 再加
+TLS 握手）→ 发 HTTP 请求 → 服务器处理返回响应 → 浏览器解析 HTML/CSS/JS
+渲染 →
+四次挥手断开。<strong>这题是上面所有知识的串联</strong>，答的时候分层说清楚就是高分。</p>
+</blockquote>
+<h3 id="cookie-session-token">3.6 Cookie / Session / Token ★</h3>
+<p><strong>类比</strong>：<strong>办会员的三种方式</strong>—— -
+<strong>Cookie</strong>：把信息<strong>存在你身上</strong>（会员卡带在身上，每次出示；不安全、容量小）；
+-
+<strong>Session</strong>：信息<strong>存在店里</strong>，只发你一个编号（报号就能查——但店只有一家，<strong>开分店〔分布式〕就麻烦了</strong>）；
+- <strong>Token（如
+JWT）</strong>：发你一张<strong>防伪签名盖章的自包含凭证</strong>——分店验一下章就认，不用打电话回总店（无状态、天然适配分布式）。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：Cookie 客户端存储自动携带；Session
+服务端存储靠 SessionID 关联，集群要共享存储；Token
+自包含信息加签名，服务端无状态只需验签——适合分布式和前后端分离。<strong>勾连
+RESTful 的无状态</strong>：“RESTful 提倡无状态，Token
+正好是这个哲学的落地，我两边项目都用 token。”</p>
+</blockquote>
+<hr />
+<p><a id="k4"></a></p>
+<h2 id="四操作系统">四、操作系统</h2>
+<h3 id="内存管理虚拟内存">4.1 ★ 内存管理：虚拟内存</h3>
+<p><strong>类比</strong>：<strong>银行授信</strong>——程序以为自己有 4GB
+空间（虚拟地址），实际物理内存可能只给了正在用的几页；<strong>要用到没映射的页，银行现给现映射（缺页中断，从磁盘调入）</strong>。每个进程都有自己独立的虚拟空间——<strong>互相看不见，天然隔离</strong>（A
+崩了 B 无感）。</p>
+<blockquote>
+<p><strong>30
+秒答案</strong>：虚拟内存给每个进程一个独立、连续的假象地址空间，实际按页映射到物理内存和磁盘交换区。好处：进程隔离、程序不必关心物理布局、物理内存可以超卖（按需调页）。缺页
+= 访问的页不在内存，触发从磁盘换入。
+<strong>延伸一句</strong>：局部性原理（刚用过的很快再用——时间局部性；挨着的马上会用——空间局部性）是这一切划算的原因。</p>
+</blockquote>
+<h3 id="io-多路复用selectpollepoll">4.2 ★ I/O
+多路复用（select/poll/epoll）</h3>
+<p><strong>类比</strong>：<strong>餐厅传呼台</strong>——一万个桌子都可能按铃：
+-
+<strong>select/poll</strong>：服务员<strong>轮流跑一圈问每桌</strong>”按铃了吗”（每次都要全量扫一遍，桌子多了累死）；
+- <strong>epoll（Linux
+的王牌）</strong>：装一个<strong>总呼叫器</strong>——哪桌按铃它直接亮哪桌的号，服务员只处理亮灯的（事件驱动，<strong>注册一次、就绪回调</strong>，几万连接也轻松）。</p>
+<blockquote>
+<p><strong>30 秒答案</strong>：I/O 多路复用 =
+一个线程监视大量连接、谁就绪处理谁。epoll
+高效的原因：内核维护红黑树存连接（注册一次）+
+就绪链表回调通知（不轮询全量）。<strong>勾连</strong>：“Redis
+单线程快、Nginx 高并发、Python asyncio 的底层，全是
+epoll——我神农项目的异步服务就是这个原理。”</p>
+</blockquote>
+<h3 id="零拷贝中频说清省了几次搬运">4.3
+零拷贝（中频，说清”省了几次搬运”）</h3>
+<p><strong>类比</strong>：传统读文件发网络：数据<strong>从仓库→前台打包间（内核缓冲）→柜台（用户空间）→又跑回打包间（socket
+缓冲）→发出</strong>，来回搬运。<strong>零拷贝 =
+仓库的东西直接装车发走</strong>（sendfile：内核里直接从文件缓冲怼到网卡），省掉搬到柜台再搬回来的两趟。</p>
+<h3 id="用户态和内核态">4.4 用户态和内核态</h3>
+<p><strong>类比</strong>：<strong>家里 vs
+电闸房</strong>。程序平时在自己家（用户态，干普通事）；要动电闸（读磁盘、收网络包）必须去电闸房（内核态，操作系统代劳，安全但切换有开销）。系统调用
+= 申请去电闸房办一件事。</p>
+<h3 id="进程间通信-ipc-一句话梯队">4.5 进程间通信 IPC 一句话梯队</h3>
+<p>管道（父子进程的单向水管）→ 消息队列（格子信箱）→
+共享内存（同住一屋看同一块白板，<strong>最快</strong>但要自己加锁）→
+信号量（锁本身）→
+Socket（<strong>跨机器</strong>也能通信——网络通信的底座）。</p>
+<hr />
+<p><a id="k5"></a></p>
+<h2 id="五数据结构与算法">五、数据结构与算法</h2>
+<h3 id="十大排序重点背四个">5.1 十大排序，重点背四个</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>排序</th>
+<th>思路（类比）</th>
+<th>复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>冒泡</strong></td>
+<td>相邻俩人比身高，大的往后挪，一轮下来最大到尾</td>
+<td>O(n²)</td>
+<td>最差但必会写</td>
+</tr>
+<tr>
+<td><strong>快排 ★</strong></td>
+<td>选个基准，比它小的站左边大的站右边，两边递归——<strong>分组站队</strong></td>
+<td>平均 O(n log n)，最坏 O(n²)</td>
+<td>面试手撕 Top2，<strong>基准随机选防最坏</strong></td>
+</tr>
+<tr>
+<td><strong>归并</strong></td>
+<td>两个已排好的队列合成一个（两叠排好的牌轮流抽小的）</td>
+<td>稳定 O(n log n)</td>
+<td>稳定排序的代表（相等的元素顺序不变）</td>
+</tr>
+<tr>
+<td><strong>堆排</strong></td>
+<td>用二叉堆（大顶堆堆顶永远最大）反复取顶</td>
+<td>O(n log n)</td>
+<td>和 TopK 是亲戚</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>30 秒答案</strong>：快排——选基准分区递归，平均 nlogn 最坏
+n²（已有序+固定选头）；归并——分治到底再合并，稳定 nlogn
+但要额外空间；堆排——建堆反复取顶，原地 nlogn 不稳定。<strong>稳定性 =
+相等的元素排完序相对顺序不变</strong>——报表按多字段排序时重要（先按金额排，再按日期排，金额相同的日期顺序不乱）。</p>
+</blockquote>
+<h3 id="高频手撕思路每个一句话套路">5.2
+高频手撕思路（每个一句话套路）</h3>
+<ul>
+<li><strong>反转链表</strong>：三个指针
+prev/cur/next，走一步翻一个（“改牵手的方向”）；</li>
+<li><strong>判断环</strong>：快慢双指针（一快一慢，套圈了=有环——操场跑圈快的人追上慢的）；</li>
+<li><strong>合并两个有序链表</strong>：双指针各指一头，每次摘小的接到结果上；</li>
+<li><strong>二叉树遍历</strong>：前/中/后序 =
+访问根的时机在前/中/后；层序 = 队列（先进先出逐层出）；</li>
+<li><strong>两数之和</strong>：哈希表存”看过的数→下标”，来一个新数查”补数在不在”——<strong>空间换时间</strong>；</li>
+<li><strong>二分查找</strong>：有序才能用，每次砍一半 O(log n)——注意 mid
+防溢出写 <code>left+(right-left)//2</code>。</li>
+</ul>
+<h3 id="topk-问题海量数据取前-k">5.3 TopK 问题（海量数据取前 K）</h3>
+<blockquote>
+<p><strong>30 秒答案</strong>：N 亿个数取最大前 100——<strong>维护一个
+100 大小的最小堆</strong>：新数比堆顶（当前第 100
+名）大就踢掉堆顶换入。全程只跟 K 个数较劲，O(n log
+k)，不用全排序。<strong>勾连</strong>：“RAG 检索从百万文档取 Top5
+就是同一问题——向量库的 HNSW 和 Rerank 后取前 K 本质都是 TopK。”</p>
+</blockquote>
+<h3 id="布隆过滤器说得出加分">5.4 布隆过滤器（说得出=加分）</h3>
+<p><strong>类比</strong>：<strong>一个很大胆的门卫</strong>：他说”<strong>没见过</strong>”就一定没见过（绝不放错）；他说”见过”可能看走眼（小概率误判）。原理：一个位数组+k
+个哈希函数，加元素时把 k 个位置标 1；查询时 k 个位置都是 1
+才说”可能存在”。<strong>用途</strong>：缓存穿透的防火墙、爬虫 URL
+去重。特点：<strong>可能误判存在、绝不漏报、不能删除</strong>。</p>
+<hr />
+<p><a id="k6"></a></p>
+<h2 id="六消息队列深入00-里学了基础这里补三连问">六、消息队列深入（00
+里学了基础，这里补”三连问”）</h2>
+<h3 id="消息丢了怎么办分三段保障">6.1 ★
+消息丢了怎么办（分三段保障）</h3>
+<blockquote>
+<p><strong>30
+秒答案</strong>：<strong>生产端</strong>——发完等确认（ack），没确认就重发；<strong>MQ
+端</strong>——消息持久化到磁盘再确认（没落盘就挂了消息就没了）；<strong>消费端</strong>——<strong>处理完成再确认</strong>（手动
+ACK；先确认后处理的话，处理到一半崩了消息就丢了）。三段各兜一层，配合消费端幂等（重发会导致重复）。
+<strong>勾连</strong>：“这套和我在美团的’延迟确认+二次校验’是一个思路——<strong>每个环节都不轻信上一步</strong>。”</p>
+</blockquote>
+<h3 id="消息积压怎么办">6.2 消息积压怎么办</h3>
+<blockquote>
+<p><strong>30
+秒答案</strong>：先定位原因（消费者挂了/处理变慢/流量暴增）。扩容：加消费者实例（注意分区数是消费并行上限）；批量消费提吞吐；可重算的历史消息极端时跳过或转移。<strong>勾连</strong>：美团巡检”失败分片登记下轮补扫”就是主动管理积压。</p>
+</blockquote>
+<h3 id="三大-mq-选型一句话">6.3 三大 MQ 选型一句话</h3>
+<p><strong>Kafka</strong>：吞吐之王，日志流/大数据管道，顺序写+零拷贝；<strong>RocketMQ</strong>：业务消息全能选手，原生延迟消息、事务消息；<strong>RabbitMQ</strong>：路由灵活、协议友好，中小流量。（你项目的选择口径：设备事件用
+RocketMQ——要延迟消息做”延迟确认”。）</p>
+<hr />
+<p><a id="k7"></a></p>
+<h2
+id="七分布式与高可用概念入门级答出就是降维">七、分布式与高可用概念（入门级，答出就是降维）</h2>
+<h3 id="cap-定理">7.1 CAP 定理</h3>
+<p><strong>类比</strong>：<strong>三个愿望只能同时实现两个</strong>——网络分区（P：机器间断网）必然发生，剩下一致（C：所有机器数据时刻一致）和可用（A：每个请求都有响应）只能二选一。注册中心举例：ZooKeeper
+选 CP（宁可拒绝服务也要一致）、Eureka 选
+AP（宁可给旧数据也要回话）。</p>
+<h3 id="限流-熔断-降级高可用三板斧一套话记住">7.2 限流 / 熔断 /
+降级（高可用三板斧，一套话记住）</h3>
+<blockquote>
+<p><strong>类比</strong>：医院急诊在疫情高峰的三招——<strong>限流</strong>=门口发号，超过接待能力不让进（计数器/令牌桶/漏桶）；<strong>熔断</strong>=某科室连续出事直接挂牌停诊一段时间，请求不再送进去（快速失败），过段时间试探性恢复（半开）；<strong>降级</strong>=非核心服务先撤（体检预约停了），保核心（抢救照常）——返回兜底数据或友好提示。<strong>勾连</strong>：“我神农的
+CapacityLimiter 就是限流思想——保护下游模型服务。”</p>
+</blockquote>
+<h3 id="负载均衡">7.3 负载均衡</h3>
+<blockquote>
+<p><strong>30 秒答案</strong>：把请求分摊到多台机器——四层（按
+IP/端口，LVS，转发快）和七层（按 HTTP
+内容，Nginx，能按路径/头部路由）。策略：轮询、加权轮询、最少连接、一致性哈希（节点增减只影响相邻段——“固定去哪家奶茶店，换店长只重新分配一条街”）。</p>
+</blockquote>
+<h3 id="分布式-id中频一句话">7.4 分布式 ID（中频一句话）</h3>
+<p>为什么不用自增主键——分库后各库都从 1
+开始会撞。方案：UUID（无序，索引不友好）、雪花算法（时间戳+机器号+序列号拼
+64 位，趋势递增——记住名字”雪花”）。</p>
+<hr />
+<p><a id="k8"></a></p>
+<h2
+id="八设计模式常考五个一句话在哪见过">八、设计模式（常考五个，一句话+在哪见过）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>模式</th>
+<th>一句话</th>
+<th>类比 / 在哪见过（勾连你的技术栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单例</strong> ★</td>
+<td>全局只有一个实例</td>
+<td>公司公章只有一枚；Spring Bean
+默认单例；双重检锁写法被问就口头说”volatile+两次 if”</td>
+</tr>
+<tr>
+<td><strong>工厂</strong></td>
+<td>不自己 new，交给工厂造</td>
+<td>4S 店买车不看流水线；<code>Calendar.getInstance()</code></td>
+</tr>
+<tr>
+<td><strong>代理</strong> ★</td>
+<td>包一层，不改本体加功能</td>
+<td>中介/经纪人和球员谈合同；<strong>Spring AOP
+的动态代理</strong>、<strong>你开源插件的”包装流”就是代理思想</strong>（透传+附加统计）——主动说！</td>
+</tr>
+<tr>
+<td><strong>观察者</strong></td>
+<td>一变多知（发布订阅）</td>
+<td>公众号订阅；<strong>MQ 的发布订阅模型</strong></td>
+</tr>
+<tr>
+<td><strong>策略</strong></td>
+<td>同一接口换不同算法</td>
+<td>导航的驾车/步行模式；支付方式选择；你的”分片扫描策略”</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>30
+秒答案（被问”说几个设计模式”）</strong>：按上表挑三个说，每个带一个”我在哪见过”——<strong>设计模式题的高分不是背定义，是能指认真实使用现场</strong>。</p>
+</blockquote>
+<hr />
+<p><a id="k9"></a></p>
+<h2
+id="九考前速答表最后一晚刷这页">九、考前速答表（最后一晚刷这页）</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>题</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>索引为什么快</td>
+<td><strong>B+
+树矮胖</strong>少跳磁盘，<strong>叶子成链</strong>好范围查；主键索引存整行，普通索引要<strong>回表</strong></td>
+</tr>
+<tr>
+<td>索引失效</td>
+<td>函数运算、<strong>左%</strong>、隐式转换、<strong>破坏最左前缀</strong>、OR
+无索引列</td>
+</tr>
+<tr>
+<td>隔离级别</td>
+<td>读未提交→读已提交→<strong>可重复读（默认）</strong>→串行化；治脏读/不可重复读/幻读</td>
+</tr>
+<tr>
+<td>MVCC</td>
+<td>每事务一张<strong>版本快照</strong>，读写不互相堵</td>
+</tr>
+<tr>
+<td>三大日志</td>
+<td>redo=<strong>存档点</strong>（持久性）undo=<strong>Ctrl+Z</strong>（回滚+MVCC）binlog=<strong>总账</strong>（主从复制）</td>
+</tr>
+<tr>
+<td>慢查询优化</td>
+<td>慢日志→<strong>EXPLAIN</strong>（看
+ALL/key/rows）→加索引/改写法/游标分页</td>
+</tr>
+<tr>
+<td>穿透/击穿/雪崩</td>
+<td>查<strong>不存在</strong>的→空值+<strong>布隆</strong>；<strong>热点</strong>过期→互斥重建；<strong>大批同过期</strong>→随机
+TTL+集群</td>
+</tr>
+<tr>
+<td>缓存一致性</td>
+<td><strong>先更库再删缓存</strong>（Cache
+Aside）；数据库是唯一真相源</td>
+</tr>
+<tr>
+<td>分布式锁</td>
+<td>SET NX EX + <strong>唯一值</strong>防误删 + 过期防死锁；Redisson
+看门狗</td>
+</tr>
+<tr>
+<td>主从/哨兵/集群</td>
+<td>主从管<strong>读多</strong>，哨兵管<strong>怕挂</strong>，集群管<strong>装不下</strong></td>
+</tr>
+<tr>
+<td>四层模型</td>
+<td>应用（内容）→传输（<strong>端口</strong>，TCP）→网络（<strong>IP</strong>
+选路）→链路（逐跳）</td>
+</tr>
+<tr>
+<td>三次握手</td>
+<td>你能听到吗→能你呢→能；防旧请求误建连+确认双向</td>
+</tr>
+<tr>
+<td>四次挥手+TIME_WAIT</td>
+<td>全双工所以各说两次”说完”；等 2MSL 防最后 ACK 丢+旧包死透</td>
+</tr>
+<tr>
+<td>HTTP 演进</td>
+<td>1.1 <strong>长连接</strong>（队头堵）→2 <strong>多路复用</strong>→3
+上 QUIC</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td><strong>证书验身份+对称加密传内容</strong>，443 端口</td>
+</tr>
+<tr>
+<td>Cookie/Session/Token</td>
+<td>存<strong>你身上</strong>/存<strong>店里发号</strong>/<strong>签名盖章的防伪凭证</strong>（无状态配分布式）</td>
+</tr>
+<tr>
+<td>虚拟内存</td>
+<td><strong>银行授信</strong>：虚拟连续假象+按需调页，进程隔离</td>
+</tr>
+<tr>
+<td>epoll</td>
+<td><strong>总呼叫器</strong>：注册一次、就绪亮灯，单线程看几万连接</td>
+</tr>
+<tr>
+<td>零拷贝</td>
+<td>仓库<strong>直装车</strong>（sendfile），省两次搬运</td>
+</tr>
+<tr>
+<td>排序四将</td>
+<td>快排=<strong>分组站队</strong>（nlogn 最坏
+n²）；归并=<strong>两叠牌轮抽</strong>（稳定）；堆排=反复取顶</td>
+</tr>
+<tr>
+<td>TopK</td>
+<td><strong>K 大小最小堆</strong>只跟 K 个较劲 O(n log k)——RAG Top5
+同源</td>
+</tr>
+<tr>
+<td>布隆过滤器</td>
+<td>大胆门卫：说没有就真没有，说有可能看走眼</td>
+</tr>
+<tr>
+<td>消息不丢</td>
+<td>生产<strong>确认</strong>+MQ<strong>落盘</strong>+消费<strong>完再
+ACK</strong>，三段各兜一层</td>
+</tr>
+<tr>
+<td>积压</td>
+<td>加消费者（受分区数限）/批量/可跳过</td>
+</tr>
+<tr>
+<td>CAP</td>
+<td>分区必然，<strong>一致与可用二选一</strong>（ZK 选 C，Eureka 选
+A）</td>
+</tr>
+<tr>
+<td>限流/熔断/降级</td>
+<td>发号/停诊挂牌/撤非保核心；CapacityLimiter=限流</td>
+</tr>
+<tr>
+<td>设计模式</td>
+<td>单例=公章、代理=<strong>中介（AOP、你的插件包装流）</strong>、观察者=<strong>公众号（MQ）</strong>、策略=导航模式</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>配套：00 总文档（简历题）/ 07 Java 八股 / 06
+手写代码。更新日志：2026-09-19 创建；题源对照 JavaGuide（14 万★）与
+doocs/advanced-java（7
+万★）目录体系，按央国企”概念+广度”考法裁剪。</em></p>
+</body>
+</html>

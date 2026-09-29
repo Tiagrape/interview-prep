@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>06-AI应用手写代码题库</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background: #f7f8fa; color: #2f3437; line-height: 1.9; font-size: 16px; }
+    h1 { color: #1a3a6b; border-bottom: 3px solid #4477ce; padding-bottom: .4em; font-size: 1.9em; }
+    h2 { color: #1a3a6b; border-bottom: 2px solid #b8cbe8; padding-bottom: .3em; margin-top: 2.6em; }
+    h3 { color: #2c5f9e; border-left: 5px solid #6fa8dc; padding-left: 12px; margin-top: 2.2em; }
+    a { color: #2563a8; text-decoration: none; -webkit-tap-highlight-color: rgba(68,119,206,.15); } a:hover { text-decoration: underline; }
+    blockquote { background: #fff8e6; border-left: 5px solid #f0b429; color: #5a4a1f;
+      padding: 12px 18px; border-radius: 8px; margin: 1em 0; }
+    blockquote p { margin: .4em 0; }
+    blockquote ul { margin: .4em 0; padding-left: 1.3em; }
+    blockquote li { margin: .55em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1.2em 0; background: #fff; font-size: 15px; display: block; overflow-x: auto; white-space: nowrap; }
+    th { background: #e8effa; color: #1a3a6b; }
+    th, td { border: 1px solid #d5dce6; padding: 9px 13px; text-align: left; }
+    tr:nth-child(even) { background: #fafbfd; }
+    code { background: #e9edf2; padding: 2px 6px; border-radius: 4px; font-size: .9em; color: #b34700; word-break: break-all; }
+    pre { background: #2b303b; color: #e8eaf0; padding: 16px; border-radius: 10px; overflow-x: auto; line-height: 1.6; }
+    pre code { background: none; color: inherit; padding: 0; }
+    p { margin: .85em 0; }
+    ol, ul { padding-left: 1.6em; }
+    li { margin: .35em 0; }
+    hr { border: none; border-top: 1px solid #d8dee9; margin: 2.5em 0; }
+    p.q { background: #ffffff; border: 1px solid #ccd8ea; border-left: 5px solid #4477ce;
+      border-radius: 8px; padding: 12px 16px; margin: 1.6em 0 0.4em; box-shadow: 0 1px 3px rgba(30,60,110,.06); }
+    p.q > strong:first-child { color: #1a3a6b; }
+    .top-btn { position: fixed; right: 20px; bottom: 28px; background: #4477ce; color: #fff; border-radius: 50%;
+      width: 46px; height: 46px; line-height: 46px; text-align: center; font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25); text-decoration: none; z-index: 99; }
+    .top-btn:hover { background: #2c5f9e; text-decoration: none; }
+    header#title-block-header { border-bottom: none; }
+    @media (max-width: 640px) {
+      body { padding: 20px 14px 90px; font-size: 15px; line-height: 1.85; }
+      h1 { font-size: 1.5em; } h2 { font-size: 1.3em; } h3 { font-size: 1.1em; }
+      blockquote { padding: 10px 12px; }
+      p.q { padding: 10px 12px; }
+      .top-btn { width: 52px; height: 52px; line-height: 52px; }
+    }
+  </style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var top = document.createElement('a');
+    top.href = '#s0'; top.className = 'top-btn'; top.textContent = '↑'; top.title = '回到目录';
+    document.body.appendChild(top);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  });
+  </script>
+  <a href="00-央国企计算机开发岗面试-总文档.html" class="back-btn">← 返回总文档</a>
+  <style>
+  .back-btn { position: fixed; left: 24px; bottom: 32px; background: #1a3a6b; color: #fff;
+    padding: 10px 16px; border-radius: 24px; font-size: 14px; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 99; }
+  .back-btn:hover { background: #2c5f9e; text-decoration: none; }
+  @media (max-width: 640px) { .back-btn { left: 12px; bottom: 20px; padding: 8px 12px; font-size: 13px; } }
+  </style>
+
+<style>
+/* ---- 手机适配（自动注入） ---- */
+@media (max-width: 640px) {
+  body { padding: 14px 12px 64px !important; margin: 0 !important; font-size: 15px !important; line-height: 1.85 !important; }
+  h1 { font-size: 1.35em !important; }
+  h2 { font-size: 1.18em !important; }
+  h3 { font-size: 1.05em !important; }
+  pre { white-space: pre-wrap !important; word-break: break-word !important; font-size: 0.82em !important; padding: 10px 12px !important; }
+  code { font-size: 0.86em !important; word-break: break-all; }
+  table { display: block !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: normal !important; }
+  img { max-width: 100% !important; }
+  blockquote { padding: 8px 12px !important; margin: 0.8em 0 !important; font-size: 0.95em; }
+}
+</style>
+
+<style>
+/* ---- 代码配色修正（自动注入）：浅色底 + 深色字 ---- */
+pre { background: #f5f7fa !important; color: #1f2328 !important; border: 1px solid #d5dbdb !important; }
+pre code { color: inherit !important; background: none !important; }
+pre.numberSource { border-left: 1px solid #b0b0b0 !important; }
+code span.co, code span.an, code span.cv, code span.in, code span.wa { color: #5a6570 !important; }
+code span.op { color: #424242 !important; }
+code { color: #8c3d00 !important; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">06-AI应用手写代码题库</h1>
+</header>
+<h1 id="ai-应用手写代码题库-零基础教学版">06 · AI 应用手写代码题库 ——
+零基础教学版</h1>
+<blockquote>
+<p><strong>这份文档是给”知道理论、不太写代码”的你准备的</strong>。每一题都按四级展开：①这题用大白话在干什么
+→ ②逐行拆解（每行代码旁边讲”这行是什么、为什么”）→ ③最容易写错的地方 →
+④面试时怎么口头讲。</p>
+<p><strong>读法</strong>：先读第〇章（看懂代码需要的最小 Python
+知识，全部用你熟悉的项目场景讲）；然后每道题先自己看题目想 3
+分钟，再读拆解；最后<strong>关掉文档，对着题目名默写</strong>——写不出来就再读一遍拆解，隔天再默写。<strong>代码没有”看懂”，只有”写熟”。</strong></p>
+<p><strong>考场心法（先记住这三句）</strong>：①动笔前先说思路（“我准备写一个函数，输入什么、输出什么、中间几步”）——思路分占大头；②忘了某个库的写法就说”具体参数我记不准，我用伪代码表意”——比瞎编安全十倍；③写完主动说一句”这里我做了什么防御”（比如出错怎么办、空值怎么办）。</p>
+</blockquote>
+<hr />
+<h2 id="目录">📑 目录</h2>
+<ul>
+<li><a href="#c0">第〇章 · 看懂代码需要的最小 Python
+知识（零基础必读）</a></li>
+<li><a href="#c1">一、API 调用与重试（入门必会）</a></li>
+<li><a href="#c2">二、RAG 检索链路（简历核心）</a></li>
+<li><a href="#c3">三、Prompt 与结构化输出</a></li>
+<li><a href="#c4">四、缓存与计费（呼应开源项目）</a></li>
+<li><a href="#c5">五、FastAPI 异步服务（神农场景）</a></li>
+<li><a href="#c6">六、Agent / 工具调用（进阶）</a></li>
+<li><a href="#c7">七、手撕算法类</a></li>
+<li><a href="#c8">八、常见报错速查 + 默写练习法</a></li>
+</ul>
+<hr />
+<p><a id="c0"></a></p>
+<h2 id="第〇章-看懂代码需要的最小-python-知识零基础必读">第〇章 ·
+看懂代码需要的最小 Python 知识（零基础必读）</h2>
+<blockquote>
+<p>这一章把你读后面所有题目需要的东西一次讲齐。每个概念都配：它是什么（类比）+
+它长什么样（例子）+
+在你项目里对应什么。<strong>读完这章，后面的代码你就能”读”了。</strong></p>
+</blockquote>
+<h3 id="变量-贴了标签的盒子">0.1 变量 = 贴了标签的盒子</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>question <span class="op">=</span> <span class="st">&quot;古北水镇门票多少钱？&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> <span class="st">&quot;退役军人可享半价&quot;</span></span></code></pre></div>
+<ul>
+<li><code>question</code>、<code>price</code>、<code>answer</code>
+是<strong>标签</strong>（变量名），<code>=</code>
+的右边是<strong>装进盒子的东西</strong>（值）；</li>
+<li>以后在任何地方写
+<code>question</code>，就是在引用盒子里的那句话；</li>
+<li>名字随便起，但<strong>见名知意</strong>：<code>question</code>
+一看就知道装的是问题。</li>
+</ul>
+<p><strong>在你的项目里</strong>：<code>device_id = 42</code>（42
+号机柜）、<code>n = 3</code>（连失窗口取 3）——之前讲过的”心跳 30
+秒、窗口 3 周期”，写进代码就是几个变量。</p>
+<h3 id="字符串数字布尔三种最常用的东西">0.2
+字符串、数字、布尔——三种最常用的”东西”</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">&quot;李方好&quot;</span>        <span class="co"># 字符串(str)：一段文字，用引号包住</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">46</span>             <span class="co"># 数字(int)：能加减乘除</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>is_online <span class="op">=</span> <span class="va">True</span>       <span class="co"># 布尔(bool)：只有 True / False 两个值，表示&quot;是/否&quot;</span></span></code></pre></div>
+<p><strong>注意</strong>：<code>True</code> 首字母大写（写成
+<code>true</code> 会报错）。布尔就是心跳判定里的”在线/离线”。</p>
+<h3 id="列表-list-一排编了号的储物柜">0.3 列表 list =
+一排编了号的储物柜</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>docs <span class="op">=</span> [<span class="st">&quot;退役军人半价&quot;</span>, <span class="st">&quot;开放时间9点到21点&quot;</span>, <span class="st">&quot;学生票八折&quot;</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>docs[<span class="dv">0</span>]        <span class="co"># 取第 1 格 → &quot;退役军人半价&quot;   （编号从 0 开始！）</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>docs[<span class="dv">1</span>]        <span class="co"># 第 2 格</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(docs)      <span class="co"># 一共几格 → 3</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>docs.append(<span class="st">&quot;夜场政策&quot;</span>)   <span class="co"># 末尾新增一格</span></span></code></pre></div>
+<ul>
+<li><strong>编号从 0 开始</strong>是最容易错的地方：第 1 格是
+<code>[0]</code>，第 3 格是 <code>[2]</code>；</li>
+<li>你项目里：检索回来的知识块就是一个列表
+<code>["块1", "块2", ...]</code>，取前 5
+个就是对列表切一刀（<code>docs[:5]</code>）。</li>
+</ul>
+<h3 id="字典-dict-通讯录名字-电话">0.4 字典 dict = 通讯录（名字 →
+电话）</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> {<span class="st">&quot;id&quot;</span>: <span class="dv">42</span>, <span class="st">&quot;status&quot;</span>: <span class="st">&quot;online&quot;</span>, <span class="st">&quot;battery&quot;</span>: <span class="dv">80</span>}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>device[<span class="st">&quot;id&quot;</span>]          <span class="co"># 用&quot;名字&quot;查 → 42</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>device[<span class="st">&quot;status&quot;</span>]      <span class="co"># → &quot;online&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>device[<span class="st">&quot;city&quot;</span>] <span class="op">=</span> <span class="st">&quot;北京&quot;</span>   <span class="co"># 新增一条记录</span></span></code></pre></div>
+<ul>
+<li>方括号里放的不再是编号，而是<strong>键（key）</strong>，查出来的是<strong>值（value）</strong>；</li>
+<li><strong>这就是 Metadata
+的代码形态</strong>！<code>{"scenic": "乌镇", "effective": "2025-06-01"}</code>——之前讲的”文档块的结构化标签”，写出来就是字典；</li>
+<li>大模型 API 的 <code>messages</code>
+参数也是字典：<code>{"role": "user", "content": "问题"}</code>。</li>
+</ul>
+<h3 id="for-循环-流水线逐个处理">0.5 for 循环 = 流水线，逐个处理</h3>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>docs <span class="op">=</span> [<span class="st">&quot;块1&quot;</span>, <span class="st">&quot;块2&quot;</span>, <span class="st">&quot;块3&quot;</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> docs:          <span class="co"># 每一轮, d 依次是 &quot;块1&quot;、&quot;块2&quot;、&quot;块3&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(d)            <span class="co"># 这行缩进的代码, 每轮执行一次</span></span></code></pre></div>
+<ul>
+<li>读法：“<strong>对</strong> docs <strong>里的每一个</strong>
+d，<strong>做</strong>下面缩进的事”；</li>
+<li><strong>缩进（行开头 4 个空格）是 Python
+的语法</strong>，不是美观——缩进错了程序直接报错；</li>
+<li>你项目里：巡检”逐台设备跑规则”就是
+<code>for device in devices:</code>。</li>
+</ul>
+<h3 id="if-判断-分岔路口">0.6 if 判断 = 分岔路口</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>battery <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> battery <span class="op">&lt;</span> <span class="dv">20</span>:                    <span class="co"># 条件成立 → 走这条</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;电量异常，生成告警&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> battery <span class="op">&gt;</span> <span class="dv">95</span>:                  <span class="co"># 否则如果…</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;电量过高&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:                               <span class="co"># 都不成立 → 走这条</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;正常&quot;</span>)</span></code></pre></div>
+<ul>
+<li>你项目里：<code>if 失联次数 &gt;= 3: 判离线</code>——防抖逻辑的骨架就是
+if。</li>
+</ul>
+<h3 id="函数-def-榨汁机放进去水果出来果汁">0.7 函数 def =
+榨汁机（放进去水果，出来果汁）</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ask(question):            <span class="co"># 定义: 函数名叫 ask, 收一个东西, 装进叫 question 的盒子</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> 调用模型(question)   <span class="co"># 内部加工</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer             <span class="co"># 出料口: 把结果交出去</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 用:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> ask(<span class="st">&quot;门票多少钱&quot;</span>)      <span class="co"># 放进去问题, 接住结果</span></span></code></pre></div>
+<ul>
+<li><code>def</code> 是
+define（定义）的缩写——<strong>定义函数时里面的代码并不执行</strong>，只是把榨汁机组装好；<strong>调用时（写
+<code>ask(...)</code>）才真正转起来</strong>；</li>
+<li><code>return</code>
+是出料口：函数算完把结果从这里交出去，交给等号左边的变量；</li>
+<li>完整体写法
+<code>def ask(question: str) -&gt; str:</code>——冒号后面的
+<code>str</code>
+是<strong>类型标注</strong>（“我收字符串、吐字符串”），给人看的备注，删掉也能跑（但面试写上更专业，FastAPI
+拿它干活）。</li>
+</ul>
+<h3 id="try-except-安全网走钢丝下面垫的网">0.8 try / except =
+安全网（走钢丝下面垫的网）</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> 调用API()          <span class="co"># 这段可能出事</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span>:             <span class="co"># 真出事了 → 不崩溃, 走这里</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="va">None</span>               <span class="co"># 给个兜底值</span></span></code></pre></div>
+<ul>
+<li>没有 try：一步出错，<strong>整个程序当场崩掉</strong>；</li>
+<li>你项目里到处是它：API 会超时（重试逻辑）、模型输出可能不是合法
+JSON（解析容错）、写文件可能失败（统计不影响主流程）——<strong>“防御性编程”就是提前想好每一步出错了怎么办</strong>。</li>
+</ul>
+<h3 id="import-去工具库借工具">0.9 import = 去工具库借工具</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jieba                    <span class="co"># 借来分词工具</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI       <span class="co"># 从 openai 这个库里只借 OpenAI 这一件</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time, json, re           <span class="co"># 一次借几件</span></span></code></pre></div>
+<ul>
+<li>别人写好的功能（分词、调模型、算时间）都在”工具库”里，<code>import</code>
+就是借来用；</li>
+<li>借完用法是 <code>工具.功能()</code>，比如
+<code>jieba.lcut("小麦条锈病")</code>、<code>time.sleep(3)</code>。</li>
+</ul>
+<h3 id="类-class-图纸一个模板能造很多台机器">0.10 类 class =
+图纸（一个模板，能造很多台机器）</h3>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AskRequest:               <span class="co"># 一张图纸</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    question: <span class="bu">str</span>               <span class="co"># 图纸规定: 每台机器都有 question 这个零件</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    top_k: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span>              <span class="co"># 零件有默认值</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>req <span class="op">=</span> AskRequest()              <span class="co"># 按图纸造一台（这一台叫&quot;对象&quot;）</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>req.question                    <span class="co"># 用这台机器的零件</span></span></code></pre></div>
+<ul>
+<li>你只需要记住：<strong>类是图纸，对象是按图纸造出来的实物</strong>；FastAPI
+里定义”请求长什么样”就是画一张图纸。</li>
+</ul>
+<h3 id="读代码的三个手勢后面拆解会反复用">0.11
+读代码的三个手勢（后面拆解会反复用）</h3>
+<ol type="1">
+<li><strong><code>x.y</code>（点）=
+“的”</strong>：<code>resp.choices</code> 读作 “resp <strong>的</strong>
+choices”——开套娃的第一层；</li>
+<li><strong><code>x[...]</code>（方括号）=
+“取出来”</strong>：列表按编号取、字典按键取；</li>
+<li><strong>从右往左读赋值</strong>：<code>a = b.c[0]</code> = 先取 b 的
+c、再取第 0 个、装进 a。</li>
+</ol>
+<hr />
+<p><a id="c1"></a></p>
+<h2 id="一api-调用与重试入门必会">一、API 调用与重试（入门必会）</h2>
+<h3 id="t1.-写一个调用大模型的函数默写级整份简历的最小代码缩影">T1.
+写一个调用大模型的函数（★默写级——整份简历的最小代码缩影）</h3>
+<p><strong>题目</strong>：“写个函数，输入一个问题字符串，返回大模型的回答。”</p>
+<p><strong>①
+这题在干什么（大白话）</strong>：大模型在远端的服务器上，你要跟它说话，就得通过”API”（应用程序接口——远程服务的标准通话方式，像打客服电话：按格式报需求，它给答复）。这个函数就是<strong>打包好一次通话</strong>：以后任何地方想问模型，调一下
+<code>ask("问题")</code> 就行。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span></code></pre></div>
+<blockquote>
+<p>借工具：openai 是官方提供的通话工具库（DeepSeek 兼容它的格式）。借来
+<code>OpenAI</code> 这个”电话机类”。</p>
+</blockquote>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> OpenAI(api_key<span class="op">=</span><span class="st">&quot;sk-xxx&quot;</span>, base_url<span class="op">=</span><span class="st">&quot;https://api.deepseek.com&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>按图纸造一台电话机，起名叫 <code>client</code>。<code>api_key</code>
+是你的身份凭证（钥匙，证明你是付费用户）；<code>base_url</code>
+是打给哪家（不填默认 OpenAI，填 DeepSeek 的地址就是打给
+DeepSeek）。<strong>这台”电话机”造一次全局复用，不用每次通话都造新的。</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ask(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span></code></pre></div>
+<blockquote>
+<p>组装榨汁机：函数名
+<code>ask</code>，收一个字符串（问题），承诺吐一个字符串（回答）。</p>
+</blockquote>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    resp <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">&quot;deepseek-chat&quot;</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        messages<span class="op">=</span>[{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: question}],</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<blockquote>
+<p><strong>真正打电话的三行</strong>。从右往左读：<code>client.chat.completions.create(...)</code>
+=
+电话机<strong>的</strong>聊天功能<strong>的</strong>创建方法——拨号。两个参数：
+- <code>model</code>：用哪个模型（车型选型）； -
+<code>messages</code>：<strong>说什么</strong>。它是一个列表，里面装字典——每个字典代表一句话，<code>role</code>
+是说话人身份（user=用户 / system=设定 /
+assistant=模型），<code>content</code> 是内容。这里就一句：用户问
+question。 返回的 <code>resp</code>
+是一个<strong>大包裹</strong>（响应对象）：里面有正文、有 token
+用量等很多层——正文藏在包裹深处，下一步拆。</p>
+</blockquote>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resp.choices[<span class="dv">0</span>].message.content</span></code></pre></div>
+<blockquote>
+<p>拆包裹：resp <strong>的</strong>
+choices（候选回答列表，一般就一个）<strong>的</strong> 第 0 个
+<strong>的</strong> message（消息体）<strong>的</strong>
+content（正文文字）。四层套娃，一层层点下来才是人话。<code>return</code>
+交出去。</p>
+</blockquote>
+<p><strong>完整成品</strong>（默写目标）：</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> OpenAI(api_key<span class="op">=</span><span class="st">&quot;sk-xxx&quot;</span>, base_url<span class="op">=</span><span class="st">&quot;https://api.deepseek.com&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ask(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    resp <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">&quot;deepseek-chat&quot;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        messages<span class="op">=</span>[{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: question}],</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resp.choices[<span class="dv">0</span>].message.content</span></code></pre></div>
+<p><strong>③ 最容易错的地方</strong>： - <code>messages</code>
+是<strong>列表套字典</strong>：<code>[{"role": ..., "content": ...}]</code>——最外层方括号忘写、role
+拼错（不是 “user”），都直接报错； -
+四层取值顺序背熟：<code>choices[0].message.content</code>——面试紧张时最容易断在这。</p>
+<p><strong>④ 面试口头讲</strong>：“定义函数收问题字符串；用全局复用的
+client 调 chat 接口，messages 里放一条 user 消息；响应是个多层对象，取
+choices 第一个的 message 的 content 返回。”</p>
+<p><strong>追问①：messages 里还能放什么？</strong> →
+三种角色：<strong>system</strong>（开场设定，如”你是文旅客服，只依据材料回答”——立规矩的位置）、<strong>user</strong>（用户问题）、<strong>assistant</strong>（模型历史回答）。多轮对话就是把历史
+user/assistant
+交替塞进去——<strong>所谓”上下文”，本质就是每次把历史完整重发一遍</strong>。
+<strong>追问②：怎么让输出稳定/控制长度？</strong> →
+<code>temperature</code>（0
+最稳定，适合抽取类任务；越高越发散）、<code>max_tokens</code>（限长）、要
+JSON 加 <code>response_format={"type": "json_object"}</code>。</p>
+<h3 id="t2.-带重试的调用考异常处理高频">T2.
+带重试的调用（考异常处理，高频）</h3>
+<p><strong>①
+大白话</strong>：电话偶尔占线（超时），占线就挂了再拨——但要有章法：<strong>别秒拨</strong>（对方正在忙，连着拨是补刀），<strong>别无限拨</strong>（打
+100 次也没用的就认命上报）。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ask_with_retry(question: <span class="bu">str</span>, max_retries: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span>):</span></code></pre></div>
+<blockquote>
+<p>多收一个参数”最多试几次”，<strong>给默认值
+3</strong>——调用方不传就自动是 3（默认值语法，面试常考）。</p>
+</blockquote>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(max_retries):</span></code></pre></div>
+<blockquote>
+<p><code>range(3)</code> 生成 0,1,2——循环三轮，<code>attempt</code>
+是”这是第几次”（从 0 数）。</p>
+</blockquote>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> ask(question)</span></code></pre></div>
+<blockquote>
+<p>试着打电话。<strong>成功就直接 return
+走人</strong>——后面全不用看。成功路径永远最短，这是好代码的特征。</p>
+</blockquote>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> attempt <span class="op">==</span> max_retries <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span></span></code></pre></div>
+<blockquote>
+<p>出事了接住（<code>as e</code> 把错误信息装进 e
+方便打印）。判断：<strong>这已经是最后一次了</strong>（attempt 从 0
+数，第 3 次时
+attempt=2=max_retries-1）——再失败就没有下一次，<code>raise</code>
+把错误<strong>向上抛</strong>（交给调用方处理）。
+<strong>为什么抛而不返回 None</strong>：返回 None 是”吞错”——调用方拿到
+None
+不知道是成功了答案为空还是彻底失败，查问题会查到疯；抛错让错误明明白白传下去。</p>
+</blockquote>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>            wait <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> attempt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;第</span><span class="sc">{</span>attempt<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">次失败: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>wait<span class="sc">}</span><span class="ss">s 后重试&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            time.sleep(wait)</span></code></pre></div>
+<blockquote>
+<p><strong>指数退避</strong>：<code>2**0=1s, 2**1=2s, 2**2=4s</code>——越失败等越久，给对方喘息。<code>f"..."</code>
+是格式化字符串（f-string）：引号前加 f，<code>{变量}</code>
+会被替换成真实值。<code>time.sleep(wait)</code> =
+等这么多秒再进下一轮循环。</p>
+</blockquote>
+<p><strong>③ 易错</strong>：最后一次的判断是
+<code>max_retries - 1</code> 不是 <code>max_retries</code>（因为 attempt
+从 0 数）——边界差一（off-by-one）是循环最常见的错。 <strong>④
+口头加分</strong>：“生产里 except
+会区分错误类型——429（限流）才值得重试，401（密钥错）重试一万次也没用。”（429
+就是你开源计费插件里处理过的那个状态码。）</p>
+<h3 id="t3.-多轮对话函数考上下文维护">T3.
+多轮对话函数（考上下文维护）</h3>
+<p><strong>①
+大白话</strong>：让模型”记住”前面聊过什么——办法不是它有记忆，而是<strong>每次把历史完整重发</strong>。这个函数维护一个”聊天记录本”（history
+列表），每轮：追加用户的话 → 连同历史一起发 → 追加模型的回答。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chat(history: <span class="bu">list</span>, user_input: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    history.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: user_input})</span></code></pre></div>
+<blockquote>
+<p>history
+是个<strong>列表</strong>，每条消息是个字典。先把用户这句<strong>追加</strong>到记录本尾部。</p>
+</blockquote>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>    resp <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">&quot;deepseek-chat&quot;</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        messages<span class="op">=</span>[{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;system&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;你是文旅客服&quot;</span>}] <span class="op">+</span> history,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<blockquote>
+<p>发送内容 = <strong>一条 system 设定 +
+全部历史</strong>。<code>+</code> 把两个列表拼成一个（列表加法）。system
+在最前面立规矩，历史跟在后面。</p>
+</blockquote>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> resp.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    history.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;assistant&quot;</span>, <span class="st">&quot;content&quot;</span>: answer})</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code></pre></div>
+<blockquote>
+<p>取出回答，<strong>也追加进记录本</strong>（模型的回答成为下一轮的历史），然后返回。用完之后
+history
+里用户和模型的话交替排列——<strong>这就是”上下文”四个字的代码实体</strong>。</p>
+</blockquote>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用法:</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> []</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>chat(history, <span class="st">&quot;古北水镇门票多少钱&quot;</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>chat(history, <span class="st">&quot;学生半价吗&quot;</span>)     <span class="co"># 模型能懂&quot;半价&quot;指门票——因为第一轮在 history 里</span></span></code></pre></div>
+<p><strong>③ 易错</strong>：忘了把 assistant 回答 append
+回去——第二轮模型就”失忆”了。 <strong>④ 口头升华</strong>：“这正是
+LangGraph 状态对象里 messages 字段’追加式更新’的手写版。生产上历史越长
+token 越贵，会做滑动窗口截断（见 T18）。”</p>
+<hr />
+<p><a id="c2"></a></p>
+<h2 id="二rag-检索链路简历核心最可能考">二、RAG
+检索链路（简历核心，最可能考）</h2>
+<h3 id="t4.-手写一个最小-rag默写级中青旅神农两段实习的最小缩影">T4.
+手写一个最小 RAG（★★默写级——中青旅+神农两段实习的最小缩影）</h3>
+<p><strong>① 大白话</strong>：开卷考试的程序版——<strong>翻书（检索）→
+把翻到的页摆在模型面前（组装材料）→
+命令它照着答（带强约束的提问）</strong>。20 行以内写完一个能跑的
+RAG，面试官就知道你真做过。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jieba</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>DOCS <span class="op">=</span> {</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;d1&quot;</span>: <span class="st">&quot;退役军人凭有效证件可享古北水镇门票半价优惠。&quot;</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;d2&quot;</span>: <span class="st">&quot;古北水镇开放时间为每日 9:00 至 21:00，夜场 17:00 入园。&quot;</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;d3&quot;</span>: <span class="st">&quot;乌镇景区对全日制在校学生实行门票八折。&quot;</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<blockquote>
+<p>知识库：字典（键是文档编号，值是内容）。真实系统里这一层是 Milvus
+向量库，<strong>面试手写用字典模拟完全够</strong>——形状对了就行。</p>
+</blockquote>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rag_answer(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    q_words <span class="op">=</span> <span class="bu">set</span>(jieba.lcut(question))</span></code></pre></div>
+<blockquote>
+<p>翻书第一步：把问题<strong>切成词</strong>。<code>jieba.lcut("门票半价吗")</code>
+→ <code>["门票", "半价", "吗"]</code>（列表）。再套 <code>set()</code>
+转成<strong>集合</strong>——集合自动去重，且能做”交集”运算（下一步用）。</p>
+</blockquote>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(doc):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>        d_words <span class="op">=</span> <span class="bu">set</span>(jieba.lcut(doc))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(q_words <span class="op">&amp;</span> d_words)</span></code></pre></div>
+<blockquote>
+<p><strong>打分函数</strong>：把每篇文档也切成集合，<code>q_words &amp; d_words</code>
+是两个集合的<strong>交集</strong>（两边都有的词），<code>len(...)</code>
+数有几个——<strong>问题里一半的词都在这篇文档里出现，它八成就是相关的</strong>。这是最朴素的”关键词检索”，思想就是
+BM25 的婴儿版（共同词越多越相关）。</p>
+</blockquote>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>    top2 <span class="op">=</span> <span class="bu">sorted</span>(DOCS.values(), key<span class="op">=</span>score, reverse<span class="op">=</span><span class="va">True</span>)[:<span class="dv">2</span>]</span></code></pre></div>
+<blockquote>
+<p>这一行三件事，从里往外读： -
+<code>DOCS.values()</code>：只要字典的”值”（文档内容），不要编号； -
+<code>sorted(..., key=score, reverse=True)</code>：按 score
+打分<strong>从高到低</strong>排（<code>key=score</code> =
+“用哪个函数算排序依据”，<code>reverse=True</code> = 降序）； -
+<code>[:2]</code>：切前两个——<strong>这就是 Top-K</strong>（K=2），和
+Top-5 命中率那个 K 是同一个东西。</p>
+</blockquote>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>    material <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>.join(<span class="ss">f&quot;[</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">] </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">&quot;</span> <span class="cf">for</span> i, d <span class="kw">in</span> <span class="bu">enumerate</span>(top2))</span></code></pre></div>
+<blockquote>
+<p>把两段材料拼成一段文字：<code>f"[{i+1}] {d}"</code> 给每段编号（[1]
+xxx [2] xxx），<code>enumerate</code>
+同时给出序号和内容，<code>"\n".join(...)</code>
+用换行符把多段缝起来。<strong>为什么要编号</strong>——后面让模型标注”依据:
+材料1”，可核查。</p>
+</blockquote>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f&quot;&quot;&quot;请仅根据以下材料回答问题，材料中没有的内容要明确说不知道。</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="ss">材料：</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>material<span class="sc">}</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="ss">问题：</span><span class="sc">{</span>question<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ask(prompt)</span></code></pre></div>
+<blockquote>
+<p><strong>组装 Prompt（三要素全齐）</strong>：指令（仅依据材料 +
+<strong>兜底话术”说不知道”</strong>）+ 材料 + 问题。三引号
+<code>"""</code> 能跨行写字符串，<code>{material}</code> 被 f-string
+替换成真材料。最后复用 T1 的 <code>ask</code> 发出去。
+<strong>那一句”没有的内容要明确说不知道”就是压幻觉的灵魂</strong>——没有它，模型材料里没有也会硬编。</p>
+</blockquote>
+<p><strong>③ 易错</strong>：①<code>key=score</code> 写成
+<code>key=score(doc)</code>（写括号就变成”立刻调用”，要传的是函数本身）；②忘
+<code>reverse=True</code>（默认从低到高，取到的是最不相关的两篇——大冤种）；③三要素漏了兜底话术。</p>
+<p><strong>④ 面试口头讲（背这个顺序）</strong>： &gt; “分词转集合 →
+对每篇文档算词交集数打分 → 排序取前 K → 编号拼材料 →
+组装带强约束的三要素 Prompt →
+调模型返回。生产上三个升级：关键词换向量检索（认意思不认字面）、检索前加元数据过滤（先锁景区和生效时间）、粗排后加
+Rerank 精排——正是我实习做的三件事。”</p>
+<h3 id="t5.-向量检索版考-embedding-概念的代码化">T5. 向量检索版（考
+Embedding 概念的代码化）</h3>
+<p><strong>① 大白话</strong>：T4
+的打分是”数相同的字”，这里换成”<strong>量意思的距离</strong>”——把问题和文档都变成坐标（向量），算距离取最近的。面试官想看你懂不懂”语义检索”的形状。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.pairwise <span class="im">import</span> cosine_similarity</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> TfidfVectorizer(analyzer<span class="op">=</span>jieba.lcut)</span></code></pre></div>
+<blockquote>
+<p>借两件工具：向量化器（把文字变向量）和余弦相似度计算器。<code>analyzer=jieba.lcut</code>
+告诉它”中文请先用 jieba 切词再统计”。（教学用 TF-IDF 假向量；生产换成
+bge 模型，<strong>接口形状完全一样</strong>。）</p>
+</blockquote>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>doc_ids <span class="op">=</span> <span class="bu">list</span>(DOCS.keys())</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> vectorizer.fit_transform(<span class="bu">list</span>(DOCS.values()))</span></code></pre></div>
+<blockquote>
+<p>所有文档<strong>一起</strong>喂给向量化器学习并转换（fit_transform =
+学规律 + 转换）——得到一个”文档 × 词”的矩阵，每行是一篇文档的向量。</p>
+</blockquote>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> retrieve(question: <span class="bu">str</span>, top_k: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    q_vec <span class="op">=</span> vectorizer.transform([question])</span></code></pre></div>
+<blockquote>
+<p>问题也转成向量——<strong>注意用 <code>transform</code> 不是
+<code>fit_transform</code></strong>：坐标系的”规矩”必须用文档建的那套，新问题只转换不重建。<strong>类比：所有地址都用同一张地图标坐标，拿
+A 地图的坐标去 B 地图上找位置没有意义——这就是”换 Embedding
+模型必须全库重建向量”的原因</strong>（高频追问，背下来）。</p>
+</blockquote>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>    sims <span class="op">=</span> cosine_similarity(q_vec, matrix)[<span class="dv">0</span>]</span></code></pre></div>
+<blockquote>
+<p>算问题向量和每篇文档向量的余弦相似度（方向越一致越相关），得到一排分数；<code>[0]</code>
+是因为输入是”一批问题”，我们只有一个，取第一行。</p>
+</blockquote>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>    ranked <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(doc_ids, sims), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ranked[:top_k]</span></code></pre></div>
+<blockquote>
+<p><code>zip(编号, 分数)</code> 把两列拉链式配对成 (编号, 分数)
+元组；<code>lambda x: x[1]</code>
+是”匿名小函数：取第二项（分数）当排序键”——<strong>lambda
+就是现场定义的迷你函数</strong>，<code>x: x[1]</code> 读作”给我
+x，我还你 x 的第 1 位”。排降序切前 K。</p>
+</blockquote>
+<p><strong>③ 易错</strong>：对问题用了
+fit_transform（坐标系重建，相似度全乱）；lambda 里写
+x[0]（按编号排序了）。</p>
+<h3 id="t6.-元数据过滤考字典列表过滤基本功-你的简历知识">T6.
+元数据过滤（考字典/列表过滤基本功 + 你的简历知识）</h3>
+<p><strong>①
+大白话</strong>：翻书前<strong>先锁书架</strong>——只留”本景区的、当前生效的”文档，再谈检索。这是你中青旅治”串召和过期政策”的那一招的代码版。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>CHUNKS <span class="op">=</span> [</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;text&quot;</span>: <span class="st">&quot;退役军人半价&quot;</span>, <span class="st">&quot;scenic&quot;</span>: <span class="st">&quot;乌镇&quot;</span>,  <span class="st">&quot;effective&quot;</span>: <span class="st">&quot;2024-01-01&quot;</span>, <span class="st">&quot;expired&quot;</span>: <span class="va">None</span>},</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;text&quot;</span>: <span class="st">&quot;退役军人免票&quot;</span>, <span class="st">&quot;scenic&quot;</span>: <span class="st">&quot;乌镇&quot;</span>,  <span class="st">&quot;effective&quot;</span>: <span class="st">&quot;2025-06-01&quot;</span>, <span class="st">&quot;expired&quot;</span>: <span class="va">None</span>},</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;text&quot;</span>: <span class="st">&quot;退役军人半价&quot;</span>, <span class="st">&quot;scenic&quot;</span>: <span class="st">&quot;古北水镇&quot;</span>, <span class="st">&quot;effective&quot;</span>: <span class="st">&quot;2023-01-01&quot;</span>, <span class="st">&quot;expired&quot;</span>: <span class="st">&quot;2024-12-31&quot;</span>},</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<blockquote>
+<p>每个块 = 一个字典：正文 +
+三个标签（景区、生效日、失效日）。<strong>这就是”给文档块打 Metadata
+标签”的代码实体</strong>。</p>
+</blockquote>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_chunks(chunks, scenic_id: <span class="bu">str</span>, today: date):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ok(c):</span></code></pre></div>
+<blockquote>
+<p>写一个”合格判定”小函数 <code>ok</code>：给一个块 c，回答
+True（留下）/ False（踢掉）。</p>
+</blockquote>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c[<span class="st">&quot;scenic&quot;</span>] <span class="op">!=</span> scenic_id:</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> date.fromisoformat(c[<span class="st">&quot;effective&quot;</span>]) <span class="op">&gt;</span> today:</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c[<span class="st">&quot;expired&quot;</span>] <span class="kw">and</span> date.fromisoformat(c[<span class="st">&quot;expired&quot;</span>]) <span class="op">&lt;</span> today:</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span></code></pre></div>
+<blockquote>
+<p>三道关卡逐一拷问：景区不是我要的 → 踢；还没生效（生效日在未来）→
+踢；已失效（失效日在过去）→ 踢；全过 → 留。
+细节：<code>date.fromisoformat("2025-06-01")</code>
+把日期字符串变成日期对象（变成对象才能比大小）；第三关的
+<code>c["expired"] and ...</code>
+是<strong>先判空再比较</strong>——expired 是
+None（永不过期）时跳过比较，不判空直接比会崩。</p>
+</blockquote>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [c <span class="cf">for</span> c <span class="kw">in</span> chunks <span class="cf">if</span> ok(c)]</span></code></pre></div>
+<blockquote>
+<p><strong>列表推导式</strong>（读作”收集每一个通过考核的 c”）——等价于
+for 循环 + append，但是一行。这是 Python
+的地道写法，面试写出来加分。</p>
+</blockquote>
+<p><strong>③ 埋了一个面试官爱追的坑</strong>：上面数据里乌镇两条（2024
+版、2025
+版）<strong>都没标失效</strong>——同时”生效”怎么办？<strong>口头答</strong>：“这是真实踩过的坑：治理上要求新版本入库时给旧版本回填失效时间；查询侧按生效时间倒序取最新。”（数据治理意识，正是你实习里指标治理的同一思想。）</p>
+<h3 id="t7.-父子-chunk-替换考数据结构映射">T7. 父子 Chunk
+替换（考数据结构映射）</h3>
+<p><strong>①
+大白话</strong>：检索命中的是”小卡片”（子块），喂给模型前要换成”整页”（父块）——而且<strong>两三张卡片属于同一页时，那页只塞一次</strong>（重复塞浪费
+token）。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>PARENTS <span class="op">=</span> {<span class="st">&quot;p1&quot;</span>: <span class="st">&quot;门票优惠政策全文……&quot;</span>, <span class="st">&quot;p2&quot;</span>: <span class="st">&quot;开放时间全文……&quot;</span>}</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>CHILDREN <span class="op">=</span> [</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;id&quot;</span>: <span class="st">&quot;c1&quot;</span>, <span class="st">&quot;parent&quot;</span>: <span class="st">&quot;p1&quot;</span>, <span class="st">&quot;text&quot;</span>: <span class="st">&quot;退役军人半价&quot;</span>},</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;id&quot;</span>: <span class="st">&quot;c2&quot;</span>, <span class="st">&quot;parent&quot;</span>: <span class="st">&quot;p1&quot;</span>, <span class="st">&quot;text&quot;</span>: <span class="st">&quot;学生八折&quot;</span>},</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;id&quot;</span>: <span class="st">&quot;c3&quot;</span>, <span class="st">&quot;parent&quot;</span>: <span class="st">&quot;p2&quot;</span>, <span class="st">&quot;text&quot;</span>: <span class="st">&quot;夜场17点入园&quot;</span>},</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<blockquote>
+<p>两张表：父块库 + 子块列表（<strong>每个子块记着自己的
+parent</strong>——这就是”父子关系”的存储方式：不是嵌套，是各自独立、靠
+parent 字段关联，像户口本上写”父亲是谁”）。</p>
+</blockquote>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_parents(hit_child_ids: <span class="bu">list</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    parent_ids <span class="op">=</span> []</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> CHILDREN:</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c[<span class="st">&quot;id&quot;</span>] <span class="kw">in</span> hit_child_ids <span class="kw">and</span> c[<span class="st">&quot;parent&quot;</span>] <span class="kw">not</span> <span class="kw">in</span> parent_ids:</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>            parent_ids.append(c[<span class="st">&quot;parent&quot;</span>])</span></code></pre></div>
+<blockquote>
+<p>遍历所有子块：是命中的（<code>in hit_child_ids</code>）<strong>且</strong>它的父块还没收集过（<code>not in parent_ids</code>）→
+收录。<strong>第二个条件就是”同父去重”</strong>——c1、c2 都命中时，p1
+只进一次。漏了它，材料里同一页出现两遍，token 白花。</p>
+</blockquote>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [PARENTS[pid] <span class="cf">for</span> pid <span class="kw">in</span> <span class="bu">sorted</span>(parent_ids)]</span></code></pre></div>
+<blockquote>
+<p>按父块编号<strong>排序</strong>（p1 在 p2
+前——保持文档里的原始顺序，材料顺序乱了模型阅读体验也乱）再取正文。又是列表推导式。</p>
+</blockquote>
+<p><strong>③ 易错</strong>：忘去重（最常见）；忘排序。</p>
+<hr />
+<p><a id="c3"></a></p>
+<h2 id="三prompt-与结构化输出">三、Prompt 与结构化输出</h2>
+<h3 id="t8.-结构化输出-容错解析考-json-解析与防御">T8. 结构化输出 +
+容错解析（考 JSON 解析与防御）</h3>
+<p><strong>① 大白话</strong>：Text-to-SQL
+第一段”指标解析”的手写版——让模型从一句话里抠出三个字段并输出
+JSON。<strong>难点不在让它输出，在它偶尔不乖</strong>：会带上一句”好的，以下是结果：“或用
+```json 包裹——你的解析要像安检机，什么歪瓜裂枣都能处理。</p>
+<p><strong>② 逐行拆解</strong>：</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_metric(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f&quot;&quot;&quot;从下面的问题中提取三个字段, 只输出 JSON, 不要其他内容:</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="ch">{{</span><span class="ss">&quot;metric&quot;: &quot;&quot;, &quot;org&quot;: &quot;&quot;, &quot;period&quot;: &quot;&quot;</span><span class="ch">}}</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ss">问题：</span><span class="sc">{</span>question<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    raw <span class="op">=</span> ask(prompt)</span></code></pre></div>
+<blockquote>
+<p>Prompt 里给<strong>格式示范</strong>（空 JSON
+模板）——模型照葫芦画瓢稳定性大增。注意 f-string 里要输出真花括号得写两遍
+<code>{{ }}</code>（转义，否则会被当成变量替换）。<code>raw</code>
+是模型的原始回答——<strong>不保证是干净 JSON</strong>。</p>
+</blockquote>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> json.loads(raw)</span></code></pre></div>
+<blockquote>
+<p>第一关：直接当 JSON 解析（<code>json.loads</code> = 把 JSON
+字符串变成 Python 字典）。乖的时候这样就够了。</p>
+</blockquote>
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> json.JSONDecodeError:</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> re.search(<span class="vs">r&#39;</span><span class="ch">\{</span><span class="dv">.</span><span class="op">*</span><span class="ch">\}</span><span class="vs">&#39;</span>, raw, re.S)</span></code></pre></div>
+<blockquote>
+<p>不乖（报 JSONDecodeError）→ 第二关：用正则从原文里<strong>抠出第一个
+<code>{</code> 到最后一个 <code>}</code>
+之间的内容</strong>。<code>re.S</code> 让 <code>.</code>
+也匹配换行（JSON 跨行时必需）。这样”好的以下是结果：```json {…}
+```“也能救回来。</p>
+</blockquote>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m:</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> json.loads(m.group())</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> json.JSONDecodeError:</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                <span class="cf">pass</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&quot;metric&quot;</span>: <span class="va">None</span>, <span class="st">&quot;org&quot;</span>: <span class="va">None</span>, <span class="st">&quot;period&quot;</span>: <span class="va">None</span>, <span class="st">&quot;error&quot;</span>: <span class="st">&quot;解析失败&quot;</span>}</span></code></pre></div>
+<blockquote>
+<p>抠出来的再解析一次（<code>m.group()</code> =
+正则匹配到的那段文字）。还失败 →
+<code>pass</code>（什么都不做，落到最后）→ <strong>返回带 error
+字段的兜底字典，而不是抛异常</strong>——下游看到 error
+就知道走”反问澄清”流程，程序不崩。<strong>两级容错 +
+兜底返回，这就是防御性编程的样子。</strong></p>
+</blockquote>
+<p><strong>③ 口头加分</strong>：“生产上加 response_format 强制 JSON 模式
++ Pydantic 校验字段完整性，缺字段反问用户——就是中青旅的消歧机制。”</p>
+<h3 id="t9.-prompt-组装函数三要素模板">T9. Prompt
+组装函数（三要素模板）</h3>
+<p><strong>①
+大白话</strong>：把”给模型下命令”写成标准模板函数——以后所有问答都走它，改规矩只改一处。<strong>模板里每一条规则都对应一类线上
+Badcase</strong>（面试时这句话值很多分）。</p>
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_prompt(question: <span class="bu">str</span>, materials: <span class="bu">list</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    material <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>.join(<span class="ss">f&quot;【材料</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">】</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">&quot;</span> <span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(materials, <span class="dv">1</span>))</span></code></pre></div>
+<blockquote>
+<p>材料编号拼接。<code>enumerate(materials, 1)</code> 的 <code>1</code>
+表示<strong>序号从 1 开始数</strong>（默认 0，给人看的编号从 1
+顺手）。</p>
+</blockquote>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;&quot;&quot;你是一名文旅客服, 遵守以下规则:</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="ss">1. 只依据【材料】回答, 材料没有的明确回答&quot;暂未查到相关规定&quot;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="ss">2. 回答末尾标注依据, 格式: (依据: 材料N)</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="ss">3. 涉及价格和时间时原样引用, 不做推算</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>material<span class="sc">}</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="ss">用户问题: </span><span class="sc">{</span>question<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span></span></code></pre></div>
+<blockquote>
+<p><strong>四要素</strong>：角色（文旅客服）→ 约束（仅依据材料 +
+兜底话术 + 标依据 + 不推算）→ 材料 → 问题。 每条规则的”主治”：规则 1
+治<strong>无依据生成</strong>（幻觉）；规则 2
+给<strong>可核查性</strong>（Badcase
+归因全靠出处标注——你中青旅定位串召就是看出处发现的）；规则 3
+治<strong>模型自己算数算错</strong>（它不擅长算术，价格一律照抄）。</p>
+</blockquote>
+<hr />
+<p><a id="c4"></a></p>
+<h2
+id="四缓存与计费呼应你的开源项目-dsh-plugin">四、缓存与计费（呼应你的开源项目
+DSH-plugin）</h2>
+<h3 id="t10.-峰谷计费函数考查表-分段逻辑">T10. 峰谷计费函数（考查表 +
+分段逻辑）</h3>
+<p><strong>① 大白话</strong>：你开源计费插件的核心逻辑——拿一次调用的
+token
+明细，<strong>先判断它发生在峰时还是谷时，再查对应价目表</strong>算钱。和电费单一个算法。</p>
+<div class="sourceCode" id="cb50"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>PRICING <span class="op">=</span> {</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;deepseek-chat&quot;</span>: {</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;peak&quot;</span>:    {<span class="st">&quot;hit&quot;</span>: <span class="fl">0.30</span>, <span class="st">&quot;miss&quot;</span>: <span class="fl">9.0</span>,  <span class="st">&quot;output&quot;</span>: <span class="fl">27.0</span>},</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;offpeak&quot;</span>: {<span class="st">&quot;hit&quot;</span>: <span class="fl">0.15</span>, <span class="st">&quot;miss&quot;</span>: <span class="fl">4.5</span>,  <span class="st">&quot;output&quot;</span>: <span class="fl">13.5</span>},</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<blockquote>
+<p>价目表：<strong>字典套字典套字典</strong>（模型 → 时段 →
+三桶单价，单位：元/百万token）。<strong>查表代替一堆
+if</strong>——加新模型只需加一行表，代码零改动（这也是”指标词典”的代码思想：规则进数据，不进代码）。</p>
+</blockquote>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cost(model: <span class="bu">str</span>, usage: <span class="bu">dict</span>, ts: datetime) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> PRICING[model]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> ts.hour</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    band <span class="op">=</span> <span class="st">&quot;peak&quot;</span> <span class="cf">if</span> <span class="dv">9</span> <span class="op">&lt;=</span> hour <span class="op">&lt;</span> <span class="dv">12</span> <span class="kw">or</span> <span class="dv">14</span> <span class="op">&lt;=</span> hour <span class="op">&lt;</span> <span class="dv">18</span> <span class="cf">else</span> <span class="st">&quot;offpeak&quot;</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    rate <span class="op">=</span> table[band]</span></code></pre></div>
+<blockquote>
+<p>峰谷判定：北京时间 9-12 点、14-18
+点是峰（<strong>注意两个区间的写法：9 &lt;= hour &lt; 12
+数学式连写，Python 支持这样写</strong>；边界是”左闭右开”——9 点整算峰，12
+点整算谷，能讲清这个边界就是加分）。<code>"A" if 条件 else "B"</code> 是
+if 的单行版（三元表达式）。</p>
+</blockquote>
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>    hit  <span class="op">=</span> usage.get(<span class="st">&quot;cache_read&quot;</span>, <span class="dv">0</span>) <span class="op">+</span> usage.get(<span class="st">&quot;cache_write&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    miss <span class="op">=</span> usage.get(<span class="st">&quot;input&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    out  <span class="op">=</span> usage.get(<span class="st">&quot;output&quot;</span>, <span class="dv">0</span>)</span></code></pre></div>
+<blockquote>
+<p>取 token 数。<strong><code>.get(键, 0)</code> 而不是
+<code>[键]</code></strong>：键不存在时 get 返回默认 0，方括号直接
+KeyError 崩掉——<strong>处理外部数据（模型返回的）永远用
+get</strong>，因为你不能保证它每次都带全字段。</p>
+</blockquote>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> miss<span class="op">/</span><span class="fl">1e6</span><span class="op">*</span>rate[<span class="st">&quot;miss&quot;</span>] <span class="op">+</span> hit<span class="op">/</span><span class="fl">1e6</span><span class="op">*</span>rate[<span class="st">&quot;hit&quot;</span>] <span class="op">+</span> out<span class="op">/</span><span class="fl">1e6</span><span class="op">*</span>rate[<span class="st">&quot;output&quot;</span>]</span></code></pre></div>
+<blockquote>
+<p>三桶各自 ÷ 一百万 × 单价再相加（<code>1e6</code> 是 100
+万的科学计数法写法）。完事——这就是”峰谷电价”的全部代码。</p>
+</blockquote>
+<p><strong>③
+口头呼应</strong>：“这是我开源计费插件的核心逻辑，真实代码还多了按计价带的累计统计和
+jsonl 落盘。”</p>
+<h3 id="t11.-统计装饰器考装饰器手写技能栏点名考">T11.
+统计装饰器（考装饰器手写——技能栏点名考）</h3>
+<p><strong>①
+大白话</strong>：之前讲过装饰器是”不改函数本体给它加功能”。现在手写一个：给任意函数装一块”水表”——每次调用自动数
+token、累计，<strong>原函数干什么完全不动</strong>。</p>
+<div class="sourceCode" id="cb54"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> functools</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>total_tokens <span class="op">=</span> {<span class="st">&quot;value&quot;</span>: <span class="dv">0</span>}</span></code></pre></div>
+<blockquote>
+<p>全局累计数。<strong>为什么装在字典里而不是直接
+<code>total_tokens = 0</code></strong>：函数内要改外层变量，字典是”改盒子里的东西”（合法），裸数字是”换盒子”（Python
+会当成新变量，踩坑点——用字典包一层是标准解法）。</p>
+</blockquote>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_tokens(fn):</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">@functools.wraps</span>(fn)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span></code></pre></div>
+<blockquote>
+<p>装饰器三板斧第一、二步：<strong>接收函数 fn</strong> → <strong>定义
+wrapper</strong>。<code>*args, **kwargs</code>
+是”不管原函数收什么参数，原样接住”（位置参数进 args、关键字参数进
+kwargs）——这样装饰器能套在任何函数上。<code>@functools.wraps(fn)</code>
+是礼貌：保留原函数的名字和文档（不写的话函数改名叫 wrapper 了）。</p>
+</blockquote>
+<div class="sourceCode" id="cb56"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> fn(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>        usage <span class="op">=</span> <span class="bu">getattr</span>(result, <span class="st">&quot;usage&quot;</span>, <span class="va">None</span>) <span class="kw">or</span> kwargs.get(<span class="st">&quot;usage&quot;</span>, {})</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>        tokens <span class="op">=</span> usage.get(<span class="st">&quot;total_tokens&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>        total_tokens[<span class="st">&quot;value&quot;</span>] <span class="op">+=</span> tokens</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;[本次 </span><span class="sc">{</span>tokens<span class="sc">}</span><span class="ss"> tokens, 累计 </span><span class="sc">{</span>total_tokens[<span class="st">&#39;value&#39;</span>]<span class="sc">}</span><span class="ss">]&quot;</span>)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span></code></pre></div>
+<blockquote>
+<p>wrapper
+内部四步：<strong>先调原函数</strong>（<code>fn(*args, **kwargs)</code>
+是把接住的参数原样转交）→ 从结果里找 token
+数（<code>getattr(对象, "属性", 默认)</code> =
+“有这个属性吗？没有给默认”）→ 累计 → <strong>原样 return
+结果</strong>（水表不改变水流——这句是灵魂）。
+第三步斧：<code>return wrapper</code> 把包装好的交出去。</p>
+</blockquote>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="at">@count_tokens</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> call_model(question, usage<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div>
+<blockquote>
+<p><code>@</code> 语法糖 =
+<code>call_model = count_tokens(call_model)</code>——从此调 call_model
+实际跑的是带水表的 wrapper。</p>
+</blockquote>
+<p><strong>③
+口头升华（必说）</strong>：“我的开源计费插件本质就是这个装饰器的流式加强版——在数据流上包一层，透传原样、末尾记账。”</p>
+<hr />
+<p><a id="c5"></a></p>
+<h2 id="五fastapi-异步服务神农场景">五、FastAPI
+异步服务（神农场景）</h2>
+<h3 id="t12.-最小-ai-服务接口默写级神农项目的最小缩影">T12. 最小 AI
+服务接口（★默写级——神农项目的最小缩影）</h3>
+<p><strong>① 大白话</strong>：把 T4 的 RAG
+从”本地函数”变成”<strong>网上的服务</strong>”——别人（前端页面、别的程序）通过网络
+POST 一个问题过来，你返回 JSON 答案。十几行就是一个能跑的 AI 接口。</p>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastapi <span class="im">import</span> FastAPI</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastAPI()</span></code></pre></div>
+<blockquote>
+<p>借两个工具：FastAPI（框架）和
+BaseModel（数据校验图纸的基类）。<code>app = FastAPI()</code>
+造出应用本体——之后所有接口都登记在它身上。</p>
+</blockquote>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AskRequest(BaseModel):</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    question: <span class="bu">str</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    top_k: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span></span></code></pre></div>
+<blockquote>
+<p><strong>画”收货单”图纸</strong>：规定请求体必须长什么样——question
+必须是字符串（必填），top_k 是整数（有默认值
+3，可不传）。<strong>FastAPI 拿这张图纸自动校验</strong>：对方发来
+<code>{"question": 123}</code>（数字），根本进不了你的函数，直接被打回
+422 参数错误——这就是”参数自动校验”，之前讲 FastAPI 时说的 Pydantic
+在干这件事。</p>
+</blockquote>
+<div class="sourceCode" id="cb60"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.post</span>(<span class="st">&quot;/ask&quot;</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ask_api(req: AskRequest):</span></code></pre></div>
+<blockquote>
+<p><strong>两件大事</strong>：①装饰器登记——“POST 到 /ask
+的请求交给这个函数”（登记一次，之后全自动——还记得”你给格式和逻辑，流程它负责”吗，这就是那行登记）；②<code>async def</code>
+声明这是<strong>可中断的函数</strong>（异步版榨汁机：遇到等待会让位给别的请求——烧水时去拿茶叶）。</p>
+</blockquote>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>    docs <span class="op">=</span> retrieve(req.question, top_k<span class="op">=</span>req.top_k)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="cf">await</span> ask_async(build_prompt(req.question, docs))</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&quot;answer&quot;</span>: answer, <span class="st">&quot;used_docs&quot;</span>: <span class="bu">len</span>(docs)}</span></code></pre></div>
+<blockquote>
+<p>函数体三步：检索（复用 T5）→ 组装 Prompt
+调模型（<strong><code>await</code> =
+“这里要等几秒，我先让位，好了叫我”</strong>）→ <strong>返回 Python
+字典，FastAPI 自动转成 JSON 发回去</strong>（你永远只管 return
+字典）。注意 <code>req.question</code>：收货单里的字段用点取。</p>
+</blockquote>
+<p><strong>③ 口头必说</strong>：“启动用 uvicorn 跑多 worker；/docs
+路径能看到自动生成的可交互文档。”</p>
+<h3 id="t13.-并发限流器考异步锁capacitylimiter-的手写版">T13.
+并发限流器（考异步锁——CapacityLimiter 的手写版）</h3>
+<p><strong>①
+大白话</strong>：<strong>索道限载</strong>——模型服务最多同时扛 10 路，第
+11
+个请求排队等着，完成一个放行一个。防止瞬时洪峰打爆下游（你神农项目干的事）。</p>
+<div class="sourceCode" id="cb62"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> asyncio</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Limiter:</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n: <span class="bu">int</span>):</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._sem <span class="op">=</span> asyncio.Semaphore(n)</span></code></pre></div>
+<blockquote>
+<p>图纸：造限流器时发 n 个”名额牌”（Semaphore 信号量 =
+一摞名额牌的抽象）。<code>__init__</code>
+是”造机器时自动执行的初始化”。</p>
+</blockquote>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="kw">def</span> call(<span class="va">self</span>, prompt: <span class="bu">str</span>):</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">async</span> <span class="cf">with</span> <span class="va">self</span>._sem:</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="cf">await</span> ask_async(prompt)</span></code></pre></div>
+<blockquote>
+<p>核心两行：<code>async with self._sem</code> =
+<strong>进门先取名额牌，没有就挂起排队</strong>（挂起不占
+CPU——事件循环趁你去服务别的请求）；<code>async with</code>
+代码块结束时<strong>自动还牌</strong>（with
+语法的承诺：进来干什么，走时一定还）。牌子在手里才真正调模型。</p>
+</blockquote>
+<div class="sourceCode" id="cb64"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>limiter <span class="op">=</span> Limiter(<span class="dv">10</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="at">@app.post</span>(<span class="st">&quot;/ask&quot;</span>)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ask_api(req: AskRequest):</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&quot;answer&quot;</span>: <span class="cf">await</span> limiter.call(req.question)}</span></code></pre></div>
+<blockquote>
+<p>全局限流器实例（10 个名额），接口里包一层。50 个请求同时来：10
+个在调模型、40
+个安静排队——<strong>这就是”避免瞬时请求造成服务拥塞”的代码实体</strong>（简历原话落地）。</p>
+</blockquote>
+<p><strong>口头追问</strong>：为什么不用多线程？→ 等模型是 I/O
+等待不是计算，事件循环挂起零成本；线程每个占内存、切换有开销。N=10
+怎么定？→ 压测下游看延迟拐点。</p>
+<h3 id="t14.-批量并发考-asyncio.gather">T14. 批量并发（考
+asyncio.gather）</h3>
+<p><strong>① 大白话</strong>：一个问题要问 5
+个子问题——<strong>别排队一个一个问</strong>（5×3 秒=15
+秒），<strong>同时问</strong>（约 3
+秒）——等待时间重叠利用，就是”一个厨师看五锅”。</p>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ask_multi(questions: <span class="bu">list</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    tasks <span class="op">=</span> [ask_async(q) <span class="cf">for</span> q <span class="kw">in</span> questions]</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> asyncio.gather(<span class="op">*</span>tasks)</span></code></pre></div>
+<blockquote>
+<p>两行：①列表推导式造 5
+个”任务”（注意：<strong>造任务不等于开跑</strong>，协程此刻只是待命）；②<code>asyncio.gather(*tasks)</code>
+一声令下<strong>全部开跑</strong>，等齐后<strong>按造任务的原顺序</strong>收结果（谁先完成都行，收的时候顺序不乱——这个保证要口头说出来）。<code>*tasks</code>
+的 <code>*</code> 是拆包：把列表拆成一个个参数塞给 gather。</p>
+</blockquote>
+<p><strong>口头加分</strong>：“配合 T13
+用——并发但不超下游承受力；<code>return_exceptions=True</code>
+可以让单个失败不拖垮整批。”</p>
+<hr />
+<p><a id="c6"></a></p>
+<h2 id="六agent-工具调用进阶能写就是亮点">六、Agent /
+工具调用（进阶，能写就是亮点）</h2>
+<h3 id="t15.-极简-agent工具注册与循环">T15. 极简
+Agent：工具注册与循环</h3>
+<p><strong>① 大白话</strong>：Agent
+的本质就一个循环——<strong>模型说”我要用某工具” → 程序执行 → 结果喂回去 →
+再问模型</strong>，直到它给出最终回答。这个题把”智能体”祛魅成 30
+行代码。</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>TOOLS <span class="op">=</span> {</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;query_ticket&quot;</span>: {</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;desc&quot;</span>: <span class="st">&quot;查询景区门票库存, 参数: scenic(景区名), date(日期YYYY-MM-DD)&quot;</span>,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;func&quot;</span>: <span class="kw">lambda</span> scenic, date: {<span class="st">&quot;scenic&quot;</span>: scenic, <span class="st">&quot;left&quot;</span>: <span class="dv">128</span>},</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;get_weather&quot;</span>: {</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;desc&quot;</span>: <span class="st">&quot;查询城市天气, 参数: city(城市名)&quot;</span>,</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;func&quot;</span>: <span class="kw">lambda</span> city: {<span class="st">&quot;city&quot;</span>: city, <span class="st">&quot;weather&quot;</span>: <span class="st">&quot;多云 26℃&quot;</span>},</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<blockquote>
+<p><strong>工具表</strong>：字典——工具名 → {说明书 desc, 真函数
+func}。<strong>desc
+是给模型看的</strong>（模型靠读描述决定用不用、怎么填参数——所以描述写不清就是”Tool
+参数错误”的根源，你中青旅修的 Badcase 之一）；func 用 lambda
+写了个假的（真环境里是查库/调 API）。</p>
+</blockquote>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> agent(question: <span class="bu">str</span>, max_turns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: question}]</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_turns):</span></code></pre></div>
+<blockquote>
+<p>对话记录 + <strong>最多循环 max_turns
+轮</strong>。<code>for _ in ...</code> 的 <code>_</code>
+是”我不关心这个变量，纯粹数次数”的惯用写法。<strong>为什么要封顶：模型可能反复要工具甚至死循环——防御性设计</strong>。</p>
+</blockquote>
+<div class="sourceCode" id="cb68"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>        tool_desc <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>.join(<span class="ss">f&quot;- </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>t[<span class="st">&#39;desc&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span> <span class="cf">for</span> n, t <span class="kw">in</span> TOOLS.items())</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>        raw <span class="op">=</span> ask(<span class="ss">f&quot;&quot;&quot;你可以使用以下工具:</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>tool_desc<span class="sc">}</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="ss">如果需要工具, 只输出 JSON: </span><span class="ch">{{</span><span class="ss">&quot;tool&quot;: &quot;工具名&quot;, &quot;args&quot;: </span><span class="ch">{{</span><span class="ss">...</span><span class="ch">}}}}</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="ss">如果不需要, 直接输出对用户的最终回答。</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="ss">当前对话: </span><span class="sc">{</span>json<span class="sc">.</span>dumps(messages, ensure_ascii<span class="op">=</span><span class="va">False</span>)<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>每轮把<strong>工具说明书 + 当前对话 +
+输出格式要求</strong>一起给模型，让它决策。<code>json.dumps(..., ensure_ascii=False)</code>
+把对话列表变回字符串塞进提示（ensure_ascii=False 让中文不以
+乱码显示）。</p>
+</blockquote>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>            call <span class="op">=</span> json.loads(raw.strip())</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">assert</span> call[<span class="st">&quot;tool&quot;</span>] <span class="kw">in</span> TOOLS</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> TOOLS[call[<span class="st">&quot;tool&quot;</span>]][<span class="st">&quot;func&quot;</span>](<span class="op">**</span>call[<span class="st">&quot;args&quot;</span>])</span></code></pre></div>
+<blockquote>
+<p>执行工具三步：解析模型的 JSON 指令 →
+<strong>白名单校验</strong>（<code>assert ... in TOOLS</code>：模型可能编造不存在的工具名——这行就是”Tool
+参数错误”的防线，漏了它模型让你调 <code>delete_database</code>
+你也照干）→ 查表执行。<code>**call["args"]</code>
+是字典拆包成关键字参数：<code>{"city": "北京"}</code> 变成
+<code>func(city="北京")</code>。</p>
+</blockquote>
+<div class="sourceCode" id="cb70"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>            messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;assistant&quot;</span>, <span class="st">&quot;content&quot;</span>: raw})</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>            messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="ss">f&quot;工具结果: </span><span class="sc">{</span>json<span class="sc">.</span>dumps(result)<span class="sc">}</span><span class="ss">&quot;</span>})</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> raw.strip()</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">&quot;达到最大轮数限制&quot;</span></span></code></pre></div>
+<blockquote>
+<p><strong>结果回喂</strong>：工具结果作为新的 user
+消息追加进对话，进下一轮循环——模型看到结果再决定”够了，给最终答案”还是”再要一个工具”。<strong>except
+兜底</strong>：模型输出不是合法
+JSON（说明它不想用工具了，直接给了答案）→ 把原文当最终回答返回。循环耗尽
+→ 明说达到上限（不装死）。</p>
+</blockquote>
+<p><strong>口头升华</strong>：“这就是 Agent 的本质——模型决策 + 程序执行
++ 结果回喂的循环；LangGraph
+只是把这套循环画成显式的图，节点单独测试、路由写在代码里，可控性强。”</p>
+<h3 id="t16.-意图路由langgraph-条件边的手写版">T16. 意图路由（LangGraph
+条件边的手写版）</h3>
+<p><strong>①
+大白话</strong>：<strong>医院分诊台</strong>——先判断来的是哪类问题，再决定走哪条流水线（病虫害的多查一步天气，普通问答直接
+RAG）。</p>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> route(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">any</span>(k <span class="kw">in</span> question <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">&quot;病&quot;</span>, <span class="st">&quot;虫&quot;</span>, <span class="st">&quot;枯&quot;</span>, <span class="st">&quot;斑&quot;</span>, <span class="st">&quot;锈&quot;</span>)):</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;病虫害&quot;</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">&quot;其他&quot;</span></span></code></pre></div>
+<blockquote>
+<p>分诊函数：<code>any(...)</code> =
+“括号里<strong>任何一个</strong>条件为真就真”——问题里含这些关键词之一就判病虫害。（教学版用关键词；生产上让模型做选择题输出标签——<strong>这就是
+query_process 节点干的事</strong>。）</p>
+</blockquote>
+<div class="sourceCode" id="cb72"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process(question: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    intent <span class="op">=</span> route(question)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> intent <span class="op">==</span> <span class="st">&quot;病虫害&quot;</span>:</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>        weather <span class="op">=</span> TOOLS[<span class="st">&quot;get_weather&quot;</span>][<span class="st">&quot;func&quot;</span>](city<span class="op">=</span><span class="st">&quot;北京&quot;</span>)</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ask(<span class="ss">f&quot;结合天气数据 </span><span class="sc">{</span>weather<span class="sc">}</span><span class="ss"> 回答: </span><span class="sc">{</span>question<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rag_answer(question)</span></code></pre></div>
+<blockquote>
+<p>按意图分流：病虫害分支<strong>多走一步工具</strong>（查天气——湿度影响病害判断，神农的真实场景），其他走
+RAG。<strong>route = 条件边，两个分支 =
+两条执行路径</strong>——“根据不同农业场景组合执行流程”的代码实体。</p>
+</blockquote>
+<hr />
+<p><a id="c7"></a></p>
+<h2 id="七手撕算法类ai-岗也会考的经典">七、手撕算法类（AI
+岗也会考的经典）</h2>
+<h3 id="t17.-top-k和检索直接相关">T17. Top-K（和检索直接相关）</h3>
+<p><strong>考法</strong>：“一堆 (文档id, 相似度)，取最高的 k 个。”</p>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> heapq</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> top_k(pairs: <span class="bu">list</span>, k: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> heapq.nlargest(k, pairs, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])</span></code></pre></div>
+<blockquote>
+<p><code>heapq.nlargest(k, 数据, 依据)</code> = “按依据取最大的 k
+个”——标准库一行搞定（面试先写这行，追问再手写）。<strong>手写版思路</strong>：维护一个<strong>大小为
+k 的最小堆</strong>，新元素比堆顶（当前第 k
+名）大就踢掉堆顶换进来——全程只跟 k 个元素较劲，O(n log k)。</p>
+</blockquote>
+<p><strong>追问：为什么不全排序？</strong> → 全排序 O(n log
+n)；百万文档取 50 个，堆法快一个量级。<strong>Rerank 之后取 top5
+就是这个场景。</strong></p>
+<h3 id="t18.-滑动窗口截断多轮历史管理">T18.
+滑动窗口截断（多轮历史管理）</h3>
+<div class="sourceCode" id="cb74"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> truncate(history: <span class="bu">list</span>, keep_turns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> history[<span class="op">-</span>keep_turns <span class="op">*</span> <span class="dv">2</span>:]</span></code></pre></div>
+<blockquote>
+<p><code>history[-20:]</code> 的负号 = “从尾部数”——保留最近 20
+条（一轮对话 = user+assistant 两条，所以
+×2）。<strong>列表切片负索引</strong>是这题唯一考点。</p>
+</blockquote>
+<p><strong>追问：截断丢了最早的信息怎么办？</strong> →
+生产做法：被截掉的部分<strong>摘要压缩</strong>成一条 system
+消息（“此前对话摘要：…”）——信息不丢、token 大减。</p>
+<h3 id="t19.-分词去停用词">T19. 分词去停用词</h3>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>STOP <span class="op">=</span> {<span class="st">&quot;的&quot;</span>, <span class="st">&quot;了&quot;</span>, <span class="st">&quot;是&quot;</span>, <span class="st">&quot;在&quot;</span>, <span class="st">&quot;和&quot;</span>, <span class="st">&quot;有&quot;</span>, <span class="st">&quot;就&quot;</span>, <span class="st">&quot;不&quot;</span>, <span class="st">&quot;我&quot;</span>, <span class="st">&quot;你&quot;</span>}</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tokenize(text: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [w <span class="cf">for</span> w <span class="kw">in</span> jieba.lcut(text) <span class="cf">if</span> w.strip() <span class="kw">and</span> w <span class="kw">not</span> <span class="kw">in</span> STOP]</span></code></pre></div>
+<blockquote>
+<p>列表推导式带<strong>两个过滤条件</strong>：<code>w.strip()</code>（去掉纯空格的碎屑——strip
+是去首尾空白）且不在停用词表里。<strong>STOP
+用集合不用列表</strong>：集合的 <code>in</code> 是飞快查（哈希），列表的
+<code>in</code>
+要逐个对——数据量大时天壤之别（小优化，说出来是加分）。</p>
+</blockquote>
+<p><strong>追问：为什么去停用词？</strong> →
+“的了我你”哪句话都有，毫无区分度——BM25
+的”逆文档频率”思想：<strong>越常见的词越不值钱</strong>。</p>
+<hr />
+<p><a id="c8"></a></p>
+<h2 id="八常见报错速查-默写练习法">八、常见报错速查 + 默写练习法</h2>
+<h3 id="看到这些报错先想到什么考场自救表">8.1
+看到这些报错先想到什么（考场自救表）</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>报错</th>
+<th>意思</th>
+<th>十有八九是</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NameError: name 'x' is not defined</code></td>
+<td>用了没定义的名字</td>
+<td>变量名拼错 / 忘了先赋值 / 忘 import</td>
+</tr>
+<tr>
+<td><code>IndentationError</code></td>
+<td>缩进不对</td>
+<td>少了或多了一层缩进（Python 靠缩进分块）</td>
+</tr>
+<tr>
+<td><code>KeyError: 'xxx'</code></td>
+<td>字典里没这个键</td>
+<td>拼错键名；<strong>外部数据该用 .get(键, 默认)</strong></td>
+</tr>
+<tr>
+<td><code>TypeError: 'dict' is not callable</code></td>
+<td>把不是函数的东西当函数调</td>
+<td>多写了括号：<code>sorted(x, key=score)</code> 写成了
+<code>key=score(x)</code></td>
+</tr>
+<tr>
+<td><code>IndexError: list index out of range</code></td>
+<td>列表没这么长</td>
+<td>编号从 0 起算错了 / 空列表取 [0]</td>
+</tr>
+<tr>
+<td><code>JSONDecodeError</code></td>
+<td>不是合法 JSON</td>
+<td>模型输出带了废话——正则抠 <code>{...}</code> 再解析（见 T8）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="默写练习法48-小时冲刺节奏">8.2 默写练习法（48
+小时冲刺节奏）</h3>
+<ol type="1">
+<li><strong>第一遍（对着文档抄）</strong>：T1、T4、T12
+三题，逐行抄一遍——手熟从抄开始，不丢人；</li>
+<li><strong>第二遍（遮住答案默写）</strong>：写完对照，<strong>用红笔标出每一处和答案不一样的</strong>——标红处就是你的”个人漏洞清单”；</li>
+<li><strong>第三遍（隔天盲写）</strong>：只看题目名默写，能一次写对 90%
+就算过；</li>
+<li>其余题目做到”<strong>看着目录能口述每行在干什么</strong>”即可；</li>
+<li>每题写完的口头三件套别忘了：<strong>思路先行 → 防御说明 →
+“生产上会升级成…”（勾连实习经历）</strong>。</li>
+</ol>
+<h3 id="最后的话">8.3 最后的话</h3>
+<p>你不需要变成”会写代码的人”才能过这些题——你需要的是<strong>把这三题背成肌肉记忆</strong>（T1
+调模型、T4 最小 RAG、T12 接口骨架），它们加起来不到 50
+行，覆盖了你简历的全部关键词。其余题目理解形状、口述清楚即可。<strong>面试官考手写的目的不是看你是高手，是排除”完全没写过”的人</strong>——你只要明显在”写过”这一侧，就赢了。</p>
+<hr />
+<p><em>配套：00 总文档 / 01 美团 / 02 中青旅 / 04 MSTGN / 05
+DSH-plugin。更新日志：2026-09-18 创建（19 题）；2026-09-19
+重制为零基础教学版（新增第〇章 Python 最小知识 11
+节、全部题目改四级展开：大白话→逐行拆解→易错→口头版、新增第八章报错速查与默写法）。</em></p>
+</body>
+</html>
