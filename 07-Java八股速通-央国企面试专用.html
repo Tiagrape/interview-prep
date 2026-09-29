@@ -684,6 +684,10 @@ DI 是实现手段：容器把依赖”注射”进你的字段/构造器。</p>
 的依赖注入是同一个思想，我在神农项目里天天用——两个语言在框架设计上互通，这也是我说
 Java 上手快的原因。”（这句是第六章的预告，务必会说。）</p>
 </blockquote>
+<blockquote>
+<p><strong>⚠️ 易混点·“两个语言互通”≠ 代码能跨语言跑</strong>：上面说“Java 和 Python 在框架设计上互通”，指的是 <strong>IoC 这个设计思想两种语言都能用</strong>——Java 用 Spring 的 <span
+data-cites="Autowired">@Autowired</span> 容器注入，Python 用 FastAPI 的 <code>Depends</code> 依赖注入，<strong>思想一样，但代码各写各的、各跑各的</strong>。一份 Spring 的 Java 代码不能丢进 Python 里直接跑，反之亦然。IoC 解决的是“对象谁来创建、依赖怎么组装”的工程组织问题，和“代码能不能跨语言运行”完全是两回事——<strong>面试里别说成“我写一份代码两种语言都能跑”，那会露馅</strong>。</p>
+</blockquote>
 <h3 id="aop-面向切面">5.2 ★ AOP 面向切面</h3>
 <p><strong>类比</strong>：<strong>学校门口的保安</strong>——所有学生（所有方法）进出都要过同一道安检（日志/事务/权限），但每个班级（每个业务类）完全不用自己写安检代码。<strong>切面
 =
