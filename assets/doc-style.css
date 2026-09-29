@@ -1,0 +1,186 @@
+/* ===== 共享文档样式：覆盖 pandoc 默认，统一为现代清爽风 =====
+   与 index.html 视觉语言一致：蓝紫渐变点缀、浅色背景、可读正文 */
+
+:root {
+  --accent: #2d6cdf;
+  --accent2: #6a5cff;
+  --bg: #f4f6fb;
+  --text: #1f2733;
+  --muted: #8a94a6;
+  --border: #e7ebf3;
+  --code-bg: #f4f6fb;
+  --quote-bg: #f5f8ff;
+  --maxw: 860px;
+}
+
+/* 覆盖 pandoc 默认 html/body 设定 */
+html {
+  color: var(--text);
+  background-color: var(--bg);
+}
+body {
+  margin: 0 auto;
+  max-width: var(--maxw);
+  padding: 0 24px 80px;       /* 顶部留给 sticky 导航；pandoc 默认的 50px 内边距覆盖掉 */
+  line-height: 1.78;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", "Noto Sans CJK SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text);
+}
+
+/* ===== 顶部导航（注入） ===== */
+.doc-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.doc-nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 11px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.doc-nav-back {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  transition: .18s;
+  white-space: nowrap;
+}
+.doc-nav-back:hover {
+  background: #eef3ff;
+  border-color: #cdd9f5;
+}
+.doc-nav-title {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== 标题 ===== */
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  font-weight: 700;
+  color: #161d29;
+}
+h1 {
+  font-size: 26px;
+  margin: 28px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+h2 {
+  font-size: 20px;
+  margin: 30px 0 12px;
+  padding-left: 12px;
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(var(--accent), var(--accent2)) 1;
+}
+h3 {
+  font-size: 17px;
+  margin: 22px 0 10px;
+  color: #20283a;
+}
+h4 { font-size: 15px; margin: 18px 0 8px; }
+
+/* ===== 正文元素 ===== */
+p { margin: 12px 0; }
+ul, ol { padding-left: 1.6em; margin: 12px 0; }
+li { margin: 5px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+/* 行内代码 */
+code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 0.88em;
+  font-family: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, Menlo, monospace;
+  color: #c0392b;
+}
+
+/* 代码块（pandoc 用 pre > code） */
+pre {
+  background: #1e2430;
+  color: #e6edf3;
+  border-radius: 12px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 16px 0;
+  line-height: 1.55;
+  font-size: 13.5px;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* 引用块 */
+blockquote {
+  margin: 16px 0;
+  padding: 12px 18px;
+  background: var(--quote-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  color: #2c3647;
+}
+blockquote p { margin: 6px 0; }
+
+/* 表格 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 18px 0;
+  font-size: 14px;
+  display: block;
+  overflow-x: auto;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+thead th {
+  background: #eef2fb;
+  font-weight: 700;
+  color: #20283a;
+  white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #fafbfe; }
+
+/* 图片 */
+img { max-width: 100%; height: auto; border-radius: 8px; }
+
+/* 复选框任务列表（md 里 - [ ] 转换来的） */
+li input[type="checkbox"] { margin-right: 6px; }
+ul:has(> li > input[type="checkbox"]) { list-style: none; padding-left: 2px; }
+
+/* 小屏适配 */
+@media (max-width: 600px) {
+  body { padding: 0 16px 60px; font-size: 15px; }
+  .doc-nav-inner { padding: 10px 16px; }
+  h1 { font-size: 22px; }
+  pre { font-size: 12.5px; }
+}
