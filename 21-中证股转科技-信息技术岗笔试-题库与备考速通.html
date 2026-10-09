@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>21-中证股转科技-信息技术岗笔试-题库与备考速通</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+    <style>
+    /* ===== 速备文档样式（pandoc -H 注入，一次到位含手机适配） ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      max-width: 900px; margin: 0 auto; padding: 24px 20px 80px;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.9; color: #1f2328; background: #fff;
+      font-size: 16.5px;
+    }
+    h1 { font-size: 1.6em; border-bottom: 3px solid #c8102e; padding-bottom: 10px; line-height: 1.4; }
+    h2 { font-size: 1.32em; margin-top: 2em; border-left: 6px solid #c8102e; padding-left: 10px; }
+    h3 { font-size: 1.12em; margin-top: 1.6em; color: #8c1d2a; }
+    a { color: #0a5396; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote {
+      background: #fff8dc; border-left: 5px solid #e8b931;
+      margin: 0.8em 0; padding: 10px 16px; border-radius: 6px;
+      color: #443c14;
+    }
+    blockquote p { margin: 0.5em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.93em; }
+    th { background: #fdecea; }
+    th, td { border: 1px solid #d9a0a0; padding: 7px 10px; text-align: left; }
+    tr:nth-child(even) td { background: #faf7f7; }
+    code { background: #f5f2ed; color: #8c3d00; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #f5f7fa; color: #1f2328; border: 1px solid #e0e4ea; border-radius: 8px; padding: 12px; overflow-x: auto; }
+    pre code { background: none; color: inherit; padding: 0; }
+    hr { border: none; border-top: 1px dashed #c9c9c9; margin: 1.6em 0; }
+    /* ===== 可点击目录 ===== */
+    nav#TOC { background: #f7f4ef; border: 1px solid #e0d8c8; border-radius: 10px; padding: 14px 18px 14px 10px; }
+    nav#TOC::before { content: "📑 目录（点标题直达）"; display: block; font-weight: 700; font-size: 1.1em; padding-bottom: 6px; margin-left: 8px; }
+    nav#TOC ul { list-style: none; padding-left: 14px; margin: 4px 0; }
+    nav#TOC li { margin: 3px 0; }
+    nav#TOC a { display: block; padding: 2px 6px; border-radius: 5px; }
+    nav#TOC a:hover { background: #fdecea; text-decoration: none; }
+    /* ===== 悬浮返回目录按钮 ===== */
+    .back-toc {
+      position: fixed; bottom: 22px; right: 22px; z-index: 999;
+      background: #c8102e; color: #fff; border-radius: 50%;
+      width: 52px; height: 52px; line-height: 52px; text-align: center;
+      font-size: 22px; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+    .back-toc:hover { background: #a50d24; color: #fff; text-decoration: none; }
+    /* ===== 手机适配 ===== */
+    @media (max-width: 640px) {
+      body { padding: 12px 12px 90px; font-size: 15.5px; }
+      h1 { font-size: 1.35em; }
+      h2 { font-size: 1.18em; padding-left: 8px; border-left-width: 4px; }
+      table { display: block; overflow-x: scroll; white-space: nowrap; font-size: 0.85em; -webkit-overflow-scrolling: touch; }
+      pre { white-space: pre-wrap; word-break: break-all; font-size: 0.85em; }
+      blockquote { padding: 8px 12px; }
+      .back-toc { width: 46px; height: 46px; line-height: 46px; font-size: 19px; bottom: 16px; right: 16px; }
+    }
+    </style>
+    <a class="back-toc" href="#TOC" title="回目录">☰</a>
+    <link rel="stylesheet" href="assets/doc-style.css" />
+</head>
+<body>
+<header class="doc-nav">
+  <div class="doc-nav-inner">
+    <a class="doc-nav-back" href="index.html">← 返回目录首页</a>
+    <span class="doc-nav-title">面试备战 · 李方好</span>
+  </div>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#中证股转科技-信息技术岗笔试-题库与备考速通"
+id="toc-中证股转科技-信息技术岗笔试-题库与备考速通">21-中证股转科技 ·
+信息技术岗笔试 · 题库与备考速通</a>
+<ul>
+<li><a href="#一先把这条短信办掉今天必须做"
+id="toc-一先把这条短信办掉今天必须做">一、先把这条短信办掉（今天必须做）</a></li>
+<li><a href="#二这场笔试考什么情报结论"
+id="toc-二这场笔试考什么情报结论">二、这场笔试考什么（情报结论）</a></li>
+<li><a href="#三题库入口可直接点开"
+id="toc-三题库入口可直接点开">三、题库入口（可直接点开）</a></li>
+<li><a href="#四8-天冲刺表10.9-10.17"
+id="toc-四8-天冲刺表10.9-10.17">四、8 天冲刺表（10.9 → 10.17）</a></li>
+<li><a href="#五计算机高频考点清单"
+id="toc-五计算机高频考点清单">五、计算机高频考点清单</a></li>
+<li><a href="#六编程题这次要练手写"
+id="toc-六编程题这次要练手写">六、编程题：这次要练”手写”</a></li>
+<li><a href="#七智联考试系统注意事项"
+id="toc-七智联考试系统注意事项">七、智联考试系统注意事项</a></li>
+<li><a href="#八给你的-3-条判断说人话"
+id="toc-八给你的-3-条判断说人话">八、给你的 3 条判断（说人话）</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="中证股转科技-信息技术岗笔试-题库与备考速通">21-中证股转科技 ·
+信息技术岗笔试 · 题库与备考速通</h1>
+<blockquote>
+<p><strong>适用</strong>：北京证券交易所 / 全国股转公司 /
+中证股转科技有限公司 2026 年校园招聘（面向 2027 届）· 信息技术类
+<strong>笔试时间</strong>：2026-10-17（周六）14:00
+<strong>形式</strong>：北京线下机考 / 天津线下机考 /
+线上笔试（三选一，10-10 前回复）
+<strong>回执截止</strong>：2026-10-10（周六）17:00
+<strong>本文档用途</strong>：笔试考什么 + 题库在哪 + 8 天怎么刷</p>
+</blockquote>
+<hr />
+<h2
+id="一先把这条短信办掉今天必须做">一、先把这条短信办掉（今天必须做）</h2>
+<p>回执格式：<code>姓名＋是否参加（参加北京线下笔试/参加天津线下笔试/参加线上笔试/放弃）＋放弃原因（如有）</code></p>
+<p><strong>直接可复制的回执模板</strong>：</p>
+<ul>
+<li>选北京线下：<code>李方好+参加北京线下笔试</code></li>
+<li>选线上：<code>李方好+参加线上笔试</code></li>
+<li>选天津线下：<code>李方好+参加天津线下笔试</code></li>
+</ul>
+<p><strong>三条通道怎么选</strong>：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>通道</th>
+<th>适合情况</th>
+<th>要注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>北京线下机考</td>
+<td>人在北京（农大在读，最顺）</td>
+<td>需通勤，提前到场，带身份证；机考环境由主办方保障</td>
+</tr>
+<tr>
+<td>天津线下机考</td>
+<td>人在天津 / 想避开北京考位</td>
+<td>同上，需提前订行程</td>
+</tr>
+<tr>
+<td>线上笔试</td>
+<td>不想跑，自备设备</td>
+<td>智联<strong>双机位 +
+人脸识别</strong>，网络要求高，双机位出问题风险大</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>建议</strong>：优先选<strong>线下机考</strong>。线上的双机位监控（正视角电脑
++
+第二视角手机）对网络、设备、环境摆放都有硬要求，一旦被判异常直接影响成绩；线下由主办方统一环境，更稳。</p>
+</blockquote>
+<hr />
+<h2 id="二这场笔试考什么情报结论">二、这场笔试考什么（情报结论）</h2>
+<p><strong>一句话结论</strong>：这是<strong>国企金融科技 IT
+岗的标准三段式</strong>
+——【综合能力/行测】＋【计算机专业单选多选】＋【编程题（手写）】。</p>
+<h3 id="证据链来自公开笔经">2.1 证据链（来自公开笔经）</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>年份 / 单位</th>
+<th>题型构成</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2020 中证股转（本单位，唯一公开笔经）</strong></td>
+<td>单选＋不定项（以 <strong>Java 和数据结构</strong>为主，<strong>没有
+C++</strong>，穿插 <strong>2 道编译原理</strong>）；<strong>SQL
+一条两表连接查询</strong>；<strong>3
+道编程题</strong>（在<strong>富文本编辑框手写代码</strong>，非
+OJ，不许跳出，无自动补全）</td>
+<td>牛客 <code>ac.nowcoder.com/discuss/572854</code></td>
+</tr>
+<tr>
+<td><strong>2022 中证登（姊妹单位）</strong></td>
+<td>三部分<strong>限时、不可逆、按顺序做</strong>：①党史 10 题 / 限时
+10min ②逻辑推理计算 15 题 / 限时 30min ③计算机知识 30 题 / 限时
+80min（Linux、Docker、计算机网络、Java、Redis）</td>
+<td>牛客 <code>discuss/426865355869462528</code></td>
+</tr>
+<tr>
+<td><strong>2024 中证登社招</strong></td>
+<td>时政 10 题 ＋ 行测 20 题 ＋ <strong>专业知识 80
+题</strong>（大数据、Java、Python、HTML、CSS
+都涉及），<strong>单选＋多选</strong>，无图形题</td>
+<td>牛客·中证登公司面经</td>
+</tr>
+<tr>
+<td><strong>中证数据</strong></td>
+<td>数据结构与算法 / 编程（Java、C++、Python）/ 数据库 SQL / 计算机网络
+/ 操作系统 / 数学（概率、线代）/ 逻辑 / 英语 / 证券行业知识</td>
+<td>牛客求职答疑</td>
+</tr>
+</tbody>
+</table>
+<h3 id="推断本次信息技术类的结构">2.2 推断本次（信息技术类）的结构</h3>
+<ol type="1">
+<li><strong>综合能力（限时）</strong>：时政党史 ＋ 言语理解 ＋ 数量关系
+＋ 判断推理 ＋ 资料分析</li>
+<li><strong>计算机专业（单选 +
+多选）</strong>：Java、数据结构与算法、操作系统、计算机网络、数据库与
+SQL、Linux、Redis、<strong>编译原理</strong>、软件工程与测试</li>
+<li><strong>编程题 2–3
+道</strong>：<strong>手写代码</strong>（大概率仍是富文本框 /
+简易编辑框形式）</li>
+</ol>
+<blockquote>
+<p><strong>难度判断</strong>：题目本身<strong>不算难</strong>（2020
+笔经原话：“简单吧”）。真正的坑在<strong>机考形式</strong>与<strong>手写编程</strong>。</p>
+</blockquote>
+<hr />
+<h2 id="三题库入口可直接点开">三、题库入口（可直接点开）</h2>
+<h3 id="首选牛客网免费最对口">3.1 首选：牛客网（免费、最对口）</h3>
+<ul>
+<li><strong>公司真题 → 国央企/银行</strong>：<a
+href="https://www.nowcoder.com/contestRoom"
+class="uri">https://www.nowcoder.com/contestRoom</a> 牛客已整理 20+
+家国央企 23/24 年笔试真题，可<strong>按公司 / 职位 /
+年份筛选</strong>。</li>
+<li><strong>专项练习（计算机专业技能 ＋
+通用能力行测/性格/英语）</strong>：<a
+href="https://www.nowcoder.com/intelligentTest"
+class="uri">https://www.nowcoder.com/intelligentTest</a></li>
+<li><strong>在线编程 OJ（新手入门 130 题单）</strong>：<a
+href="https://www.nowcoder.com/activity/oj"
+class="uri">https://www.nowcoder.com/activity/oj</a></li>
+<li><strong>国央企 &amp; 银行笔试怎么准备（官方备考帖）</strong>：<a
+href="https://www.nowcoder.com/discuss/1572890"
+class="uri">https://www.nowcoder.com/discuss/1572890</a></li>
+</ul>
+<h3 id="本题唯一公开笔经必读">3.2 本题唯一公开笔经（必读）</h3>
+<ul>
+<li><strong>中证股转校招笔试分享（2020，本单位）</strong>：<a
+href="https://ac.nowcoder.com/discuss/572854"
+class="uri">https://ac.nowcoder.com/discuss/572854</a></li>
+<li><strong>中证登笔试题型（2022，姊妹单位）</strong>：<a
+href="https://nowcoder.com/discuss/426865355869462528"
+class="uri">https://nowcoder.com/discuss/426865355869462528</a></li>
+</ul>
+<h3 id="行测部分">3.3 行测部分</h3>
+<ul>
+<li><strong>粉笔 App /
+华图在线</strong>：判断推理、资料分析专项（国企笔试行测必考，练速度）</li>
+<li>牛客「专项练习 → 通用能力」里也有行测题</li>
+</ul>
+<h3 id="编程部分">3.4 编程部分</h3>
+<ul>
+<li><strong>LeetCode</strong>：HOT 300 ＋ <strong>剑指
+Offer</strong>（笔试题常由剑指原题改编）</li>
+<li>重点题型：字符串、数组、双指针、链表、二叉树、排序、二分、栈/队列、简单
+DP</li>
+</ul>
+<h3 id="智联官方考试系统">3.5 智联官方（考试系统）</h3>
+<ul>
+<li><strong>智联考生操作指南（双机位摆放）PDF</strong>：<a
+href="https://images.zhaopin.com/logos/20220803/2.pdf"
+class="uri">https://images.zhaopin.com/logos/20220803/2.pdf</a></li>
+<li><strong>准考证里的”模拟考试”入口</strong>（不限次数，不计成绩）——<strong>考前务必完整做一遍</strong>，熟悉系统与设备。</li>
+</ul>
+<h3 id="付费文档谨慎使用">3.6 付费文档（谨慎使用）</h3>
+<ul>
+<li>人人文库 / 原创力文档搜「中证股转科技有限公司招聘笔试题库
+2026」。</li>
+<li>⚠️ <strong>提醒</strong>：这类文档多为<strong>通用模板 / AI
+拼凑</strong>（例如人人文库那份开篇就是通用行测”气象灾害”题），<strong>不是真题，只当练手，别当宝</strong>。</li>
+</ul>
+<hr />
+<h2 id="四8-天冲刺表10.9-10.17">四、8 天冲刺表（10.9 → 10.17）</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>日期</th>
+<th>主攻</th>
+<th>具体动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.9 五（今天）</td>
+<td>回执 + 摸底</td>
+<td>①回复短信 ②做 1 套牛客行测专项找手感 ③通读本文档</td>
+</tr>
+<tr>
+<td>10.10 六</td>
+<td>计算机专业</td>
+<td>数据结构 + 操作系统 专项 50 题</td>
+</tr>
+<tr>
+<td>10.11 日</td>
+<td>计算机专业</td>
+<td>计算机网络 + 数据库 SQL（<strong>重点两表连接</strong>）+ Java 专项
+50 题</td>
+</tr>
+<tr>
+<td>10.12 一</td>
+<td>编程</td>
+<td><strong>手写 10 题</strong>（不用 IDE，记事本/白纸写）</td>
+</tr>
+<tr>
+<td>10.13 二</td>
+<td>编程 + 编译原理</td>
+<td>LeetCode 10 题 ＋ 编译原理小抄（见第五节）</td>
+</tr>
+<tr>
+<td>10.14 三</td>
+<td>行测</td>
+<td>资料分析 + 数量关系，限时 2 套</td>
+</tr>
+<tr>
+<td>10.15 四</td>
+<td>全真模拟</td>
+<td><strong>智联模拟考试</strong> ＋ 一套完整计时模考</td>
+</tr>
+<tr>
+<td>10.16 五</td>
+<td>复盘</td>
+<td>错题回看 ＋ 八股（见第 07/08 号文档）＋ 确认考场/设备</td>
+</tr>
+<tr>
+<td>10.17 六</td>
+<td>考试</td>
+<td><strong>提前 30 分钟</strong>入场/登录</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="五计算机高频考点清单">五、计算机高频考点清单</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>模块</th>
+<th>必会点</th>
+<th>本项目已有文档</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Java</strong></td>
+<td>集合、JVM 内存、GC、多线程、异常、String</td>
+<td><code>07-Java八股速通-央国企面试专用</code></td>
+</tr>
+<tr>
+<td><strong>数据结构与算法</strong></td>
+<td>数组/链表/树/图、排序查找、复杂度</td>
+<td><code>08-计算机基础全家桶-央国企零死角</code></td>
+</tr>
+<tr>
+<td><strong>操作系统</strong></td>
+<td>进程线程、内存管理、死锁、调度</td>
+<td>同上（08）</td>
+</tr>
+<tr>
+<td><strong>计算机网络</strong></td>
+<td>TCP/IP、HTTP、三次握手、DNS</td>
+<td>同上（08）</td>
+</tr>
+<tr>
+<td><strong>数据库 / SQL</strong></td>
+<td>两表连接、分组聚合、子查询、索引</td>
+<td>同上（08）</td>
+</tr>
+<tr>
+<td><strong>Linux / Docker / Redis</strong></td>
+<td>常用命令、容器基础、5 种数据类型</td>
+<td>同上（08）</td>
+</tr>
+<tr>
+<td><strong>编译原理（本单位确考！）</strong></td>
+<td>见下方小抄</td>
+<td>本文档</td>
+</tr>
+</tbody>
+</table>
+<h3 id="编译原理小抄2020-本单位穿插-2-题容易失分">5.1 编译原理小抄（2020
+本单位穿插 2 题，容易失分）</h3>
+<ul>
+<li><strong>编译 5 个阶段</strong>：词法分析 → 语法分析 →
+语义分析与中间代码生成 → 优化 → 目标代码生成</li>
+<li><strong>词法分析</strong>：正则表达式 ↔︎
+<strong>有限自动机</strong>（NFA 可确定化为 DFA）</li>
+<li><strong>语法分析</strong>：上下文无关文法（CFG）；<strong>自上而下</strong>（递归下降、LL(1)）vs
+<strong>自下而上</strong>（LR、算符优先）</li>
+<li><strong>推导</strong>：最左推导 / 最右推导（规范推导）、句型 / 句子
+/ 短语 / 直接短语 / 句柄</li>
+<li><strong>中间代码</strong>：<strong>四元式</strong>、三地址码、逆波兰式（后缀表达式）</li>
+<li><strong>符号表</strong>：名字、类型、作用域</li>
+<li><strong>目标</strong>：至少能<strong>认出概念、在选项里挑对</strong>，不求推导</li>
+</ul>
+<h3 id="sql-手写模板必练">5.2 SQL 手写模板（必练）</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- 1) 两表连接（2020 原题难度：很简单）</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> a.<span class="kw">id</span>, a.name, b.score</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> student a</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> score b <span class="kw">ON</span> a.<span class="kw">id</span> <span class="op">=</span> b.student_id</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> b.score <span class="op">&gt;</span> <span class="dv">60</span>;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- 2) 分组聚合 + 排序</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> dept, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> cnt, <span class="fu">AVG</span>(salary) <span class="kw">AS</span> avg_sal</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> emp</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> dept</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;</span> <span class="dv">5</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> avg_sal <span class="kw">DESC</span>;</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- 3) 子查询（高于本部门平均薪资的人）</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> name <span class="kw">FROM</span> emp e</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> (<span class="kw">SELECT</span> <span class="fu">AVG</span>(salary) <span class="kw">FROM</span> emp <span class="kw">WHERE</span> dept <span class="op">=</span> e.dept);</span></code></pre></div>
+<hr />
+<h2 id="六编程题这次要练手写">六、编程题：这次要练”手写”</h2>
+<p>2020
+年本单位编程题最大的坑：<strong>在富文本编辑框里写代码、不许跳出、没有自动补全、没有
+IDE</strong>（笔经原话：“我下意识开 IDE
+然后被警告了”）。所以<strong>别只会在 IDE
+里敲</strong>，要练”脱离补全也能写”。</p>
+<h3 id="手写自测清单10-题先在白纸记事本写完再对照答案">手写自测清单（10
+题，先在白纸/记事本写完，再对照答案）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>题目</th>
+<th>考点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>反转链表</td>
+<td>链表 / 指针</td>
+</tr>
+<tr>
+<td>2</td>
+<td>合并两个有序链表</td>
+<td>链表 / 双指针</td>
+</tr>
+<tr>
+<td>3</td>
+<td>两数之和</td>
+<td>哈希表</td>
+</tr>
+<tr>
+<td>4</td>
+<td>有效的括号</td>
+<td>栈</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>合并区间（LC56）</strong></td>
+<td>排序 / 区间 ★中证登原题</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>买卖股票最大收益（LC121）</strong></td>
+<td>贪心 / 一次遍历 ★中证登原题</td>
+</tr>
+<tr>
+<td>7</td>
+<td>最长回文子串（LC5）</td>
+<td>中心扩散 / DP</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Top K 高频元素（LC347）</td>
+<td>堆 / 哈希</td>
+</tr>
+<tr>
+<td>9</td>
+<td>二分查找（含左右边界）</td>
+<td>二分边界处理</td>
+</tr>
+<tr>
+<td>10</td>
+<td>快速排序</td>
+<td>分治 / 手写递归</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>重点</strong>：中证登一面真出现过 <strong>LC121 / LC56 /
+LC42（接雨水）</strong>，说明姊妹单位偏爱 <strong>LeetCode
+原题</strong>——这批题值得反复刷到能默写。</p>
+</blockquote>
+<hr />
+<h2 id="七智联考试系统注意事项">七、智联考试系统注意事项</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>项目</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备</td>
+<td>笔记本 / 台式机（<strong>不支持手机作答</strong>），需摄像头 +
+麦克风 + 扬声器</td>
+</tr>
+<tr>
+<td>浏览器</td>
+<td><strong>Chrome 或 360 极速浏览器</strong>最新版</td>
+</tr>
+<tr>
+<td>双机位</td>
+<td>电脑正视角 ＋ <strong>手机微信扫码</strong>作第二视角（侧后方
+0.5–1m、高约 1.2m，须拍到<strong>人 + 屏幕 + 桌面</strong>）</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>两路网络（电脑有线/WiFi ＋ 手机 4G/5G），宽带上行 ≥100M</td>
+</tr>
+<tr>
+<td>监考</td>
+<td>人脸识别（考前拍照）、全程录像抓拍；<strong>禁止切屏/截屏</strong>；开考
+<strong>30 分钟后不得入场</strong></td>
+</tr>
+<tr>
+<td>线下机考</td>
+<td>带<strong>身份证</strong>，提前到场，按现场指引就座</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="八给你的-3-条判断说人话">八、给你的 3 条判断（说人话）</h2>
+<ol type="1">
+<li><strong>这单位是”正牌”金融基础设施 IT</strong>：新三板 /
+北交所的技术子公司，工作地北京金融街，2020
+年笔经提到”据说基本能解决京户”。值得认真准备。</li>
+<li><strong>笔试难度不高，但”格式怪”</strong>：富文本编程、部分限时不可逆。<strong>难点在机考形式与手写编程，不在题目本身</strong>。别因为题目简单就裸考。</li>
+<li><strong>今天的优先级</strong>：① 回复短信 ②
+明后天做一次智联模拟考试熟悉系统 ③
+把编程练习从”IDE”改成”白纸手写”。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>本页信息源</strong>：牛客网公开笔经（中证股转 2020 / 中证登
+2022）、牛客国央企笔试备考帖、智联招聘考生操作指南、各高校就业网发布的中证股转
+2024–2026 校招公告。推断部分已标注，仅供参考。</p>
+</blockquote>
+</body>
+</html>
